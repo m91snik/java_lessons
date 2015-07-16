@@ -10,5 +10,7 @@ public class LinkType {
         str3 = str3.concat(str2);
 
         System.out.print(str3);
+
+        System.gc();
     }
 }
