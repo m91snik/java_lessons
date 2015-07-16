@@ -5,6 +5,11 @@ package com.igor2i.lesson1.theam1;
  */
 public class Bibi {
 
-    private static void
+    private static void bibi(){
+        System.out.println("Hello bibi");
+    }
+    public static void getBibi(){
+        bibi();
+    }
 
 }

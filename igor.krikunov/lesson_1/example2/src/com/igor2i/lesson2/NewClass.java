@@ -5,8 +5,8 @@ package com.igor2i.lesson2;
 
 public class NewClass {
 
-    public static void newClass(String args[]){
-        com.igor2i.lesson1.Main;
+    public static void newClass(){
+        System.out.println("NewClass");
 
     }
 
