@@ -12,7 +12,7 @@ public class PrimitivesTest {
         float f = 13;
         double d = 13.D;
 
-        double d1 = (double)0/(double)0;
+        double d1 = (double) 0 / (double) 0;
         double d2 = 0.0D / 0.0D;
         System.out.print(Double.compare(d1, d2));
 
@@ -22,5 +22,6 @@ public class PrimitivesTest {
         char c2 = 'b';
         System.out.print(c1 + c2);
 
+        int a = (int) l1;
     }
 }
