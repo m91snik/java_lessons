@@ -6,13 +6,13 @@ public class Main {
         // создаЄм объект класса Scanner
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("¬ведите первый аргумент (целое число): ");
+        System.out.print("Enter the first argument (integer): ");
         int value1 = sc.nextInt();
 
-        System.out.print("¬ведите второй аргумент (целое число): ");
+        System.out.print("Enter the first argument (integer): ");
         int value2 = sc.nextInt();
 
-        System.out.print("¬ведите символ операции (+ - * /): ");
+        System.out.print("Enter operation symbol (+ - * /): ");
         char operator = sc.next().charAt(0);
 
         switch (operator) {
