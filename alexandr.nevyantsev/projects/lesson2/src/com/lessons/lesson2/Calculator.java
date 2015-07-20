@@ -40,6 +40,7 @@ public class Calculator {
      * Считывает арифметическое выражение из потока System.in
      */
     public void readCommand() throws Exception {
+        System.out.println("Введите арифметическое выражение, например (5+(3*(3-2)))/2");
         BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
         this.command = buffer.readLine();
         if(!this.getRegex(this.command, "^[0-9"+operationPattern+"\\(\\)]+$")) // Проверяем, является ли выражение арифметическим, если нет, то бросаем исключение
