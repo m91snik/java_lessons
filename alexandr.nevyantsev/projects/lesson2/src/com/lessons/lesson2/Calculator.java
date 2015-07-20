@@ -21,6 +21,9 @@ public class Calculator {
      */
     private String command = "";
 
+
+    private String printCommand = "";
+
     /**
      * Паттерн арифметических операций
      */
@@ -51,6 +54,7 @@ public class Calculator {
      * Выполняет последнее считанное арифметическое выражение
      */
     public void executeCommand() {
+        printCommand = command;
         while(!this.isNumber(this.command)) {
             List<String> list = this.getRegexResult(this.command, "[-]?\\d+["+operationPatternFirst+"][-]?\\d+");
             if(list.isEmpty())
@@ -58,7 +62,7 @@ public class Calculator {
             this.command = this.command.replace(list.get(0), this.executeCommand(list.get(0))); // Выполняем замену выражения на результат вычисления
             this.command = this.removeBrackets(this.command);
         }
-        System.out.println(this.command);
+        System.out.printf("Результат выражения %s=%s \n", this.printCommand, this.command);
     }
 
 
