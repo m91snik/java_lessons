@@ -3,7 +3,6 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        // создаём объект класса Scanner
         Scanner sc = new Scanner(System.in);
 
         System.out.print("Enter the first argument (integer): ");
