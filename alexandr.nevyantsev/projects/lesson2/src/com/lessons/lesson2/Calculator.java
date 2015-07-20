@@ -1,4 +1,4 @@
-package com.lessons.lesson2;
+п»їpackage com.lessons.lesson2;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,44 +17,44 @@ public class Calculator {
     }
 
     /**
-     * Арифметическое выражение
+     * РђСЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ РІС‹СЂР°Р¶РµРЅРёРµ
      */
     private String command = "";
 
     /**
-     * Паттерн арифметических операций
+     * РџР°С‚С‚РµСЂРЅ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРёС… РѕРїРµСЂР°С†РёР№
      */
     private String operationPattern = "\\+\\-\\*\\/";
 
     /**
-     * Приоритетные операции
+     * РџСЂРёРѕСЂРёС‚РµС‚РЅС‹Рµ РѕРїРµСЂР°С†РёРё
      */
     private String operationPatternFirst = "\\*\\/";
 
     /**
-     * Менее приоритетные операции
+     * РњРµРЅРµРµ РїСЂРёРѕСЂРёС‚РµС‚РЅС‹Рµ РѕРїРµСЂР°С†РёРё
      */
     private String operationPatternSecond = "\\+\\-";
 
     /**
-     * Считывает арифметическое выражение из потока System.in
+     * РЎС‡РёС‚С‹РІР°РµС‚ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ РІС‹СЂР°Р¶РµРЅРёРµ РёР· РїРѕС‚РѕРєР° System.in
      */
     public void readCommand() throws Exception {
         BufferedReader buffer = new BufferedReader(new InputStreamReader(System.in));
         this.command = buffer.readLine();
-        if(!this.getRegex(this.command, "^[0-9"+operationPattern+"\\(\\)]+$")) // Проверяем, является ли выражение арифметическим, если нет, то бросаем исключение
-            throw new Exception("Введена неверная комманда!");
+        if(!this.getRegex(this.command, "^[0-9"+operationPattern+"\\(\\)]+$")) // РџСЂРѕРІРµСЂСЏРµРј, СЏРІР»СЏРµС‚СЃСЏ Р»Рё РІС‹СЂР°Р¶РµРЅРёРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРёРј, РµСЃР»Рё РЅРµС‚, С‚Рѕ Р±СЂРѕСЃР°РµРј РёСЃРєР»СЋС‡РµРЅРёРµ
+            throw new Exception("Р’РІРµРґРµРЅР° РЅРµРІРµСЂРЅР°СЏ РєРѕРјРјР°РЅРґР°!");
     }
 
     /**
-     * Выполняет последнее считанное арифметическое выражение
+     * Р’С‹РїРѕР»РЅСЏРµС‚ РїРѕСЃР»РµРґРЅРµРµ СЃС‡РёС‚Р°РЅРЅРѕРµ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРµ РІС‹СЂР°Р¶РµРЅРёРµ
      */
     public void executeCommand() {
         while(!this.isNumber(this.command)) {
             List<String> list = this.getRegexResult(this.command, "[-]?\\d+["+operationPatternFirst+"][-]?\\d+");
             if(list.isEmpty())
-                list = this.getRegexResult(this.command, "[-]?\\d+["+operationPatternSecond+"][-]?\\d+"); // Если не нашли операции с приоритетными операндами, то ищем с приоритетом ниже
-            this.command = this.command.replace(list.get(0), this.executeCommand(list.get(0))); // Выполняем замену выражения на результат вычисления
+                list = this.getRegexResult(this.command, "[-]?\\d+["+operationPatternSecond+"][-]?\\d+"); // Р•СЃР»Рё РЅРµ РЅР°С€Р»Рё РѕРїРµСЂР°С†РёРё СЃ РїСЂРёРѕСЂРёС‚РµС‚РЅС‹РјРё РѕРїРµСЂР°РЅРґР°РјРё, С‚Рѕ РёС‰РµРј СЃ РїСЂРёРѕСЂРёС‚РµС‚РѕРј РЅРёР¶Рµ
+            this.command = this.command.replace(list.get(0), this.executeCommand(list.get(0))); // Р’С‹РїРѕР»РЅСЏРµРј Р·Р°РјРµРЅСѓ РІС‹СЂР°Р¶РµРЅРёСЏ РЅР° СЂРµР·СѓР»СЊС‚Р°С‚ РІС‹С‡РёСЃР»РµРЅРёСЏ
             this.command = this.removeBrackets(this.command);
         }
         System.out.println(this.command);
@@ -62,11 +62,11 @@ public class Calculator {
 
 
     /**
-     * Перегруженный оператор.
-     * Высчитывает результат арифметического вывражения, состоящего из 2-х элементов (чисел)
+     * РџРµСЂРµРіСЂСѓР¶РµРЅРЅС‹Р№ РѕРїРµСЂР°С‚РѕСЂ.
+     * Р’С‹СЃС‡РёС‚С‹РІР°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ Р°СЂРёС„РјРµС‚РёС‡РµСЃРєРѕРіРѕ РІС‹РІСЂР°Р¶РµРЅРёСЏ, СЃРѕСЃС‚РѕСЏС‰РµРіРѕ РёР· 2-С… СЌР»РµРјРµРЅС‚РѕРІ (С‡РёСЃРµР»)
      *
      * @param string
-     * @return Результат вычисления
+     * @return Р РµР·СѓР»СЊС‚Р°С‚ РІС‹С‡РёСЃР»РµРЅРёСЏ
      */
     private String executeCommand(String string) {
         int number1 = Integer.parseInt(this.getRegexResult(string, "^[-]?\\d+").get(0));
@@ -89,11 +89,11 @@ public class Calculator {
     }
 
     /**
-     * Возвращает результат выполнения регулярного выражения
+     * Р’РѕР·РІСЂР°С‰Р°РµС‚ СЂРµР·СѓР»СЊС‚Р°С‚ РІС‹РїРѕР»РЅРµРЅРёСЏ СЂРµРіСѓР»СЏСЂРЅРѕРіРѕ РІС‹СЂР°Р¶РµРЅРёСЏ
      *
-     * @param string Строка, в которой ведется поиск
-     * @param pattern Паттерн, по которому ведется поиск
-     * @return Результат выполнения регулярного выражения
+     * @param string РЎС‚СЂРѕРєР°, РІ РєРѕС‚РѕСЂРѕР№ РІРµРґРµС‚СЃСЏ РїРѕРёСЃРє
+     * @param pattern РџР°С‚С‚РµСЂРЅ, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ РІРµРґРµС‚СЃСЏ РїРѕРёСЃРє
+     * @return Р РµР·СѓР»СЊС‚Р°С‚ РІС‹РїРѕР»РЅРµРЅРёСЏ СЂРµРіСѓР»СЏСЂРЅРѕРіРѕ РІС‹СЂР°Р¶РµРЅРёСЏ
      */
     private List<String> getRegexResult(String string, String pattern) {
         List<String> regexResult = new ArrayList<String>();
@@ -106,11 +106,11 @@ public class Calculator {
     }
 
     /**
-     * Определяет, существуют ли совпадения в строке string по регулярному выражению pattern
+     * РћРїСЂРµРґРµР»СЏРµС‚, СЃСѓС‰РµСЃС‚РІСѓСЋС‚ Р»Рё СЃРѕРІРїР°РґРµРЅРёСЏ РІ СЃС‚СЂРѕРєРµ string РїРѕ СЂРµРіСѓР»СЏСЂРЅРѕРјСѓ РІС‹СЂР°Р¶РµРЅРёСЋ pattern
      *
-     * @param string Строка, в которой ведется поиск
-     * @param pattern Паттерн, по которому ведется поиск
-     * @return Результат выполения регулярного выражения
+     * @param string РЎС‚СЂРѕРєР°, РІ РєРѕС‚РѕСЂРѕР№ РІРµРґРµС‚СЃСЏ РїРѕРёСЃРє
+     * @param pattern РџР°С‚С‚РµСЂРЅ, РїРѕ РєРѕС‚РѕСЂРѕРјСѓ РІРµРґРµС‚СЃСЏ РїРѕРёСЃРє
+     * @return Р РµР·СѓР»СЊС‚Р°С‚ РІС‹РїРѕР»РµРЅРёСЏ СЂРµРіСѓР»СЏСЂРЅРѕРіРѕ РІС‹СЂР°Р¶РµРЅРёСЏ
      */
     private boolean getRegex(String string, String pattern) {
         Pattern p = Pattern.compile(pattern);
@@ -121,20 +121,20 @@ public class Calculator {
     }
 
     /**
-     * Проверяет, является ли строка числом
+     * РџСЂРѕРІРµСЂСЏРµС‚, СЏРІР»СЏРµС‚СЃСЏ Р»Рё СЃС‚СЂРѕРєР° С‡РёСЃР»РѕРј
      *
-     * @param string Строка для проверки
-     * @return Результат проверки
+     * @param string РЎС‚СЂРѕРєР° РґР»СЏ РїСЂРѕРІРµСЂРєРё
+     * @return Р РµР·СѓР»СЊС‚Р°С‚ РїСЂРѕРІРµСЂРєРё
      */
     private boolean isNumber(String string) {
         return this.getRegex(string, "^[-]?\\d+$");
     }
 
     /**
-     * Если в скобках остается одно число, то скобки убираются
+     * Р•СЃР»Рё РІ СЃРєРѕР±РєР°С… РѕСЃС‚Р°РµС‚СЃСЏ РѕРґРЅРѕ С‡РёСЃР»Рѕ, С‚Рѕ СЃРєРѕР±РєРё СѓР±РёСЂР°СЋС‚СЃСЏ
      *
-     * @param string Строка, в которой ищутся совпадения
-     * @return Форматированная строка
+     * @param string РЎС‚СЂРѕРєР°, РІ РєРѕС‚РѕСЂРѕР№ РёС‰СѓС‚СЃСЏ СЃРѕРІРїР°РґРµРЅРёСЏ
+     * @return Р¤РѕСЂРјР°С‚РёСЂРѕРІР°РЅРЅР°СЏ СЃС‚СЂРѕРєР°
      */
     private String removeBrackets(String string) {
         List<String> list = this.getRegexResult(string, "[\\(][-]?\\d+[\\)]");
