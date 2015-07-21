@@ -43,16 +43,14 @@ public class Calc {
                 simbolI = 0;
             }
 
-            if (inArrSimbol.get(simbolI).equals("*")) {
+            if ("*".equals(inArrSimbol.get(simbolI))) {
                 if (IndexExists.indexExists(inArrDoub, simbolI + 1)) {
                     inArrDoub.set(simbolI, Multiplication.multiplication(inArrDoub.get(simbolI), inArrDoub.get(simbolI + 1)));
                     inArrDoub.remove(simbolI + 1);
                     inArrSimbol.remove(simbolI);
                     simbolI--;
                 }
-            }
-
-            if (inArrSimbol.get(simbolI).equals("/")) {
+            }else if ("/".equals(inArrSimbol.get(simbolI))) {
                 if (IndexExists.indexExists(inArrDoub, simbolI + 1)) {
                     inArrDoub.set(simbolI, Division.division(inArrDoub.get(simbolI), inArrDoub.get(simbolI + 1)));
                     inArrDoub.remove(simbolI + 1);
