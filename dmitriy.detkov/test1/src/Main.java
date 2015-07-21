@@ -1,9 +1,23 @@
+import java.util.Arrays;
+import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World");
-        int test = 1;
+        int[][] arr = new int[10][5];
+        mainFor :
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
+                arr[i][j] = i + j;
+                if ((i + j)  == 10){
+                    break mainFor;
+                }
+            }
+        }
+
+        System.out.print(CardType.DP.calTex(100));
+
     }
+
 }
 /*
 Alt +Ctl + l = форматированиа
