@@ -42,8 +42,8 @@ public class Sorter {
         }
 
 
-       String[] outSimbol;
-       outSimbol = outSimbolList.toArray(new String[outSimbolList.size()]);
+        String[] outSimbol;
+        outSimbol = outSimbolList.toArray(new String[outSimbolList.size()]);
 
 
         return new String[][]{outNumbers, outSimbol};
