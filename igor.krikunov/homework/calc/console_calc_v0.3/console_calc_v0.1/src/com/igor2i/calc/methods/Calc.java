@@ -21,7 +21,7 @@ public class Calc {
         for (int count = Collections.frequency(inArrSimbol, "!"), simbolI; count != 0; count = Collections.frequency(inArrSimbol, "!")) {
             simbolI = inArrSimbol.indexOf("!");
             if (inArrSimbol.get(simbolI).equals("!")) {
-                inArrDoub.set(simbolI, Factorial.factorial(inArrDoub.get(simbolI)));
+                inArrDoub.set(simbolI, Factorial.getFactorial(inArrDoub.get(simbolI)));
                 inArrSimbol.remove(simbolI);
             }
         }
