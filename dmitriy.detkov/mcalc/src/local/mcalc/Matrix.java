@@ -31,4 +31,14 @@ public class Matrix {
         }
     }
 
+    public void transt(){
+        for (int i =0;i<rowsCount;i++){
+            for (int j = 0; j<colsCount;j++){
+                double[][] tempArray = matrixArray;
+//                matrixArray[i][j]= matrixArray[j][i];
+//                matrixArray[j][i]=s;
+            }
+        }
+    }
+
 }
