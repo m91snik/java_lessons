@@ -1,5 +1,5 @@
 /**
- * Created by Anry on 14.07.2015.
+ * Created by Ангелина on 14.07.2015.
  */
-public class newclass {
+public class NewClass {
 }
