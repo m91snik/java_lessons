@@ -45,7 +45,7 @@ public class Calculator {
             }
             return product;
         } else {
-            System.out.print("Matrix sizes are not equal");
+            System.out.println("Matrix sizes are not equal");
             return new Matrix(1, 1);
         }
     }
@@ -54,13 +54,16 @@ public class Calculator {
         if (this.consistency(a, b)) {
             Matrix product = new Matrix(a.getRowSize(), b.getColSize());
             for (int i = 0; i < a.getRowSize(); i++) {
-                for (int j = 0; j < a.getColSize(); j++) {
-                    product.matrixArray[i][j] = a.matrixArray[i][j] * b.matrixArray[i][j];
+                for (int j = 0; j < b.getColSize(); j++) {
+                    for (int k = 0; k < b.getRowSize();k++) {
+                        product.matrixArray[i][j] += a.matrixArray[i][k] * b.matrixArray[k][j];
+
+                    }
                 }
             }
             return product;
         } else {
-            System.out.print("Matrix sizes are not equal");
+            System.out.println("Matrix sizes are not equal");
             return new Matrix(1, 1);
         }
     }

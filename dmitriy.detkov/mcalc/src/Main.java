@@ -22,6 +22,7 @@ public class Main {
 
         System.out.println("----------");
 
+        m1.transp();
         result = conputer.multiplication(m1, m2);
         result.print();
 
