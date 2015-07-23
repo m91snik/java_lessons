@@ -16,34 +16,22 @@ public class Sorter {
 
         String outNumbers[];
 
-        String pattern2 = "[+|-]|[*|/]|[!|\\^]";
+        String pattern2 = "[+|-]|[*|/]|[!|\\^]|[(|)]|(matrix\\[)|(\\])|(;)";
         outNumbers = out1.split(pattern2);
 
 
         //outNumbers -- массив, только цифры
 
-        String out3[];
+        String outSimbol[];
 
         String pattern3 = "[0-9]|[.|,]|[\\s]";
-        out3 = out1.split(pattern3);
+        outSimbol = out1.split(pattern3);
 
 
-        ArrayList<String> outSimbolList = new ArrayList<String>();
-
-        for (int i = 0; i < out3.length; i++) {
-            if (!out3[i].equals("")) {
-                outSimbolList.add(out3[i]);
-            }
-        }
-
-        //плюшка для любителей разделять числа с плавающей точкой - запятой
+        //замена запятой на точку, в числах с плавающей точкой
         for (int i = 0; i < outNumbers.length; i++) {
             outNumbers[i] = outNumbers[i].replace(",", ".");
         }
-
-
-        String[] outSimbol;
-        outSimbol = outSimbolList.toArray(new String[outSimbolList.size()]);
 
 
         return new String[][]{outNumbers, outSimbol};

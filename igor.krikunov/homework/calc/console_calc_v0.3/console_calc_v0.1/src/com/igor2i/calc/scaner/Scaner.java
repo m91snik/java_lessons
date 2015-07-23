@@ -7,7 +7,7 @@ import java.util.regex.*;
  * Created by igor2i on 17.07.2015.
  */
 public class Scaner {
-    public static String scan() {
+    private static String scan() {
         String s = "";
         Scanner sc = new Scanner(System.in);
         if (sc.hasNextLine()) {
@@ -18,7 +18,7 @@ public class Scaner {
             return s;
         }
 
-        String pattern1 = "[0-9]|[.|,]|[+|-]|[*|/]|[!|\\^]";
+        String pattern1 = "[0-9]|[.|,]|[+|-]|[*|/]|[!|\\^]|[(|)]|(matrix\\[)|(\\])|(;)";
 
         Pattern p1 = Pattern.compile(pattern1);
         Matcher m1 = p1.matcher(s);
@@ -30,5 +30,16 @@ public class Scaner {
         //out1  -- очищенная строка
 
         return out1;
+    }
+
+    public static String getScan() {
+        String outStr = scan();
+
+        if (outStr.equals("")) {
+            System.out.println("Введите корректное выражение");
+            return "";
+        } else {
+            return outStr;
+        }
     }
 }

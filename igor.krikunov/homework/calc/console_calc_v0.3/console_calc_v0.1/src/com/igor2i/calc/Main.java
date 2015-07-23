@@ -8,6 +8,7 @@ import com.igor2i.calc.sorter.SorterListSimbol;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * Created by igor2i on 17.07.2015.
@@ -19,7 +20,13 @@ public class Main {
 
         Prevetstvie.getPrevetstvie();
 
-        for (String[][] ar = Sorter.sorter(Scaner.scan()); !ar[0][0].equals("exit"); ) {
+        nextScan:
+        for (String[][] ar = Sorter.sorter(Scaner.getScan()); !ar[0][0].equals("exit"); ar = Sorter.sorter(Scaner.getScan())) {
+
+//            if(arrayDoubStr.equals("")){
+//                continue nextScan;
+//            }
+
 
             ArrayList<Double> arrayDoubStr = new ArrayList<Double>();
             arrayDoubStr = SorterListDouble.sorterListDouble(ar[0]);    // arrayDoubStr - массив из чисел double
@@ -28,20 +35,25 @@ public class Main {
             ArrayList<String> arraySimbolStr = new ArrayList<String>();
             arraySimbolStr = SorterListSimbol.sorterListSimbol(ar[1]);  //arraySimbolStr - массив из символов (+ - / *)
 
-            double outFinish;
-            outFinish = Calc.calc(arrayDoubStr, arraySimbolStr);    //отправим на вычисление
 
-            DecimalFormat df = new DecimalFormat("#.###");
+            if(Collections.frequency(arraySimbolStr,"matrix[") > 0){
+                double outFinishMatrix[][];
+                outFinishMatrix = CalcMatrix.calcMatrix(arrayDoubStr, arraySimbolStr);
 
-            if (outFinish == (long) outFinish) {
-                System.out.println((long) outFinish);
-            } else {
-                System.out.println(df.format(outFinish));
+            }else{
+                double outFinishCalc;
+                outFinishCalc = Calc.calc(arrayDoubStr, arraySimbolStr);    //отправим на вычисление
+
+                DecimalFormat df = new DecimalFormat("#.###");
+
+                if (outFinishCalc == (long) outFinishCalc) {
+                    System.out.println((long) outFinishCalc);
+                } else {
+                    System.out.println(df.format(outFinishCalc));
+                }
             }
+
             System.out.println("|--------------------------------|");
-
-            ar = Sorter.sorter(Scaner.scan());
-
         }
     }
 
