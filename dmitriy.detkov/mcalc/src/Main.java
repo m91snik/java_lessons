@@ -12,6 +12,8 @@ public class Main {
         m2.setMatrixArray(b);
 
         m1.print();
-        m2.print();
+        System.out.println("--------");
+        m1.transp();
+        m1.print();
     }
 }
