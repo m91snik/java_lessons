@@ -52,7 +52,7 @@ public class CalcMatrix {
             }
 
         }
-        double outDoub[][] = new double[10][];
+        double outDoub[][] = new double[forDoub[0][0].length][];
 
         for(int i = 0 ; i< inArrSimbol.size();i++){
             if(inArrSimbol.get(i).equals("+")){

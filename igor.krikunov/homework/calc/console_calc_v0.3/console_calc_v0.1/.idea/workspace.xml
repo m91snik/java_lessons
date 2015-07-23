@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="111b9ba0-81e9-44ac-800a-0fa215790ab0" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/methods/Bkt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/methods/CalcMatrix.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/methods/Matrix.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/methods/MatrixFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/igor2i/calc/methods/Calc.java" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/methods/Calc.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/igor2i/calc/methods/CalcMatrix.java" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/methods/CalcMatrix.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/igor2i/calc/Main.java" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/igor2i/calc/methods/Prevetstvie.java" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/methods/Prevetstvie.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/igor2i/calc/scaner/Scaner.java" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/scaner/Scaner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/igor2i/calc/sorter/Sorter.java" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/sorter/Sorter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/igor2i/calc/sorter/SorterListSimbol.java" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/sorter/SorterListSimbol.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/igor2i/calc/methods/Subtraction.java" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/methods/Subtraction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/igor2i/calc/methods/MatrixFunction.java" afterPath="$PROJECT_DIR$/src/com/igor2i/calc/methods/MatrixFunction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../lesson_3/lesson3/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../../../lesson_3/lesson3/.idea/workspace.xml" />
     </list>
@@ -36,11 +28,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Main.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Main.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/igor2i/calc/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.63793105">
+              <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#778#786#0" expanded="true" />
@@ -54,7 +46,7 @@
         <entry file="file://$PROJECT_DIR$/src/com/igor2i/calc/methods/CalcMatrix.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+              <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
               <folding>
                 <element signature="e#635#643#0" expanded="true" />
               </folding>
@@ -62,28 +54,18 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Scaner.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/igor2i/calc/scaner/Scaner.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MatrixFunction.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="MatrixFunction.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/igor2i/calc/methods/MatrixFunction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334">
-              <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding>
-                <element signature="e#611#612#0" expanded="true" />
-                <element signature="e#643#644#0" expanded="true" />
-                <element signature="e#719#720#0" expanded="true" />
-                <element signature="e#749#750#0" expanded="true" />
-                <element signature="e#779#780#0" expanded="true" />
-                <element signature="e#805#806#0" expanded="true" />
+                <element signature="e#617#618#0" expanded="true" />
+                <element signature="e#649#650#0" expanded="true" />
+                <element signature="e#725#726#0" expanded="true" />
+                <element signature="e#755#756#0" expanded="true" />
+                <element signature="e#785#786#0" expanded="true" />
+                <element signature="e#811#812#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -169,10 +151,10 @@
         <option value="$PROJECT_DIR$/src/com/igor2i/calc/methods/Bkt.java" />
         <option value="$PROJECT_DIR$/src/com/igor2i/calc/methods/Matrix.java" />
         <option value="$PROJECT_DIR$/src/com/igor2i/calc/methods/Prevetstvie.java" />
-        <option value="$PROJECT_DIR$/src/com/igor2i/calc/Main.java" />
         <option value="$PROJECT_DIR$/src/com/igor2i/calc/sorter/SorterListSimbol.java" />
         <option value="$PROJECT_DIR$/src/com/igor2i/calc/methods/CalcMatrix.java" />
         <option value="$PROJECT_DIR$/src/com/igor2i/calc/methods/MatrixFunction.java" />
+        <option value="$PROJECT_DIR$/src/com/igor2i/calc/Main.java" />
       </list>
     </option>
   </component>
@@ -548,7 +530,13 @@
       <option name="project" value="LOCAL" />
       <updated>1437501765304</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add matrix, it does not work">
+      <created>1437660459263</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1437660459263</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -563,7 +551,7 @@
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3287037" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3271605" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3271605" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.20239043" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
@@ -572,7 +560,7 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24940239" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5092593" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41820988" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -618,7 +606,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="correct else in &quot;* /&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="correct else in &quot;* /&quot;" />
+    <MESSAGE value="add matrix, it does not work" />
+    <option name="LAST_COMMIT_MESSAGE" value="add matrix, it does not work" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1069,18 +1058,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/igor2i/calc/Main.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#778#786#0" expanded="true" />
-            <element signature="e#965#973#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/igor2i/calc/sorter/SorterListSimbol.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.9375">
@@ -1093,33 +1070,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/igor2i/calc/scaner/Scaner.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.4888889">
           <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/igor2i/calc/methods/MatrixFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+          <folding>
+            <element signature="e#617#618#0" expanded="true" />
+            <element signature="e#649#650#0" expanded="true" />
+            <element signature="e#725#726#0" expanded="true" />
+            <element signature="e#755#756#0" expanded="true" />
+            <element signature="e#785#786#0" expanded="true" />
+            <element signature="e#811#812#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/igor2i/calc/methods/CalcMatrix.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <caret line="66" column="0" selection-start-line="66" selection-start-column="0" selection-end-line="66" selection-end-column="0" />
           <folding>
             <element signature="e#635#643#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/igor2i/calc/methods/MatrixFunction.java">
+    <entry file="file://$PROJECT_DIR$/src/com/igor2i/calc/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="16" column="0" selection-start-line="16" selection-start-column="0" selection-end-line="16" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.63793105">
+          <caret line="48" column="0" selection-start-line="48" selection-start-column="0" selection-end-line="48" selection-end-column="0" />
           <folding>
-            <element signature="e#611#612#0" expanded="true" />
-            <element signature="e#643#644#0" expanded="true" />
-            <element signature="e#719#720#0" expanded="true" />
-            <element signature="e#749#750#0" expanded="true" />
-            <element signature="e#779#780#0" expanded="true" />
-            <element signature="e#805#806#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#778#786#0" expanded="true" />
+            <element signature="e#965#973#0" expanded="true" />
           </folding>
         </state>
       </provider>

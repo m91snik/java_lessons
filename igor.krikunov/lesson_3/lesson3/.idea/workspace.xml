@@ -2,17 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5ca6022e-4a06-4204-a965-3f21d5fadc8e" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/Bkt.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/CalcMatrix.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/Matrix.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/MatrixFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/Calc.java" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/Calc.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/CalcMatrix.java" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/CalcMatrix.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/Main.java" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/Main.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/Prevetstvie.java" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/Prevetstvie.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/scaner/Scaner.java" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/scaner/Scaner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/sorter/Sorter.java" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/sorter/Sorter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/sorter/SorterListSimbol.java" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/sorter/SorterListSimbol.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/Subtraction.java" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/Subtraction.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/MatrixFunction.java" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/src/com/igor2i/calc/methods/MatrixFunction.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/.idea/workspace.xml" afterPath="$PROJECT_DIR$/../../homework/calc/console_calc_v0.3/console_calc_v0.1/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
