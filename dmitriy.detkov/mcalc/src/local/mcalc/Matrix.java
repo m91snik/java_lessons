@@ -5,40 +5,43 @@ package local.mcalc;
  */
 public class Matrix {
     public double[][] matrixArray;
-    public int rowsCount;
-    public int colsCount;
 
-    public Matrix(int rowsCount, int colsCount) {
-        matrixArray = new double[rowsCount][colsCount];
+    public Matrix(int rowSize , int colSize) {
+        matrixArray = new double[rowSize][colSize];
     }
 
     public void setMatrixArray(double[][] matrixArray) {
         this.matrixArray = matrixArray;
     }
 
-    public void size() {
-        rowsCount = matrixArray.length;
-        colsCount = matrixArray[0].length;
+    public int getRowSize() {
+        return matrixArray.length;
+    }
+
+    public int getColSize() {
+        return matrixArray[0].length;
     }
 
     public void print() {
-        this.size();
-        for (int i = 0; i < rowsCount; i++) {
-            for (int j = 0; j < colsCount; j++) {
-                System.out.print(matrixArray[i][j]);
+        int rowSize = this.getRowSize();
+        int colSize = this.getColSize();
+        for (int i = 0; i < rowSize; i++) {
+            for (int j = 0; j < colSize; j++) {
+                System.out.print(matrixArray[i][j] + "\t");
             }
             System.out.println();
         }
     }
 
-    public void transt(){
-        for (int i =0;i<rowsCount;i++){
-            for (int j = 0; j<colsCount;j++){
-                double[][] tempArray = matrixArray;
-//                matrixArray[i][j]= matrixArray[j][i];
-//                matrixArray[j][i]=s;
+    public void transp() {
+        int rowSize = this.getRowSize();
+        int colSize = this.getColSize();
+        double[][] product = new double[colSize][rowSize];
+        for (int i = 0; i < colSize; i++) {
+            for (int j = 0; j < rowSize; j++) {
+                product[i][j] = matrixArray[j][i];
             }
         }
+        setMatrixArray(product);
     }
-
 }
