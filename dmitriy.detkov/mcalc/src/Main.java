@@ -1,6 +1,7 @@
 import local.mcalc.Calculator;
 import local.mcalc.Matrix;
 
+
 public class Main {
 
     public static void main(String[] args) {
@@ -18,7 +19,9 @@ public class Main {
 
         m2.print();
 
-        result = Calculator.addition(m1,m2);
+        Calculator calc = new Calculator();
+
+        result = calc.addition(m1, m2);
         result.print();
 
 
