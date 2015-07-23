@@ -10,10 +10,10 @@ public enum MatrixFunction {
         @Override
         public double[][] set(double d1[][], double d2[][]) {
 
-            double[][] outDoub = new double[d1.length][d1[0].length];
+            double[][] outDoub = new double[d1[0].length][d1[0].length];
 
-            for (int i = 0; i < d1.length; i++) {
-                for (int n = 0; i < d1[i].length; n++) {
+            for (int i = 0; i < d1[0].length; i++) {
+                for (int n = 0; n < d1[i].length; n++) {
                     outDoub[i][n] = d1[i][n] + d2[i][n];
                 }
             }
