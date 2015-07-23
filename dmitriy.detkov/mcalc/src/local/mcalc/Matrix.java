@@ -6,7 +6,7 @@ package local.mcalc;
 public class Matrix {
     public double[][] matrixArray;
 
-    public Matrix(int rowSize, int colSize) {
+    public Matrix(int rowSize , int colSize) {
         matrixArray = new double[rowSize][colSize];
     }
 
@@ -40,7 +40,6 @@ public class Matrix {
         for (int i = 0; i < colSize; i++) {
             for (int j = 0; j < rowSize; j++) {
                 product[i][j] = matrixArray[j][i];
-
             }
         }
         setMatrixArray(product);

@@ -1,3 +1,4 @@
+import local.mcalc.Calculator;
 import local.mcalc.Matrix;
 
 public class Main {
@@ -10,10 +11,19 @@ public class Main {
         m1.setMatrixArray(a);
         Matrix m2 = new Matrix(5,3);
         m2.setMatrixArray(b);
+        Matrix result;
 
         m1.print();
-        System.out.println("--------");
-        m1.transp();
-        m1.print();
+//        m1.transp();
+
+        m2.print();
+
+        result = Calculator.addition(m1,m2);
+        result.print();
+
+
+
+
+
     }
 }
