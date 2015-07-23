@@ -1,8 +1,5 @@
 package local.lesson4;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class Person {
     private static final String constant = "abc";
     static int counter = 0;
@@ -14,8 +11,12 @@ public class Person {
     final String name;
     int age;
 
-    public Person(String name, int age) {
+    public Person(String name) {
         this.name = name;
+    }
+
+    public Person(String name, int age) {
+        this(name);
         this.age = age;
     }
 
