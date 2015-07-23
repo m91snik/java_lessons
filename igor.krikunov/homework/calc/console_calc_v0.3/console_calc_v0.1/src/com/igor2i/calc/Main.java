@@ -40,6 +40,13 @@ public class Main {
                 double outFinishMatrix[][];
                 outFinishMatrix = CalcMatrix.calcMatrix(arrayDoubStr, arraySimbolStr);
 
+                for(int i =0 ;i < outFinishMatrix[0].length;i++){
+                    for(int n =0;n<outFinishMatrix[0].length;n++){
+                        System.out.print(outFinishMatrix[i][n]+ "  ");
+                    }
+                    System.out.println();
+                }
+
             }else{
                 double outFinishCalc;
                 outFinishCalc = Calc.calc(arrayDoubStr, arraySimbolStr);    //отправим на вычисление
