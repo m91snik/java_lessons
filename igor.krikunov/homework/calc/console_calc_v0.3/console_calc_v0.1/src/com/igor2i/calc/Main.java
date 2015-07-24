@@ -1,6 +1,8 @@
 package com.igor2i.calc;
 
-import com.igor2i.calc.methods.*;
+import com.igor2i.calc.methods.algExp.Calc;
+import com.igor2i.calc.methods.Prevetstvie;
+import com.igor2i.calc.methods.matrix.CalcMatrix;
 import com.igor2i.calc.scaner.Scaner;
 import com.igor2i.calc.sorter.Sorter;
 import com.igor2i.calc.sorter.SorterListDouble;
@@ -23,10 +25,9 @@ public class Main {
         nextScan:
         for (String[][] ar = Sorter.sorter(Scaner.getScan()); !ar[0][0].equals("exit"); ar = Sorter.sorter(Scaner.getScan())) {
 
-//            if(arrayDoubStr.equals("")){
-//                continue nextScan;
-//            }
-
+            if ("reScan".equals(ar[0][0])) {
+                continue nextScan;
+            }
 
             ArrayList<Double> arrayDoubStr = new ArrayList<Double>();
             arrayDoubStr = SorterListDouble.sorterListDouble(ar[0]);    // arrayDoubStr - массив из чисел double
@@ -36,28 +37,25 @@ public class Main {
             arraySimbolStr = SorterListSimbol.sorterListSimbol(ar[1]);  //arraySimbolStr - массив из символов (+ - / *)
 
 
-            if(Collections.frequency(arraySimbolStr,"matrix[") > 0){
+            DecimalFormat df = new DecimalFormat("#.###");
+
+            if (Collections.frequency(arraySimbolStr, "matrix[") > 0) {
+
                 double outFinishMatrix[][];
                 outFinishMatrix = CalcMatrix.calcMatrix(arrayDoubStr, arraySimbolStr);
 
-                for(int i =0 ;i < outFinishMatrix[0].length;i++){
-                    for(int n =0;n<outFinishMatrix[0].length;n++){
-                        System.out.print(outFinishMatrix[i][n]+ "  ");
+                for (int i = 0; i < outFinishMatrix.length; i++) {
+                    for (int n = 0; n < outFinishMatrix[i].length; n++) {
+                        System.out.print(df.format(outFinishMatrix[i][n]) + "  ");
                     }
                     System.out.println();
                 }
 
-            }else{
+            } else {
                 double outFinishCalc;
                 outFinishCalc = Calc.calc(arrayDoubStr, arraySimbolStr);    //отправим на вычисление
 
-                DecimalFormat df = new DecimalFormat("#.###");
-
-                if (outFinishCalc == (long) outFinishCalc) {
-                    System.out.println((long) outFinishCalc);
-                } else {
-                    System.out.println(df.format(outFinishCalc));
-                }
+                System.out.println(df.format(outFinishCalc));
             }
 
             System.out.println("|--------------------------------|");

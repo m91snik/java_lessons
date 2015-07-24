@@ -7,7 +7,7 @@ public class Prevetstvie {
 
     private static void prevetstvie(){
 
-        System.out.println("|         Console Calc v0.3                         |");
+        System.out.println("|         Console Calc v0.5                         |");
         System.out.println("|   Возможности:                                    |");
         System.out.println("|   + , - , * , / , n! , n^a                        |");
         System.out.println("|   Пример:                                         |");

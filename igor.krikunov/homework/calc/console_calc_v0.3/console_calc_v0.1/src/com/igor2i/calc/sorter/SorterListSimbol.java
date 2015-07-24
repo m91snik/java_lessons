@@ -24,6 +24,12 @@ public class SorterListSimbol {
                     outArrayString.add("+");
                     outArrayString.add("matrix[");
                     outArrayString.add("(");
+                } else if(arStr[i].equals(")]*matrix[(")) {
+                outArrayString.add(")");
+                outArrayString.add("]");
+                outArrayString.add("*");
+                outArrayString.add("matrix[");
+                outArrayString.add("(");
                 }else{
                     for (int n = 0; n < arStr[i].length(); n++) {
                         char ch1 = arStr[i].charAt(n);
