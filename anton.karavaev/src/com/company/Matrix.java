@@ -1,26 +1,27 @@
 package com.company;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-
 /**
- * Created by HP on 23.07.2015.
+ * Created by HP on 25.07.2015.
  */
-public class Mascalculator {
-    public static void main(String[] args)throws Exception{
+public class Matrix
+    {
+        public static void main(String[] args)throws Exception{
 
         Scanner in = new Scanner(System.in);
 
         BufferedReader reader  = new BufferedReader(new InputStreamReader(System.in));
 
-// Создаем массив summas для сложения наших двух массивов ( mas1 и mas2 )
+
         int chsummas1 = 0;
         int chsummas2 = 0;
         int [][] summas  = new int [chsummas1][chsummas2];
 
 
-// первый массив
+
         System.out.println("Working with massiv 1");
         System.out.println("enter the string");
         String str1 = reader.readLine();
@@ -49,7 +50,7 @@ public class Mascalculator {
         }
 
 
-// второй массив
+
         System.out.println("Working with massiv 2");
         System.out.println("enter the length of the string");
         String str3 = reader.readLine();
@@ -89,11 +90,8 @@ public class Mascalculator {
 //
 //        }
 
-            System.out.println(mas1 [0] [0] + mas2 [0] [0]);
+        System.out.println(mas1 [0] [0] + mas2 [0] [0]);
+        }
+
     }
-
-}
-
-
-
 
