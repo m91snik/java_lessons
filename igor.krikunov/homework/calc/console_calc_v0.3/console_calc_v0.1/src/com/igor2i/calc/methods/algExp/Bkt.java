@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by igor2i on 22.07.15.
  */
-public class Bkt {
+class Bkt {
 
 //    protected static List<List<Double>> (ArrayList<Double> inArrMatrixDoub, ArrayList<String> inArrMatrixSimbol){
 //
