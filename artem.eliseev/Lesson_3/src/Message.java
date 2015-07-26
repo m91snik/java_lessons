@@ -5,6 +5,6 @@ public class Message {
     private String to;
     private String from;
 
-    @Language (lang - LangType.RU, maxLengh = 2048)
+ //   @Language (lang - LangType.RU, maxLengh = 2048)
     private String text;
 }

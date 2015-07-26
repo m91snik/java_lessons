@@ -18,7 +18,7 @@ public class Main {
         System.out.println("Enter number of arrays:");                                                          //get number of arrays
         Scanner scanner_quantity = new Scanner(System.in);
         int quantity = scanner_quantity.nextInt();
-        System.out.println("Enter operation (+, -, /, *) :");                                                    //get operation
+        System.out.println("Enter operation (+, -, /, *, 't' for transpose) :");                                                    //get operation
         Scanner scanner_oper = new Scanner(System.in);
         char oper = '+';
         try {
@@ -30,13 +30,13 @@ public class Main {
         int kMax = 0, pMax = 0;
 
         for (int a = 0; a < quantity; a++) {
-            System.out.println((a + 1) + " Array. Enter row length:");                                           //get array parameters
+            System.out.println((a + 1) + " Array. Enter number of rows:");                                           //get array parameters
             Scanner scanner_k = new Scanner(System.in);
             int k = scanner_k.nextInt();
             if (k > kMax) {                                                                                      //return to viewer
                 kMax = k;
             }
-            System.out.println((a + 1) + " Array. Enter column length:");
+            System.out.println((a + 1) + " Array. Enter number of columns:");
             Scanner scanner_p = new Scanner(System.in);
             int p = scanner_p.nextInt();
             if (p > pMax) {                                                                                      //return to viewer
@@ -71,10 +71,11 @@ public class Main {
                 System.out.println();
             }
             System.out.println();
-            System.out.println();
-
         }
+        System.out.println();
+// Operations
         int[][] arrFin = new int[kMax][pMax];
+        int[][][] arrFinT = new int[pMax][kMax][quantity];
         switch (oper) {
             case '+':
                 for (int rowFin = 0; rowFin < kMax; rowFin++) {
@@ -109,16 +110,39 @@ public class Main {
                     }
                 }
             case 't':
+                for (int quantityFin = 0; quantityFin < quantity; quantityFin++) {
+                    for (int rowFin = 0; rowFin < pMax; rowFin++) {
+                        for (int columnFin = 0; columnFin < kMax; columnFin++) {
+                            arrFinT[rowFin][columnFin][quantityFin] = arr[columnFin][rowFin][quantityFin];
+                        }
 
+                    }
+                }
         }
 //Result viewer
-        System.out.println("Operation result:");
-        for (int iResult = 0; iResult < kMax; iResult++) {
-            for (int jResult = 0; jResult < pMax; jResult++) {
-                System.out.print(arrFin[iResult][jResult] + "\t");
-            }
-            System.out.println();
-        }
+        switch (oper) {
+            case 't':
+                System.out.println("Operation result:");
+                for (int quantityResult = 0; quantityResult < quantity; quantityResult++) {
+                    for (int rowResult = 0; rowResult < pMax; rowResult++) {
+                        for (int columnResult = 0; columnResult < kMax; columnResult++) {
+                            System.out.print(arrFinT[rowResult][columnResult][quantityResult] + "\t");
+                        }
+                        System.out.println();
+                    }
+                    System.out.println();
+                }
+                break;
 
+            default:
+                System.out.println("Operation result:");
+                for (int rowResult = 0; rowResult < kMax; rowResult++) {
+                    for (int columnResult = 0; columnResult < pMax; columnResult++) {
+                        System.out.print(arrFin[rowResult][columnResult] + "\t");
+                    }
+                    System.out.println();
+                }
+        }
     }
 }
+
