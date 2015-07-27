@@ -3,6 +3,7 @@ package com; /**
  */
 
 //Run Main from this file!
+
 import java.util.Arrays;
 import java.util.Scanner;
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class Main {
         System.out.println("Enter number of arrays:");                                                          //get number of arrays
         Scanner scanner_quantity = new Scanner(System.in);
         int quantity = scanner_quantity.nextInt();
-        System.out.println("Enter operation (+, -, /, *, 't' for transpose) :");                                                    //get operation
+        System.out.println("Enter operation (+, -, /, *, 't' for transpose) :");                                   //get operation
         Scanner scanner_oper = new Scanner(System.in);
         char oper = '+';
         try {
