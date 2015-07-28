@@ -15,26 +15,18 @@ public class SorterListSimbol {
             if (!arStr[i].equals("")) {
                 if (arStr[i].length() == 1) {
                     outArrayString.add(arStr[i]);
-                } else if(arStr[i].equals("matrix[(")) {
-                    outArrayString.add("matrix[");
-                    outArrayString.add("(");
-                } else if(arStr[i].equals(")]+matrix[(")) {
-                    outArrayString.add(")");
-                    outArrayString.add("]");
-                    outArrayString.add("+");
-                    outArrayString.add("matrix[");
-                    outArrayString.add("(");
-                } else if(arStr[i].equals(")]*matrix[(")) {
-                outArrayString.add(")");
-                outArrayString.add("]");
-                outArrayString.add("*");
-                outArrayString.add("matrix[");
-                outArrayString.add("(");
-                }else{
+                } else {
                     for (int n = 0; n < arStr[i].length(); n++) {
-                        char ch1 = arStr[i].charAt(n);
-                        String s1 = "" + ch1;
-                        outArrayString.add(s1);
+                        if ('m' == arStr[i].charAt(n) && (n + 7 < arStr[i].length())) {
+                            if ("matrix[".equals(arStr[i].substring(n, n + 7))) {
+                                outArrayString.add(arStr[i].substring(n, n + 7));
+                                n += 6;
+                            }
+                        } else {
+                            char ch1 = arStr[i].charAt(n);
+                            String s1 = "" + ch1;
+                            outArrayString.add(s1);
+                        }
                     }
                 }
             }

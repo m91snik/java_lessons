@@ -4,6 +4,8 @@ package com.igor2i.calc.sorter;
  * Created by igor2i on 18.07.15.
  */
 public class Sorter {
+
+
     public static String[][] sorter(String out1) {
 
         if ("exit".equals(out1)) {
@@ -16,7 +18,7 @@ public class Sorter {
 
         String outNumbers[];
 
-        final String pattern2 = "[+|-]|[*|/]|[!|\\^]|[(|)]|(matrix\\[)|(\\])|(;)";
+        final String pattern2 = "[+|-]|[*|/]|[!|\\^]|[(|)]|(matrix\\[)|(\\])|(;)|(%)";
         outNumbers = out1.split(pattern2);
 
 

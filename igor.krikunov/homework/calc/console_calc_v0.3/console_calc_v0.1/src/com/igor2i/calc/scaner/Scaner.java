@@ -18,7 +18,7 @@ public class Scaner {
             return s;
         }
 
-        final String pattern1 = "[0-9]|[.|,]|[+|-]|[*|/]|[!|\\^]|[(|)]|(matrix\\[)|(\\])|(;)";
+        final String pattern1 = "[0-9]|[.|,]|[+|-]|[*|/]|[!|\\^]|[(|)]|(matrix\\[)|(\\])|(;)|(%)";
 
         Pattern p1 = Pattern.compile(pattern1);
         Matcher m1 = p1.matcher(s);
