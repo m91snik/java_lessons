@@ -10,6 +10,8 @@ public class Prevetstvie {
         System.out.println("|         Console Calc v0.5                         |");
         System.out.println("|   Возможности:                                    |");
         System.out.println("|   + , - , * , / , n! , n^a                        |");
+        System.out.println("|   Возможности для матриц:                         |");
+        System.out.println("|   + , *, % (транспонирование)                     |");
         System.out.println("|   Пример:                                         |");
         System.out.println("|       87 - 28 / 2 * 5^2 + 5!                      |");
         System.out.println("|   или так, для матриц:                            |");

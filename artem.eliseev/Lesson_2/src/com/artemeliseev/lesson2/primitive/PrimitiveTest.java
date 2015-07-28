@@ -57,7 +57,7 @@ public class PrimitiveTest {
 String nul = null;
  System.out.println(nul !=null && nul.isEmpty());
 
-        String str=nul!=null ? (!nul.isEmpty () ?"not empty" : "empty");
+        String str=nul!=null ? !nul.isEmpty () ?"not empty" : "empty";
 
 
 
