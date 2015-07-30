@@ -6,7 +6,7 @@ import java.lang.annotation.Target;
 /**
  * Created by Anry on 21.07.2015.
  */
-@Target(ElementType.FIELD);
+//@Target(ElementType.FIELD);
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Language{
     LangType lang () default LangType.FR;

@@ -7,59 +7,93 @@ import java.util.Scanner;
 /**
  * Created by Вася-Вега on 22.07.2015.
  */
+
+class LenghtMass{
+
+    int stroka,stolbec = 0;
+    static Scanner vvod = new Scanner(System.in);
+
+    public LenghtMass() {
+
+        /**
+         * указываем длину матрицы
+         */
+
+        System.out.print("mass[i][j]\ni=");
+        this.stroka = vvod.nextInt();
+        System.out.print("j=");
+        this.stolbec = vvod.nextInt();
+
+    }
+
+    /**
+     * возвращаем столбцы и строки матрицы
+     * @return
+     */
+
+    public int getStoka(){
+        return this.stroka;
+    }
+
+    public int getStolbec(){
+        return this.stolbec;
+    }
+
+}
+
 public class main {
+
+    static Scanner vvod = new Scanner(System.in);
+
+    /**
+     * создаем матрицу
+     * @param strk
+     * @param stlb
+     * @return
+     */
+
+    private double[][] createMass(int strk, int stlb){
+        double[][] mass = new double[strk][stlb];
+        System.out.println("ellement mass:");
+        for(int i=0; i<strk; i++){
+            for(int j=0; j<stlb; j++){
+                mass[i][j] = vvod.nextDouble();
+            }
+        }
+        return mass;
+    }
 
     public static void main(String[] args) {
 
         double[][] mass3 = new double[1][1];
-        Scanner vvod = new Scanner(System.in);
-
         /*
          * Выбор операции
          */
         System.out.println("Operation: SUM or DIF or PRO or TRA");
         String oper = vvod.next();
 
-        /*
-         * Указываем размерность первого массива
-         * и заполняем его
-         */
 
-        System.out.print("mass1[i][j]\ni=");
-        Integer i1 = vvod.nextInt();
-        System.out.print("j=");
-        Integer j1 = vvod.nextInt();
-        double[][] mass1 = new double[i1][j1];
+        LenghtMass lenghtMass = new LenghtMass();
 
-        System.out.println("element mass1:");
-        for(int i=0; i<i1; i++){
-            for(int j=0; j<j1; j++){
-                mass1[i][j] = vvod.nextDouble();
-            }
-        }
+        int i1 = lenghtMass.getStoka();
+        int j1 = lenghtMass.getStolbec();
 
-        /*
-         * Указываем размерность второго массива
-         * и заполняем его
-         */
-        int i2=1,j2=1;
-        if(!operation.TRA.name().equals(oper)) {
-            System.out.print("mass2[i][j]\ni=");
-            i2 = vvod.nextInt();
-            System.out.print("j=");
-            j2 = vvod.nextInt();
-        }
+        main newMass = new main();
+
+        double[][] mass1 = newMass.createMass(i1,j1);
+
+        int i2 = 0;
+        int j2 = 0;
+
         double[][] mass2 = new double[i2][j2];
 
-        System.out.println("element mass2:");
-        for(int i=0; i<i2; i++){
-            if(operation.TRA.name().equals(oper)){
-                System.out.println("not need");
-                break;
-            }
-            for(int j=0; j<j2; j++){
-                mass2[i][j] = vvod.nextDouble();
-            }
+        if(operation.TRA.name().equals(oper)) {
+            LenghtMass lenghtMass2 = new LenghtMass();
+
+            i2 = lenghtMass2.getStoka();
+            j2 = lenghtMass2.getStolbec();
+
+            mass2 = newMass.createMass(i2, j2);
         }
 
         /*
