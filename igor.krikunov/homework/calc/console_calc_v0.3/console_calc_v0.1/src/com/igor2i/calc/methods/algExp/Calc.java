@@ -19,49 +19,47 @@ public class Calc {
         /**
          * рекурсионный метод нахождения круглых кавычек
          */
-//
-//        List<List<Double>> forDoub = new ArrayList<List<Double>>();
-//
-//        int countArr = 0;
-//        forArr:
-//        for (int i = 0; i < inArrSimbol.size(); i++) {
-//
-//            if ("(".equals(inArrSimbol.get(i))) {
-//
-//                for (int n = i; n < inArrSimbol.size(); n++) {
-//                    if("(".equals(inArrSimbol.get(n))){
-//                        contSrez++;
-//
-//                        Calc.calc(inArrDoub,inArrSimbol);
-//
-//                        for (int p = i; p < n+1; p++) {
-//                            inArrMatrixSimbol.remove(i);
-//                        }
-//
-//
-//                    }else if (")".equals(inArrSimbol.get(n))) {
-//
-//                        ArrayList<String> outArrSimbol = new ArrayList<String>();
-//                        outArrSimbol.addAll(inArrSimbol.subList(i+1,n));
-//
-//                        forDoub.add(countArr, Matrix.matrix(inArrDoub, outArrSimbol));
-//
-//                        for (int p = i; p < n+1; p++) {
-//                            inArrSimbol.remove(i);
-//                        }
-//                        for(int t = 0;t<inArrDoub.get(countArr).size();t++){
-//                            inArrMatrixDoub.remove(0);
-//                        }
-//
-//                        countArr++;
-//                        i = -1;
-//                        contSrez--;
-//                        continue forArr;
-//                    }
-//                }
-//            }
-//        }
 
+
+        forArr:
+        for (int i = 0; i < inArrSimbol.size(); i++) {
+
+            if (")".equals(inArrSimbol.get(i))) {
+
+                for (int n = i; n > 0; n--) {
+                    if ("(".equals(inArrSimbol.get(n))) {
+
+                        int sdvig = 0;
+
+                        for (int k = 0; k < n; k++) {
+                            if ("(".equals(inArrSimbol.get(k))) {
+                                sdvig++;
+                            }else if ("!".equals(inArrSimbol.get(k))){
+                                sdvig++;
+                            }
+                        }
+
+                        ArrayList<Double> forDoub = new ArrayList<Double>();
+                        forDoub.addAll(inArrDoub.subList(n - sdvig, i - sdvig));
+                        ArrayList<String> forSimbol = new ArrayList<String>();
+                        forSimbol.addAll(inArrSimbol.subList(n+1,i));
+
+                        inArrDoub.set(n - sdvig, Calc.calc(forDoub,forSimbol));
+
+                        for (int k = n; k < i+1; k++) {
+                            inArrSimbol.remove(n);
+                        }
+
+                        for(int k =n-sdvig; k < i-n+sdvig ;k++){
+                            inArrDoub.remove(n-sdvig+1);
+                        }
+
+                        i = i - n;
+                        continue forArr;
+                    }
+                }
+            }
+        }
 
 
         if (AlgExpressions.SUBTRACTION.getSim().equals(inArrSimbol.get(0)) && inArrSimbol.size() - Collections.frequency(inArrSimbol, "!") == inArrDoub.size()) {

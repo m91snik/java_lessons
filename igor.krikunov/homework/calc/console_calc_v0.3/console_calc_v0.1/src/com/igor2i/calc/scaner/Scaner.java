@@ -14,7 +14,9 @@ public class Scaner {
             s = sc.nextLine();
         }
 
-        if (s.equals("exit")) {
+        if ("exit".equals(s)) {
+            return s;
+        }else if ("help".equals(s)) {
             return s;
         }
 

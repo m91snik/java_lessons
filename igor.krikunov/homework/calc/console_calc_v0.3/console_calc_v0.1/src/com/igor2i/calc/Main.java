@@ -27,6 +27,9 @@ public class Main {
 
             if ("reScan".equals(ar[0][0])) {
                 continue nextScan;
+            }else if ("help".equals(ar[0][0])){
+                Prevetstvie.getHelp();
+                continue nextScan;
             }
 
             ArrayList<Double> arrayDoubStr = new ArrayList<Double>();
