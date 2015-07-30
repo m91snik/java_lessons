@@ -1,0 +1,8 @@
+Compiled from "Main.java"
+final class com.m91snik.lesson5.anonym.Main$1 extends java.lang.Object implements com.m91snik.lesson5.anonym.Main$MessagesQueue$MessageHandler{
+    final java.lang.String val$messagePrefix;
+    com.m91snik.lesson5.anonym.Main$1(java.lang.String);
+    public boolean isApplicable(java.lang.String);
+    public void processMessage(java.lang.String);
+}
+
