@@ -10,13 +10,13 @@ public class Elephant extends Animal {
 
     @Override
     public double foodWeightPerDayMethod(double kg) {
-        final double foodWeightPerDay = 50;
+        kg = 50;
         return kg;
     }
 
     @Override
     public String nameOut(String name) {
-        System.out.println("Your elephan's name is " + super.name);
+        System.out.println("Your elephan's name is " + super.name + ".");
         return name;
     }
 }
