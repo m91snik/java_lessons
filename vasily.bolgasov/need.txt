@@ -1,0 +1,6 @@
+SOLID
+ALT+CTL+N
+коллекция
+getinstance() java
+javap
+scanner.next().split(" ");
