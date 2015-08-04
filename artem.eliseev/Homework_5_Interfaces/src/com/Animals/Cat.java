@@ -11,13 +11,12 @@ public class Cat extends Animal {
     @Override
     public double foodWeightPerDayMethod(double kg) {
         kg = 0.2;
-
         return kg;
     }
 
     @Override
     public String nameOut(String name) {
-        System.out.println("Your cat's name is " + super.name);
+        System.out.println("Your cat's name is " + super.name + ".");
         return name;
     }
 

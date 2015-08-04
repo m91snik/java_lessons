@@ -14,7 +14,12 @@ public class Matrix {
 
         for (int i = 0; i < filledMatrix.length; i++) {
             for (int j = 0; j < filledMatrix[i].length; j++) {
-                filledMatrix[i][j] = input.returnDouble();
+                try {
+                    filledMatrix[i][j] = input.returnDouble();
+                } catch(IllegalArgumentException e) {
+                    e.printStackTrace();
+                    filledMatrix[i][j] = 1;
+                }
             }
         }
 

@@ -13,13 +13,20 @@ import com.Animals.Elephant;
 public abstract class Main {
     public static void main(String... args) {
         Animal animal;
-//        animal = new Cat(" ");
-        String animalType = "";
         String name = "";
+        StringBuffer animalTypeBuffer = new StringBuffer();
+        String animalType = new StringBuffer(InterfaceClass.inputAnimalTypeMethod(animalTypeBuffer)).toString();
 
-
-        InterfaceClass.inputAnimalTypeMethod(animalType);
         String CAT = "cat", DOG = "dog", ELEPHANT = "elephant";
+        animal = animalTypeMethod(name, animalType, CAT, DOG, ELEPHANT);
+        animal.nameOut(name);
+
+        double kg = 0;
+        System.out.println("It needs " + animal.foodWeightPerMonthMethod(kg) + "kg food every month.");
+    }
+
+    private static Animal animalTypeMethod(String name, String animalType, String CAT, String DOG, String ELEPHANT) {
+        Animal animal;
         if (animalType.equalsIgnoreCase(CAT)) {
             animal = new Cat(InterfaceClass.inputNameMethod(name));
         } else if (animalType.equalsIgnoreCase(DOG)) {
@@ -30,12 +37,7 @@ public abstract class Main {
             System.out.print("It's wrong type. Your animal is cat by default.");
             animal = new Cat(InterfaceClass.inputNameMethod(name));
         }
-        //       System.out.println("your" + super.name);
-        animal.nameOut(name);
-
-        double kg = 0;
-        System.out.println("It need " + animal.foodWeightPerMonthMethod(kg) + "kg food every month");
-
+        return animal;
     }
 
 }

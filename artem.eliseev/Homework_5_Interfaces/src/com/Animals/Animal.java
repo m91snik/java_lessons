@@ -17,6 +17,6 @@ public abstract class Animal {
     }
 
     abstract double foodWeightPerDayMethod(double kg);
-    abstract public String nameOut (String name);
 
+    abstract public String nameOut(String name);
 }

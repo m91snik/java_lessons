@@ -26,7 +26,7 @@ public class Calc {
         matrixClass.formattedOutput(matrix);
     }
 
-    public void getOperation() {
+    public void getOperation() throws CalcException {
 
         Operation operation = new Operation();
         System.out.println(
@@ -40,10 +40,16 @@ public class Calc {
             result = operation.transparency(matrix);
         } else if (type.matches("[\\+|\\-|\\*|T]")) {
 
-            switch(type) {
-                case "+": Operations.PLUS.toString(); break;
-                case "-": Operations.MINUS.toString(); break;
-                case "*": Operations.MULTI.toString(); break;
+            switch (type) {
+                case "+":
+                    Operations.PLUS.toString();
+                    break;
+                case "-":
+                    Operations.MINUS.toString();
+                    break;
+                case "*":
+                    Operations.MULTI.toString();
+                    break;
             }
 
             System.out.println("[1 - другая матрица, 2 - число]");
@@ -51,14 +57,16 @@ public class Calc {
             String action = input.returnString();
 
             if (Choise.MATRIX.choise.equals(action)) {
-                double[][] newMatrix = matrixClass.fillMatrix(cols,rows);
+                double[][] newMatrix = matrixClass.fillMatrix(cols, rows);
 
                 result = operation.twoMatrixOperations(type, matrix, newMatrix);
             } else if (Choise.DIGIT.choise.equals(action)) {
                 result = operation.matrixAndDigitOperations(type, matrix);
+            } else {
+                throw new CalcException("Unknown type!");
             }
         } else {
-            System.out.println("Неизвестная операция");
+            throw new CalcException("Unknown operation!");
         }
     }
 
