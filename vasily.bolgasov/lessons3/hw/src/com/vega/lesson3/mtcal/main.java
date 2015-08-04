@@ -3,9 +3,10 @@ package com.vega.lesson3.mtcal;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.Scanner;
+import java.util.StringTokenizer;
 
 /**
- * Created by Вася-Вега on 22.07.2015.
+ * Created by Р’Р°СЃСЏ-Р’РµРіР° on 22.07.2015.
  */
 
 class LenghtMass{
@@ -16,7 +17,7 @@ class LenghtMass{
     public LenghtMass() {
 
         /**
-         * указываем длину матрицы
+         * СѓРєР°Р·С‹РІР°РµРј РґР»РёРЅСѓ РјР°С‚СЂРёС†С‹
          */
 
         System.out.print("mass[i][j]\ni=");
@@ -27,7 +28,7 @@ class LenghtMass{
     }
 
     /**
-     * возвращаем столбцы и строки матрицы
+     * РІРѕР·РІСЂР°С‰Р°РµРј СЃС‚РѕР»Р±С†С‹ Рё СЃС‚СЂРѕРєРё РјР°С‚СЂРёС†С‹
      * @return
      */
 
@@ -46,7 +47,7 @@ public class main {
     static Scanner vvod = new Scanner(System.in);
 
     /**
-     * создаем матрицу
+     * СЃРѕР·РґР°РµРј РјР°С‚СЂРёС†Сѓ
      * @param strk
      * @param stlb
      * @return
@@ -65,9 +66,9 @@ public class main {
 
     public static void main(String[] args) {
 
-        double[][] mass3 = new double[1][1];
+        double[][] mass3 = new double[0][0];
         /*
-         * Выбор операции
+         * Р’С‹Р±РѕСЂ РѕРїРµСЂР°С†РёРё
          */
         System.out.println("Operation: SUM or DIF or PRO or TRA");
         String oper = vvod.next();
@@ -87,17 +88,17 @@ public class main {
 
         double[][] mass2 = new double[i2][j2];
 
-        if(operation.TRA.name().equals(oper)) {
-            LenghtMass lenghtMass2 = new LenghtMass();
+        // if(operation.TRA.name().equals(oper)) {
+        LenghtMass lenghtMass2 = new LenghtMass();
 
-            i2 = lenghtMass2.getStoka();
-            j2 = lenghtMass2.getStolbec();
+        i2 = lenghtMass2.getStoka();
+        j2 = lenghtMass2.getStolbec();
 
-            mass2 = newMass.createMass(i2, j2);
-        }
+        mass2 = newMass.createMass(i2, j2);
+        // }
 
         /*
-         * Подсчитывающие операции
+         * РџРѕРґСЃС‡РёС‚С‹РІР°СЋС‰РёРµ РѕРїРµСЂР°С†РёРё
          */
 
         if(operation.SUM.name().equals(oper)){
@@ -126,10 +127,10 @@ public class main {
             if(j1==i2){
                 mass3 = new double[i1][j2];
                 for(int i=0; i<i1; i++){
-                    double sum = 0.0;
                     for(int j=0; j<j2; j++) {
+                        double sum = 0.0;
                         for (int z = 0; z < j1; z++) {
-                            sum = mass1[i][z] + mass2[i][z];
+                            sum += mass1[i][z] + mass2[z][j];
                         }
                         mass3[i][j] = sum;
                     }

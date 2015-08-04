@@ -1,5 +1,7 @@
 package com.gorbachevskaya.matrix;
 
+import com.sun.xml.internal.fastinfoset.util.StringArray;
+
 import java.util.Arrays;
 import java.util.Objects;
 import java.util.Scanner;
@@ -56,9 +58,7 @@ public class Matrix {
         System.out.println( this.getClass().getName() );
         for (int i = 0; i < n; i++) {
             System.out.println(Arrays.toString(data[i]));
-
         }
-
     }
 
     public void in(){
@@ -72,11 +72,22 @@ public class Matrix {
 
         data = new double[n][m];
 
-        for (int i = 0; i < n; i++) {
-            for (int j = 0; j < m; j++){
-                System.out.format("Enter element in %d row %d colummn = ", i+1, j+1);
-                data[i][j] = scanner.nextDouble();
+//        System.out.println("Enter matrix elements:");
+//        String str = scanner.nextLine();
+//        System.out.print("fgslkjgfksfdjgksjdlkfjgsdg2");
+//        String[] elements = str.split(" ");
+//        if (elements.length != m*n)
+//            return;
+//        else {
+            for (int i = 0; i < n; i++) {
+                for (int j = 0; j < m; j++){
+                    System.out.format("Enter element in %d row %d colummn = ", i+1, j+1);
+                    data[i][j] = scanner.nextDouble();
+//                    data[i][j] = Double.valueOf(elements[i*n+j]);
+                }
             }
-        }
+
+
+
     }
 }
