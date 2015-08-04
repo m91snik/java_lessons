@@ -39,7 +39,6 @@ public class Main {
                 pMax = p;
             }
             System.out.println("Enter integer data. Type 'enter' after every variable:");                        //get array data
-//            arr = new int[kMax][pMax][quantity];
             Scanner scannerArr = new Scanner(System.in);
             for (int i = 0; i < k; i++) {
                 for (int j = 0; j < p; j++) {
@@ -49,16 +48,16 @@ public class Main {
             System.out.println();
             System.out.println("This array result:");
             for (int xEvery = 0; xEvery < k; xEvery++) {
-                for (int yEvery = 0; yEvery < p; yEvery++) {
-                    System.out.print(arr[xEvery][yEvery][a] + "\t");
-                }
-                System.out.println();
-            }                                                                                                  //View every array
+            for (int yEvery = 0; yEvery < p; yEvery++) {
+                System.out.print(arr[xEvery][yEvery][a] + "\t");
+            }
             System.out.println();
-        }
+        }                                                                                                  //View every array
+        System.out.println();
+    }
         System.out.println();
         System.out.println();
-        System.out.println("Your arrays:");
+        your_arrays();
         for (int z = 0; z < quantity; z++) {                                                                    //viewer
             for (int x = 0; x < kMax; x++) {
                 for (int y = 0; y < pMax; y++) {
@@ -139,6 +138,10 @@ public class Main {
                     System.out.println();
                 }
         }
+    }
+
+    public static void your_arrays() {
+        System.out.println("Your arrays:");
     }
 }
 

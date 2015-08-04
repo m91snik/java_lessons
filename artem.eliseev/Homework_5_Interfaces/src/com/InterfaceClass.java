@@ -9,12 +9,12 @@ import java.util.Scanner;
  */
 public interface InterfaceClass {
 
-    public static String inputAnimalTypeMethod(String animalType) {
+    public static String inputAnimalTypeMethod(StringBuffer animalTypeBuffer) {
         System.out.print("Enter animal type (cat, dog or elephant only):");
         Scanner inputAnimalType_scanner = new Scanner(System.in);
-        animalType = inputAnimalType_scanner.next();
+        animalTypeBuffer = animalTypeBuffer.append(inputAnimalType_scanner.next());
         System.out.println();
-        return animalType;
+        return animalTypeBuffer.toString();
     }
 
     public static String inputNameMethod(String name) {

@@ -3,7 +3,8 @@ package com.m91snik.lesson5.inheritance;
 /**
  * Created by Valentin on 28.07.2015.
  */
-public abstract class Employee {
+public abstract class Employee{
+
     protected String name;
 
     public Employee(String name) {

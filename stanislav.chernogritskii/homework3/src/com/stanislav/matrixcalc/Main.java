@@ -6,7 +6,7 @@ package com.stanislav.matrixcalc;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws CalcException{
 
         Calc calc = new Calc();
         Input input = new Input();

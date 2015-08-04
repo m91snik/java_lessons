@@ -16,7 +16,7 @@ public class Dog extends Animal {
 
     @Override
     public String nameOut(String name) {
-        System.out.println("Your dog's name is " + super.name);
+        System.out.println("Your dog's name is " + super.name + ".");
         return name;
     }
 }
