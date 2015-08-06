@@ -3,41 +3,41 @@ package com.example.oop;
 /**
  * Created by stanislav on 30.07.15.
  */
-public class Array implements Collection {
+public class Array implements Collection<Integer> {
 
-    private Object[] array;
+    private Integer[] array;
     private int size;
 
     public Array() {
-        array = new Object[10];
+        array = new Integer[10];
     }
 
     public Array(int i) {
-        array = new Object[i];
+        array = new Integer[i];
     }
 
     @Override
-    public boolean create(Object i) {
+    public boolean create(Integer i) {
         int num = size++;
-        array[num] = ((int)i + 1) * 10;
+        array[num] = (i + 1) * 10;
 
         return true;
     }
 
     @Override
-    public Object[] read() {
+    public Integer[] read() {
         return array;
     }
 
     @Override
-    public Object[] update(int i) {
+    public Integer[] update(Integer i) {
         array[i] = 777;
         return array;
     }
 
     @Override
-    public Object[] delete(int i) {
-        array[i] = null;
+    public Integer[] delete(Integer i) {
+        array[i] = 0;
         return array;
     }
 }

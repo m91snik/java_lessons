@@ -3,10 +3,10 @@ package com.example.oop;
 /**
  * Created by stanislav on 30.07.15.
  */
-public interface Collection {
+public interface Collection<T> {
 
-    boolean create(Object item);
-    Object[] read();
-    Object[] update(int i);
-    Object[] delete(int i);
+    boolean create(T item);
+    T[] read();
+    T[] update(T i);
+    T[] delete(T i);
 }
