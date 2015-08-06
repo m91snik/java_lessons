@@ -39,7 +39,7 @@ enum AlgExpressions {
                 return out;
             }catch (ArithmeticException e){
                 System.out.println("Нельзя делить на ноль!");
-                return out;
+                throw e;
             }
         }
     }, INVOLUTION("^") {

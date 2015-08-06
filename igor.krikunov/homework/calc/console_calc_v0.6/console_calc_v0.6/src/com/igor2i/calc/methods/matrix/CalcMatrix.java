@@ -12,7 +12,7 @@ import java.util.List;
  */
 public class CalcMatrix {
 
-    public static double[][] calcMatrix(ArrayList<Double> inArrDoub, ArrayList<String> inArrSimbol) {
+    public static double[][] calcMatrix(ArrayList<Double> inArrDoub, ArrayList<String> inArrSimbol) throws BktException {
 
         try {
             List<List<List<Double>>> forDoub = new ArrayList<List<List<Double>>>();
@@ -104,15 +104,12 @@ public class CalcMatrix {
             return outDoub;
 
         } catch (BktException ex) {
-            System.out.print("Ошибка синтаксиса, NullPointerException  ");
-            //ex1.printStackTrace();
-            double nul[][] = {{0}};
-            return nul;
+            System.out.println("Ошибка синтаксиса, NullPointerException  ");
+            throw ex;
 
         } catch (Exception ex1) {
-            System.out.print("Ошибка синтаксиса  ");
-            double nul[][] = {{0}};
-            return nul;
+            System.out.println("Ошибка синтаксиса  ");
+            throw ex1;
         }
     }
 
