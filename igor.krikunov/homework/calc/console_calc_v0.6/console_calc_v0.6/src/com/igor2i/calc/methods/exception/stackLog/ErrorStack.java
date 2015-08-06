@@ -40,6 +40,14 @@ public class ErrorStack<T extends String> {
         }
     }
 
+    public boolean isEmpty(){
+        if(arr != null){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
 
 
 }

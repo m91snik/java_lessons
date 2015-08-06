@@ -34,12 +34,12 @@ enum AlgExpressions {
         @Override
         protected double calcul(double d1, double d2) {
             double out = 0;
-            try{
-                out = d1 / d2;
+            out = d1 / d2;
+
+            if(out == Double.NaN || out == Double.NEGATIVE_INFINITY || out == Double.POSITIVE_INFINITY) {
+                throw new ArithmeticException();
+            }else {
                 return out;
-            }catch (ArithmeticException e){
-                System.out.println("Нельзя делить на ноль!");
-                throw e;
             }
         }
     }, INVOLUTION("^") {

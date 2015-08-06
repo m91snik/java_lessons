@@ -169,9 +169,12 @@ public class Calc {
         } catch (BktException ex1) {
             System.out.println("Ошибка синтаксиса, BktException  ");
             throw ex1;
-        }catch (Exception ex3){
-            System.out.println("Ошибка синтаксиса  ");
+        }catch (ArithmeticException ex3){
+            System.out.println("Ошибка синтаксиса, ArithmeticException  ");
             throw ex3;
+        }catch (Exception ex4){
+            System.out.println("Ошибка синтаксиса  ");
+            throw ex4;
         }
 
     }
