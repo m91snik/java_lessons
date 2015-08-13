@@ -4,3 +4,5 @@ ALT+CTL+N
 getinstance() java
 javap
 scanner.next().split(" ");
+jmh
+
