@@ -12,8 +12,8 @@ public class Main {
 
 
     public static void main(String[] args) throws IOException {
-        EchoServer.main("7");
-        EchoClient.main("169.254.144.144 7");
+//        EchoServer.main("7");
+        EchoClient.main("169.254.144.144", "7");
 //        testMode();
     }
 
