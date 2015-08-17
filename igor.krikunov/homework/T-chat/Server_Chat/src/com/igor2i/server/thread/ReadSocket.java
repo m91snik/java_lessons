@@ -2,6 +2,7 @@ package com.igor2i.server.thread;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.LinkedHashMap;
 import java.util.concurrent.BlockingQueue;
 
 /**
@@ -11,11 +12,13 @@ public class ReadSocket implements Runnable {
 
     private BlockingQueue<String> drop;
     private Socket clientSocket;
+    private LinkedHashMap nickUserSocket;
 
 
-    public ReadSocket(BlockingQueue<String> b, Socket clientSocket) {
+    public ReadSocket(BlockingQueue<String> b, Socket clientSocket, LinkedHashMap nickUserSocket) {
         this.drop = b;
         this.clientSocket = clientSocket;
+        this.nickUserSocket = nickUserSocket;
     }
 
 
@@ -34,6 +37,9 @@ public class ReadSocket implements Runnable {
                 BufferedReader bIn = new BufferedReader(new InputStreamReader(clientSocket.getInputStream(), "UTF-8"));
 
                 String nick = bIn.readLine();
+
+                nickUserSocket.put(nick, clientSocket);
+
                 drop.put("В чат присоединился " + nick);
 
                 while (!(line = bIn.readLine()).equals("exit")) {
@@ -43,6 +49,7 @@ public class ReadSocket implements Runnable {
                 }
                 bIn.close();
                 Connector.rm(clientSocket);
+                nickUserSocket.remove(nick);
                 clientSocket.close();
                 drop.put(nick + " покинул чат");
 

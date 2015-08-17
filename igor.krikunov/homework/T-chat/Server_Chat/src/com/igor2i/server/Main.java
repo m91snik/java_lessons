@@ -11,11 +11,13 @@ import java.io.IOException;
  * Created by igor2i on 12.08.2015.
  */
 import java.net.*;
+import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.SynchronousQueue;
 
 public class Main {
+
 
     public static void main(String args[]) throws IOException {
 
@@ -30,12 +32,14 @@ public class Main {
 
         LinkedList<Socket> clientSocket = new LinkedList<Socket>();
 
+        LinkedHashMap<String, Socket> nickUserSocket = new LinkedHashMap<String, Socket>();
 
-        Thread connector = new Thread(new Connector(blockingQueue, serverSocket, clientSocket));
+
+        Thread connector = new Thread(new Connector(blockingQueue, serverSocket, clientSocket, nickUserSocket));
         connector.setDaemon(true);
         connector.start();
 
-        Thread postMes = new Thread(new PostMes(blockingQueue, clientSocket));
+        Thread postMes = new Thread(new PostMes(blockingQueue, clientSocket, nickUserSocket));
         postMes.setDaemon(true);
         postMes.start();
 
@@ -43,6 +47,7 @@ public class Main {
             if (Scanner.getScan().equals("shutdown")) {
                 Connector.rmAll();
                 Connector.setStop();
+
                 serverSocket.close();
                 break;
             }

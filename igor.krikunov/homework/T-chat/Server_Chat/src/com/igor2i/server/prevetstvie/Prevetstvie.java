@@ -7,7 +7,7 @@ public class Prevetstvie {
 
     private static void prevetstvie(String port){
 
-        System.out.println("|         T-chat server v0.1         |");
+        System.out.println("|         T-chat server v0.2         |");
         System.out.println("|         "+ port + "            |");
         System.out.println("|   Для выхода введите -  shutdown   |");
 
