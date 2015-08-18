@@ -1,5 +1,5 @@
-/*
- * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
+package oldNotInWork;/*
+ * Copyright (c) 2013, Oracle and/or its affiliates. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions
@@ -29,48 +29,52 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.io.*;
 import java.net.*;
+import java.io.*;
 
-public class EchoClient {
-    static int counter;
+public class EchoServer {
+    static int counter = 0;
+
     public static void main(String... args) throws IOException {
 
-        if (args.length != 2) {
-            System.err.println(
-                    "Usage: java EchoClient <host name> <port number>");
+        if (args.length != 1) {
+            System.err.println("Usage: java oldNotInWork.EchoServer <port number>");
             System.exit(1);
         }
 
-        String hostName = args[0];
-        int portNumber = Integer.parseInt(args[1]);
+        int portNumber = Integer.parseInt(args[0]);
 
         try (
-                Socket echoSocket = new Socket(hostName, portNumber);
+                ServerSocket serverSocket =
+                        new ServerSocket(Integer.parseInt(args[0]));
+                Socket clientSocket = serverSocket.accept();
                 PrintWriter out =
-                        new PrintWriter(echoSocket.getOutputStream(), true);
-                BufferedReader in =
-                        new BufferedReader(
-                                new InputStreamReader(echoSocket.getInputStream()));
-                BufferedReader stdIn =
-                        new BufferedReader(
-                                new InputStreamReader(System.in))
+                        new PrintWriter(clientSocket.getOutputStream(), true);
+
+                BufferedReader in = new BufferedReader(
+                        new InputStreamReader(clientSocket.getInputStream()));
         ) {
-            String userInput;
-            System.out.println("Client works!");
-            while ((userInput = stdIn.readLine()) != null) {
-                out.println(userInput);
-                System.out.println(EchoServer.counterWithSync() + " echo: " + in.readLine());
+            String inputLine;
+            System.out.println("com.Server works!");
+            while ((inputLine = in.readLine()) != null) {
+                out.println(inputLine);
+
             }
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host " + hostName);
-            System.exit(1);
+
         } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to " +
-                    hostName);
-            System.exit(1);
+            System.out.println("Exception caught when trying to listen on port "
+                    + portNumber + " or listening for a connection");
+            System.out.println(e.getMessage());
         }
     }
 
-
+    static int counterWithSync() {
+        synchronized (EchoServer.class){
+        try {
+            Thread.sleep(1);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        return ++counter;
+    }}
 }
