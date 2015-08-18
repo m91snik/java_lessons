@@ -1,9 +1,6 @@
 package com.jay.io;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by User on 13.08.2015.
@@ -15,6 +12,10 @@ public class Main {
 //        if(!file.exists())
 //            file.createNewFile();
         FileInputStream fileInputStream = new FileInputStream(file);
+    FileOutputStream fileOutputStream = new FileOutputStream(file, true);
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+        DataOutputStream dataOutputStream = new DataOutputStream(bufferedOutputStream);
+
         try {
             byte[] buff = new byte[1];
             StringBuilder stringBuilder = new StringBuilder();

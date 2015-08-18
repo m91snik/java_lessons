@@ -8,4 +8,7 @@ public class Logger {
     public static void log(Message msg) {
         System.out.format("Message #%s: %s \n", ++counter, msg.getMessageString());
     }
+    public static void log(String msg) {
+        System.out.format("Message #%s: %s \n", ++counter, msg);
+    }
 }
