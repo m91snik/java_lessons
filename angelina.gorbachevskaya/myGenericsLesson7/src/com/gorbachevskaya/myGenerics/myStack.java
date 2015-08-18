@@ -1,8 +1,5 @@
 package com.gorbachevskaya.myGenerics;
 
-/**
- * Created by Ангелина on 09.08.2015.
- */
 public class myStack<T> implements MyDataStruct<T>{
 
     private static class Node<T> {
@@ -49,6 +46,6 @@ public class myStack<T> implements MyDataStruct<T>{
             System.out.print(tmp.data+"  ");
             tmp = tmp.next;
         }
-
+        System.out.println();
     }
 }

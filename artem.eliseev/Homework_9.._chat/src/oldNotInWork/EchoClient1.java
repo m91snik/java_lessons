@@ -1,4 +1,4 @@
-/*
+package oldNotInWork;/*
  * Copyright (c) 1995, 2013, Oracle and/or its affiliates. All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -29,16 +29,20 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-import java.io.*;
-import java.net.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+import java.net.UnknownHostException;
 
-public class EchoClient {
+public class EchoClient1 {
     static int counter;
     public static void main(String... args) throws IOException {
 
         if (args.length != 2) {
             System.err.println(
-                    "Usage: java EchoClient <host name> <port number>");
+                    "Usage: java oldNotInWork.EchoClient <host name> <port number>");
             System.exit(1);
         }
 
@@ -57,7 +61,7 @@ public class EchoClient {
                                 new InputStreamReader(System.in))
         ) {
             String userInput;
-            System.out.println("Client works!");
+            System.out.println("com.Client works!");
             while ((userInput = stdIn.readLine()) != null) {
                 out.println(userInput);
                 System.out.println(EchoServer.counterWithSync() + " echo: " + in.readLine());

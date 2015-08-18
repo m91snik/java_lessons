@@ -13,6 +13,8 @@ public class Main {
         System.out.println(collection.pop());
         collection.push(6878);
         collection.print();
+        System.out.println(collection.pop());
+        collection.print();
 
         System.out.println();
 
