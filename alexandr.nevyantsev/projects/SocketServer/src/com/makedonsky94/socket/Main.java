@@ -30,7 +30,7 @@ public class Main {
 
                 BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(echoSocket.getOutputStream()));
                 clients.put(echoSocket, new Client(bufferedWriter));
-
+                //TODO: do not create new thread for each client. just use one thread to process a messages from blocking queue
                 Thread workerReader = new Thread(new WorkerReader(messageBlockingQueue, echoSocket, clients));
                 workerReader.start();
             }
