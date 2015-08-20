@@ -1,8 +1,6 @@
 package com.igor2i.lesson10;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by igor2i on 13.08.15.
@@ -17,12 +15,38 @@ public class Main {
 //            file.createNewFile();
 //        }
         FileOutputStream fileOutputStream = new FileOutputStream(file);
+        BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
+
+        DataOutputStream dataOutputStream =new DataOutputStream(bufferedOutputStream);
+
+
+
         try {
-            fileOutputStream.write("Hello".getBytes());
+
+            dataOutputStream.writeBoolean(false);
+            dataOutputStream.writeDouble(10.2);
+            dataOutputStream.writeUTF("Hellpqw qwdqw");
+
         }finally {
 
-            fileOutputStream.close();
+            dataOutputStream.close();
         }
+
+        FileInputStream fileInputStream = new FileInputStream(file);
+        BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+        DataInputStream dataInputStream = new DataInputStream(bufferedInputStream);
+
+        try {
+
+            System.out.println(dataInputStream.readBoolean());
+            System.out.println(dataInputStream.readDouble());
+            System.out.println(dataInputStream.readUTF());
+
+        }finally {
+
+            dataInputStream.close();
+        }
+
 
     }
 
