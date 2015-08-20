@@ -1,22 +1,27 @@
-package com.kamyshovcorp.client;
+package com.kamyshovcorp.server;
 
 import com.kamyshovcorp.Message;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
-import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.BlockingQueue;
 
 /**
- * Created by kamyshov.sergey on 17.08.15.
+ * Created by kamyshov.sergey on 19.08.15.
  */
-public class ClientReader implements Runnable {
-    private static final int PORT_IN = 4321;
+public class ServerReader implements Runnable {
+    private static final int PORT = 1234;
+    private BlockingQueue<Message> blockingQueue;
+
+    public ServerReader(BlockingQueue<Message> blockingQueue) {
+        this.blockingQueue = blockingQueue;
+    }
 
     @Override
     public void run() {
-        try (ServerSocket serverSocket = new ServerSocket(PORT_IN)) {
+        try (ServerSocket serverSocket = new ServerSocket(PORT)) {
             ObjectInputStream inputStream;
             Message message;
 
@@ -24,7 +29,7 @@ public class ClientReader implements Runnable {
                 try (Socket socket = serverSocket.accept()) {
                     inputStream = new ObjectInputStream(socket.getInputStream());
                     message = (Message) inputStream.readObject();
-                    System.out.println(message.getText());
+                    blockingQueue.add(message);
                 } catch (ClassNotFoundException e) {
                     e.printStackTrace();
                 }
