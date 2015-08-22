@@ -28,4 +28,8 @@ public class Message implements Serializable {
     public ClientInfo getClientInfo() {
         return clientInfo;
     }
+
+    public void setText(String text) {
+        this.text = text;
+    }
 }

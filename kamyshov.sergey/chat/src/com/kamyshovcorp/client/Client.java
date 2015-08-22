@@ -37,42 +37,35 @@ public class Client {
         userName = scanner.nextLine();
 
         // Writer
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                String textMessage;
-                // Формируем информацию о текущем пользователе
-                ClientInfo clientInfo = new ClientInfo(userName, clientHostName, clientPort);
-                // Отправляем оповещение серверу, чтобы добавиться в список пользователей
-                ClientHandler.sendMessage(new Message(MessageType.ENTRANCE, null, clientInfo));
-                // TODO: Добавить выход из чата
-                while (true) {
-                    textMessage = scanner.nextLine();
-                    ClientHandler.sendMessage(new Message(MessageType.MESSAGE, textMessage, clientInfo));
-                }
+        new Thread(() -> {
+            String textMessage;
+            // Формируем информацию о текущем пользователе
+            ClientInfo clientInfo = new ClientInfo(userName, clientHostName, clientPort);
+            // Отправляем оповещение серверу, чтобы добавиться в список пользователей
+            ClientHandler.sendMessage(new Message(MessageType.ENTRANCE, null, clientInfo));
+            // TODO: Добавить выход из чата
+            while (true) {
+                textMessage = scanner.nextLine();
+                ClientHandler.sendMessage(new Message(MessageType.MESSAGE, textMessage, clientInfo));
             }
         }).start();
 
         // Reader
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try (ServerSocket serverSocket = new ServerSocket(clientPort)) {
-                    ObjectInputStream inputStream;
-                    Message message;
-
-                    while (true) {
-                        try (Socket socket = serverSocket.accept()) {
-                            inputStream = new ObjectInputStream(socket.getInputStream());
-                            message = (Message) inputStream.readObject();
-                            System.out.println(message.getText());
-                        } catch (ClassNotFoundException e) {
-                            e.printStackTrace();
-                        }
+        new Thread(() -> {
+            try (ServerSocket serverSocket = new ServerSocket(clientPort)) {
+                ObjectInputStream inputStream;
+                Message message;
+                while (true) {
+                    try (Socket socket = serverSocket.accept()) {
+                        inputStream = new ObjectInputStream(socket.getInputStream());
+                        message = (Message) inputStream.readObject();
+                        System.out.println(message.getText());
+                    } catch (ClassNotFoundException e) {
+                        e.printStackTrace();
                     }
-                } catch (IOException e) {
-                    e.printStackTrace();
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }).start();
     }
