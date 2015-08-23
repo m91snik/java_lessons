@@ -11,6 +11,7 @@ public class Message implements Serializable{
         Text = text;
     }
 
+    //TODO: use encapsulation. use camel case for Text. make fields final.
     public String Text;
     public String Additional;
 }

@@ -25,11 +25,13 @@ public class ClientReader implements Runnable{
                 if (message.type == MessageType.MESSAGE) {
                     System.out.println(message.Text);
                 }
+                //TODO: move to final block or use try-with-resources
                 client.close();
 
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
+                //TODO: throw an exception!
                 e.printStackTrace();
             }
         }

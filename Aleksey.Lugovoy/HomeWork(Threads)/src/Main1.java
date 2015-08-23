@@ -11,6 +11,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by LugovoyAV on 12.08.2015.
  */
+//TODO: rename to ClienMain
 public class Main1 {
     public static void main(String[] args) {
 
@@ -23,8 +24,10 @@ public class Main1 {
             BufferedReader in = new BufferedReader(
                     new InputStreamReader(kkSocket.getInputStream()));*/
 
+            //TODO: make host and port as input arguments from args
             Thread threadWrite = new Thread(new ClientWriter("127.0.0.1", 11005));
             threadWrite.start();
+            //TODO: move it into clientReader class and close it inside of finally method in ClientReader
             ServerSocket serverSocket = new ServerSocket(11007);
             Thread threadReader = new Thread(new ClientReader(serverSocket));
             threadReader.start();
