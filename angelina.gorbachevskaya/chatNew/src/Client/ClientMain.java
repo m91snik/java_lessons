@@ -19,6 +19,8 @@ import java.util.Scanner;
  * Created by Ангелина on 22.08.2015.
  * Input "save" to save client history at file "history@nick@.txt"
  * Input "all" to display all on-line users
+ * To send private message to user with nickname AAA type @AAA and input message text after the space
+ * F.e.: @user2 I send you private message
  */
 public class ClientMain {
     private static String ipAddress;

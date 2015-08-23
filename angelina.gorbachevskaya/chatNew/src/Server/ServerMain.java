@@ -8,9 +8,7 @@ import java.io.*;
 import java.net.ConnectException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Map;
-import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
@@ -68,7 +66,6 @@ public class ServerMain {
                         String[] strings = str.split(" ");
                         String receiverNick = strings[0];
                         receiverNick = receiverNick.substring(1);
-                        System.out.println(receiverNick);
                         ClientID privateReceiver = null;
 
                         for (Map.Entry<ClientID, String> entry : connectionDB.entrySet()) {
@@ -76,14 +73,13 @@ public class ServerMain {
                                 privateReceiver = entry.getKey();
                             }
                         }
-                        String text = "@".concat(message.getClientID().getNick()).concat(" ");
-                        message.setText(text.concat(str.substring(str.indexOf(" "))));
 
                         Sender.send(message, privateReceiver);
+                        System.out.println("Личное сообщение " + message.getText() + " отправлено " + privateReceiver);
                     } else if ("save".equals(str)) {
                         // отправвить сообщение тому, кто его прислал
                         Sender.send(message, message.getClientID());
-                        System.out.println("Сообщение " + message.getText() + " отправлено " + message.getClientID());
+                        System.out.println("Клиент " + message.getClientID() + " сохранил свою историю переписки");
                     } else if ("all".equals(str)) {
 
                         StringBuilder stringBuilder = new StringBuilder("Сейчас подключены пользователи: ");
@@ -102,7 +98,7 @@ public class ServerMain {
                             }
                         }
                         Sender.send(new Message(stringBuilder.toString(), serverID), message.getClientID());
-                        System.out.println("Сообщение " + stringBuilder.toString() + " отправлено " + message.getClientID());
+                        System.out.println("Клиент " + message.getClientID() + " запросилл список вссех подключенных пользователей");
                     } else {
                         // всем пользователям
                         for (Map.Entry<ClientID, String> entry : connectionDB.entrySet()) {
