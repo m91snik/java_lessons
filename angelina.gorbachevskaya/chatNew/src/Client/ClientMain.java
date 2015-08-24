@@ -31,9 +31,12 @@ public class ClientMain {
     private static boolean flag = false;
 
     public static void main(String[] args) {
+        //TODO: it make sense to ask user to enter server host ip and port instead of using constants
+
         try {
             ipAddress = InetAddress.getLocalHost().getHostAddress();
         } catch (UnknownHostException e) {
+            //TODO: throw an exception
             e.printStackTrace();
         }
 
@@ -78,6 +81,7 @@ public class ClientMain {
                          ObjectInputStream in = new ObjectInputStream(socket.getInputStream());) {
 
                         Message mes = (Message) in.readObject();
+                        //TODO: combine 2 if conditions
                         if (!"save".equals(mes.getText())) {
                             if (!"".equals(mes.getText())) {
                                 String str = mes.getClientID().getNick() + " : " + mes.getText();
@@ -88,6 +92,7 @@ public class ClientMain {
                             writeToFile(listMessages);
                         }
                     } catch (ClassNotFoundException e) {
+                        //TODO: throw an exception
                         e.printStackTrace();
                     }
                 }
