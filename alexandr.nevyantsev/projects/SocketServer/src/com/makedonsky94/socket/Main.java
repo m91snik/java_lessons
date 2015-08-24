@@ -15,12 +15,15 @@ public class Main {
     private static ConcurrentHashMap<Socket, Client> clients;
 
     public static void main(String[] args) {
+        //TODO: use int as port type
         String port = args.length > 0 ? args[0] : DEFAULT_PORT;
         messageBlockingQueue = new ArrayBlockingQueue<>(500);
         clients = new ConcurrentHashMap<>();
+        //TODO: encapsulate serverSocket in worketReader
         try (
                 ServerSocket serverSocket = new ServerSocket(Integer.parseInt(port))
         ) {
+            //TODO: move workerWriter outside of this block because it doesn't work with serverSocket
             Thread workerWriter = new Thread(new WorkerWriter(messageBlockingQueue, clients));
             workerWriter.start();
             while (true) {
@@ -35,6 +38,7 @@ public class Main {
                 workerReader.start();
             }
         } catch (UnknownHostException e) {
+            //TODO: throw it
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

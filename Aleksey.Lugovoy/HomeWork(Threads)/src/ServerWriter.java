@@ -33,7 +33,7 @@ public class ServerWriter implements Runnable {
                 new ObjectOutputStream(socket.getOutputStream());
         Message message = new Message(MessageType.MESSAGE, text);
         objectOutputStream.writeObject(message);
-
+        //TODO: it's required to close socket and streams to avoid resource leak
 
     }
 
