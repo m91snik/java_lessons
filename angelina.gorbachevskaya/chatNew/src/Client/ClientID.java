@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class ClientID implements Serializable{
     private static final long serialVersionUID = 19L;
+    //TODO: it makes sense to make them final
     private String ip;
     private String port;
     private String nick;

@@ -22,6 +22,7 @@ public class ServerMain {
     private static final int SERVER_PORT = 1992;
     private static boolean flag = false;
     private static BlockingQueue<Message> messages = new LinkedBlockingQueue<>();
+    //TODO: encapsulate connections storage in separate class
     private static ConcurrentHashMap<ClientID, String> connectionDB = new ConcurrentHashMap<>();
 
     public static void main(String[] args) {
@@ -41,6 +42,7 @@ public class ServerMain {
                         }
                         messages.put(mes);
                     } catch (ClassNotFoundException e) {
+                        //TODO: throw this exception
                         e.printStackTrace();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
@@ -58,7 +60,8 @@ public class ServerMain {
             ClientID serverID = new ClientID(SERVER_HOSTNAME, ((Integer) SERVER_PORT).toString(), "server");
             try {
                 while ((message = messages.take()) != null) {
-
+                    //TODO: implement strategy pattern (https://ru.wikipedia.org/wiki/%D0%A1%D1%82%D1%80%D0%B0%D1%82%D0%B5%D0%B3%D0%B8%D1%8F_%28%D1%88%D0%B0%D0%B1%D0%BB%D0%BE%D0%BD_%D0%BF%D1%80%D0%BE%D0%B5%D0%BA%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D1%8F%29)
+                    //TODO: create factory which will provide strategy for each operation and each strategy will encapsulate logic of it's processing
                     // определенному пользователю
                     String str = message.getText();
                     if (str.indexOf("@") == 0) {
@@ -113,8 +116,10 @@ public class ServerMain {
                     }
                 }
             } catch (InterruptedException e) {
+                //TODO: use e.printStackTrace()
                 System.out.println("Сервер. Ошибка прерывания");
             } catch (IOException e) {
+                //TODO: use e.printStackTrace()
                 System.out.println("Сервер. Ошибка ввода/ввывода");
             }
         }).start();
