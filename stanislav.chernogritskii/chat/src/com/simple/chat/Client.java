@@ -20,7 +20,26 @@ public class Client {
         writer = new BufferedWriter(new OutputStreamWriter(s.getOutputStream()));
         input = new BufferedReader(new InputStreamReader(System.in));
 
-        new Thread(new Receiver()).start();
+        new Thread(() -> {
+            while (!s.isClosed()) {
+                String line = null;
+                try {
+                    line = reader.readLine();
+                } catch (IOException e) {
+                    if ("Socket closed".equals(e.getMessage())) {
+                        break;
+                    }
+                    System.out.println("Connection lost");
+                    close();
+                }
+                if (line == null) {
+                    System.out.println("Server has closed connection");
+                    close();
+                } else {
+                    System.out.println(line);
+                }
+            }
+        }).start();
     }
 
     public static void main(String[] args)  {
@@ -61,30 +80,6 @@ public class Client {
                 s.close();
             } catch (IOException ignored) {
                 ignored.printStackTrace();
-            }
-        }
-    }
-
-    private class Receiver implements Runnable{
-
-        public void run() {
-            while (!s.isClosed()) {
-                String line = null;
-                try {
-                    line = reader.readLine();
-                } catch (IOException e) {
-                    if ("Socket closed".equals(e.getMessage())) {
-                        break;
-                    }
-                    System.out.println("Connection lost");
-                    close();
-                }
-                if (line == null) {
-                    System.out.println("Server has closed connection");
-                    close();
-                } else {
-                    System.out.println(line);
-                }
             }
         }
     }

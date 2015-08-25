@@ -12,10 +12,14 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by LugovoyAV on 12.08.2015.
  */
+//TODO: rename to ServerMain
 public class Main {
     public static void main(String[] args)
     {
         try{
+            //TODO: move server socket creation into ServerReader. it should be encapsulated inside it.
+            //TODO: make serverSocket port as input argument fro args
+            //TODO: close server socket in finally method in ServerReader
             ServerSocket serverSocket = new ServerSocket(11005);
 
            /* PrintWriter out =

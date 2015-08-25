@@ -15,8 +15,11 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Created by LugovoyAV on 13.08.2015.
  */
 public class ServerReader implements Runnable {
+    //TODO: make field final
     private ServerSocket socket = null;
     private BlockingQueue queue = null;
+    //TODO: create class to encapsulate address and port and
+    // use it's instances as values in map to avoid client port hardcoding (in this case it's 11007 in Main class)
     private ConcurrentHashMap<String, String> clientsMap;
 
 
@@ -42,11 +45,13 @@ public class ServerReader implements Runnable {
                 if (message.type == MessageType.MESSAGE) {
                     queue.put(message);
                 }
+                //TODO: move to final block or use try-with-resources
                 client.close();
 
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (ClassNotFoundException e) {
+                //TODO: throw an exception!
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 e.printStackTrace();

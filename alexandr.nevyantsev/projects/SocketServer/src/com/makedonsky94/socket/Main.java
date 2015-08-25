@@ -10,34 +10,21 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class Main {
 
-    private static final String DEFAULT_PORT = "4444";
+    private static final int DEFAULT_PORT = 4444;
     private static BlockingQueue<Message> messageBlockingQueue;
     private static ConcurrentHashMap<Socket, Client> clients;
 
     public static void main(String[] args) {
-        String port = args.length > 0 ? args[0] : DEFAULT_PORT;
+        int port = args.length > 0 ? Integer.parseInt(args[0]) : DEFAULT_PORT;
         messageBlockingQueue = new ArrayBlockingQueue<>(500);
         clients = new ConcurrentHashMap<>();
-        try (
-                ServerSocket serverSocket = new ServerSocket(Integer.parseInt(port))
-        ) {
+        try {
             Thread workerWriter = new Thread(new WorkerWriter(messageBlockingQueue, clients));
             workerWriter.start();
-            while (true) {
-                Socket echoSocket = serverSocket.accept();
-
-                System.out.println(echoSocket.toString() + "connected");
-
-                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(echoSocket.getOutputStream()));
-                clients.put(echoSocket, new Client(bufferedWriter));
-                //TODO: do not create new thread for each client. just use one thread to process a messages from blocking queue
-                Thread workerReader = new Thread(new WorkerReader(messageBlockingQueue, echoSocket, clients));
-                workerReader.start();
-            }
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
+            Thread workerReader = new Thread(new WorkerReader(messageBlockingQueue, clients, port));
+            workerReader.start();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException(e.getMessage());
         }
     }
 }

@@ -19,13 +19,14 @@ public class ClientWriter implements Runnable{
             return scanner.next();
         else return null;
     }
+    //TODO: reduce code duplication. sendLogin and sendMessage are almost the same methods!
     protected void sendLogin(String login) throws IOException {
         Socket socket = new Socket(address,port);
         ObjectOutputStream objectOutputStream =
                 new ObjectOutputStream(socket.getOutputStream());
         Message message = new Message(MessageType.LOGIN, login);
         objectOutputStream.writeObject(message);
-
+        //TODO: close socket and streams
     }
     protected void sendMessage(String text) throws IOException {
         Socket socket = new Socket(address,port);
@@ -33,6 +34,7 @@ public class ClientWriter implements Runnable{
                 new ObjectOutputStream(socket.getOutputStream());
         Message message = new Message(MessageType.MESSAGE, text);
         objectOutputStream.writeObject(message);
+        //TODO: close socket and streams
     }
    public ClientWriter(String address,int port) throws IOException {
        super();
@@ -48,6 +50,8 @@ public class ClientWriter implements Runnable{
         String text = "";
         for (;scanner.hasNext();text = scanner.next()) {
 
+            //TODO: use constant.equals(variable)
+            //TODO: make commands as enums
             if (text.equals("exit"))
                 break;
             if (text.equals("login")) {
