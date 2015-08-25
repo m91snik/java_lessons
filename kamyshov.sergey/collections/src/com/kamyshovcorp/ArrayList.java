@@ -5,7 +5,7 @@ import java.util.Arrays;
 /**
  * Created by kamyshov.sergey on 28.07.15.
  */
-public class ArrayList implements List {
+public class ArrayList /*implements List*/ {
 
     private final int DEFAULT_CAPACITY = 10;
     private Object[] data;
@@ -23,7 +23,7 @@ public class ArrayList implements List {
         }
     }
 
-    @Override
+//    @Override
     public Object read(int index) {
         if (index < 0 || index > size - 1) {
             throw new ArrayIndexOutOfBoundsException("Index is negative or bigger then amount of elemenets in list");
@@ -31,14 +31,14 @@ public class ArrayList implements List {
         return data[index];
     }
 
-    @Override
+//    @Override
     public boolean write(Object object) {
         ensureCapacity();
         data[size++] = object;
         return true;
     }
 
-    @Override
+//    @Override
     public boolean update(Object updatedObject, Object newObject) {
         for (int i = 0; i < data.length; i++) {
             if (data[i].equals(updatedObject)) {
@@ -49,7 +49,7 @@ public class ArrayList implements List {
         return false;
     }
 
-    @Override
+//    @Override
     public boolean delete(Object object) {
         for (int i = 0; i < size; i++) {
             if (data[i].equals(object)) {

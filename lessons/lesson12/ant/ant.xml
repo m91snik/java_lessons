@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="ant" default="all">
+
+
+    <!-- Uncomment the following property if no tests compilation is needed -->
+    <!--
+    <property name="skip.tests" value="true"/>
+     -->
+
+    <!-- Compiler options -->
+
+    <property name="compiler.debug" value="on"/>
+    <property name="compiler.generate.no.warnings" value="off"/>
+    <property name="compiler.args" value=""/>
+    <property name="compiler.max.memory" value="700m"/>
+
+    <patternset id="ignored.files">
+        <exclude name="**/CVS/**"/>
+        <exclude name="**/SCCS/**"/>
+        <exclude name="**/RCS/**"/>
+        <exclude name="**/rcs/**"/>
+        <exclude name="**/.DS_Store/**"/>
+        <exclude name="**/.svn/**"/>
+        <exclude name="**/.idea/**"/>
+        <exclude name="**/.pyc/**"/>
+        <exclude name="**/.pyo/**"/>
+        <exclude name="**/*.pyc/**"/>
+        <exclude name="**/*.pyo/**"/>
+        <exclude name="**/.git/**"/>
+        <exclude name="**/*.hprof/**"/>
+        <exclude name="**/_svn/**"/>
+        <exclude name="**/.hg/**"/>
+        <exclude name="**/*.lib/**"/>
+        <exclude name="**/*~/**"/>
+        <exclude name="**/__pycache__/**"/>
+        <exclude name="**/.bundle/**"/>
+        <exclude name="**/*.rbc/**"/>
+        <!--<exclude name="111.txt"/>-->
+    </patternset>
+
+    <patternset id="library.patterns">
+        <include name="*.zip"/>
+        <include name="*.apk"/>
+        <include name="*.war"/>
+        <include name="*.egg"/>
+        <include name="*.ear"/>
+        <include name="*.ane"/>
+        <include name="*.swc"/>
+        <include name="*.jar"/>
+    </patternset>
+    <patternset id="compiler.resources">
+        <exclude name="**/?*.txt"/>
+        <exclude name="**/?*.java"/>
+        <exclude name="**/?*.form"/>
+        <exclude name="**/?*.class"/>
+        <exclude name="**/?*.groovy"/>
+        <exclude name="**/?*.scala"/>
+        <exclude name="**/?*.flex"/>
+        <exclude name="**/?*.kt"/>
+        <exclude name="**/?*.clj"/>
+    </patternset>
+
+    <!-- Modules -->
+
+
+    <!-- Module ant -->
+
+    <dirname property="module.ant.basedir" file="${ant.file}"/>
+
+
+    <property name="compiler.args.ant" value="-encoding UTF-8 -source 8 ${compiler.args}"/>
+
+    <property name="ant.target.dir" value="${module.ant.basedir}/target"/>
+    <property name="ant.output.dir" value="${ant.target.dir}/classes"/>
+    <property name="ant.testoutput.dir" value="${ant.target.dir}/test-classes"/>
+
+    <path id="ant.module.bootclasspath">
+        <!-- Paths to be included in compilation bootclasspath -->
+    </path>
+
+    <path id="ant.module.production.classpath">
+        <fileset dir="${module.ant.basedir}/lib">
+            <include name="*.jar"/>
+        </fileset>
+        <pathelement path="${module.ant.basedir}/src"/>
+    </path>
+
+    <path id="ant.runtime.production.module.classpath">
+        <pathelement location="${ant.output.dir}"/>
+    </path>
+
+    <path id="ant.module.classpath">
+        <pathelement location="${ant.output.dir}"/>
+    </path>
+
+    <path id="ant.runtime.module.classpath">
+        <pathelement location="${ant.testoutput.dir}"/>
+        <pathelement location="${ant.output.dir}"/>
+    </path>
+
+
+    <patternset id="excluded.from.module.ant">
+        <patternset refid="ignored.files"/>
+    </patternset>
+
+    <patternset id="excluded.from.compilation.ant">
+        <patternset refid="excluded.from.module.ant"/>
+    </patternset>
+
+    <path id="ant.module.sourcepath">
+        <dirset dir="${module.ant.basedir}">
+            <include name="src"/>
+        </dirset>
+    </path>
+
+
+    <target name="compile.module.ant" depends="compile.module.ant.production,compile.module.ant.tests"
+            description="Compile module ant"/>
+
+    <target name="compile.module.ant.production" description="Compile module ant; production classes">
+        <mkdir dir="${ant.output.dir}"/>
+
+        <javac destdir="${ant.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}"
+               memorymaximumsize="${compiler.max.memory}" fork="true">
+            <compilerarg line="${compiler.args.ant}"/>
+            <bootclasspath refid="ant.module.bootclasspath"/>
+            <classpath refid="ant.module.production.classpath"/>
+            <src refid="ant.module.sourcepath"/>
+            <patternset refid="excluded.from.compilation.ant"/>
+        </javac>
+
+        <copy todir="${ant.output.dir}">
+            <fileset dir="${module.ant.basedir}/src">
+                <patternset refid="compiler.resources"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${ant.output.dir}/lib">
+            <fileset dir="${module.ant.basedir}/lib">
+                <patternset refid="library.patterns"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+    </target>
+
+    <target name="compile.module.ant.tests" depends="compile.module.ant.production"
+            description="compile module ant; test classes" unless="skip.tests"/>
+
+    <target name="clean.module.ant" description="cleanup module">
+        <delete dir="${ant.target.dir}"/>
+    </target>
+
+    <target name="jar" depends="clean,compile.module.ant.production">
+        <mkdir dir="${ant.target.dir}/prod"/>
+        <mkdir dir="${ant.target.dir}/prod/lib"/>
+
+        <copy todir="${ant.target.dir}/prod/lib">
+            <fileset dir="${ant.output.dir}/lib">
+                <patternset refid="library.patterns"/>
+                <type type="file"/>
+            </fileset>
+        </copy>
+        <jar destfile="${ant.target.dir}/prod/ant.jar" basedir="${ant.output.dir}">
+            <manifest>
+                <attribute name="Main-Class" value="com.m91snik.lesson12.ant.AntMain"/>
+                <attribute name="Class-Path" value="lib/commons.jar" />
+            </manifest>
+
+        </jar>
+    </target>
+
+    <target name="init" description="Build initialization">
+        <!-- Perform any build initialization in this target -->
+    </target>
+
+    <target name="clean" depends="clean.module.ant" description="cleanup all"/>
+
+    <target name="build.modules" depends="init, clean, compile.module.ant" description="build all modules"/>
+
+    <target name="all" depends="build.modules" description="build all"/>
+</project>

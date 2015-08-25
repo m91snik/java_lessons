@@ -3,7 +3,6 @@ package com.igor2i.calc.methods.algExp;
 
 import com.igor2i.calc.methods.exception.BktException;
 import com.igor2i.calc.sorter.IndexExists;
-import com.igor2i.calc.sorter.Sorter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -13,7 +12,7 @@ import java.util.Collections;
  */
 public class Calc {
 
-    public static double calc(ArrayList<Double> inArrDoub, ArrayList<String> inArrSimbol) {
+    public static double calc(ArrayList<Double> inArrDoub, ArrayList<String> inArrSimbol) throws BktException {
 
         try {
 
@@ -163,19 +162,19 @@ public class Calc {
             double out;
             out = inArrDoub.get(0);
 
-
             return out;
         } catch (IndexOutOfBoundsException ex) {
-            System.out.print("Ошибка синтаксиса, IndexOutOfBoundsException  ");
-            // ex.printStackTrace();
-            return -1;
+            System.out.println("Ошибка синтаксиса, IndexOutOfBoundsException  ");
+            throw  ex;
         } catch (BktException ex1) {
-            System.out.print("Ошибка синтаксиса, BktException  ");
-            //ex1.printStackTrace();
-            return -1;
-        }catch (Exception ex3){
-            System.out.print("Ошибка синтаксиса  ");
-            return -1;
+            System.out.println("Ошибка синтаксиса, BktException  ");
+            throw ex1;
+        }catch (ArithmeticException ex3){
+            System.out.println("Ошибка синтаксиса, ArithmeticException  ");
+            throw ex3;
+        }catch (Exception ex4){
+            System.out.println("Ошибка синтаксиса  ");
+            throw ex4;
         }
 
     }

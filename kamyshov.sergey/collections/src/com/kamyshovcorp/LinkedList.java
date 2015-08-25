@@ -5,17 +5,17 @@ import java.util.Arrays;
 /**
  * Created by kamyshov.sergey on 29.07.15.
  */
-public class LinkedList implements List {
+public class LinkedList<E> implements List<E> {
 
     private int size;
-    private Entry first, last;
+    private Entry<E> first, last;
 
     @Override
-    public Object read(int index) {
+    public E read(int index) {
         if (index < 0 || index > size - 1) {
             throw new IllegalArgumentException("Index can not be negative or bigger then amount of elements in list");
         }
-        Entry currentEntry = first;
+        Entry<E> currentEntry = first;
         int counter = 0;
         while (currentEntry != null) {
             if (index == counter) {
@@ -28,9 +28,9 @@ public class LinkedList implements List {
     }
 
     @Override
-    public boolean write(Object object) {
+    public boolean write(E element) {
         Entry oldLast = last;
-        last = new Entry(object, null, null);
+        last = new Entry(element, null, null);
         if (size == 0) {
             first = last;
         } else {
@@ -41,12 +41,13 @@ public class LinkedList implements List {
         return true;
     }
 
+
     @Override
-    public boolean update(Object updatedObject, Object newObject) {
-        Entry currentEntry = first;
+    public boolean update(E updatedElement, E newElement) {
+        Entry<E> currentEntry = first;
         while (currentEntry != null) {
-            if (currentEntry.element.equals(updatedObject)) {
-                currentEntry.element = newObject;
+            if (currentEntry.element.equals(updatedElement)) {
+                currentEntry.element = newElement;
                 return true;
             }
             currentEntry = currentEntry.next;
@@ -55,22 +56,22 @@ public class LinkedList implements List {
     }
 
     @Override
-    public boolean delete(Object object) {
-        Entry currentEntry = first;
+    public boolean delete(E element) {
+        Entry<E> currentEntry = first;
         while (currentEntry != null) {
-            if (first.element.equals(object)) {
+            if (first.element.equals(element)) {
                 first = first.next;
                 first.prev = null;
                 size--;
                 return true;
-            } else if (last.element.equals(object)) {
+            } else if (last.element.equals(element)) {
                 last = last.prev;
                 last.next = null;
                 size--;
                 return true;
-            } else if (currentEntry.element.equals(object)) {
-                Entry previousEntry = currentEntry.prev;
-                Entry nextEntry = currentEntry.next;
+            } else if (currentEntry.element.equals(element)) {
+                Entry<E> previousEntry = currentEntry.prev;
+                Entry<E> nextEntry = currentEntry.next;
                 previousEntry.next = currentEntry.next;
                 nextEntry.prev = currentEntry.prev;
                 size--;
@@ -93,11 +94,16 @@ public class LinkedList implements List {
         return Arrays.toString(elements);
     }
 
-    private static class Entry {
-        Object element;
-        Entry next, prev;
+    @Override
+    public int size() {
+        return size;
+    }
 
-        public Entry(Object element, Entry prev, Entry next) {
+    private static class Entry<E> {
+        E element;
+        Entry<E> next, prev;
+
+        public Entry(E element, Entry<E> prev, Entry<E> next) {
             this.element = element;
             this.next = next;
             this.prev = prev;
