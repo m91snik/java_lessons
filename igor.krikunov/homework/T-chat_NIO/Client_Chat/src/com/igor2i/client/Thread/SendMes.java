@@ -1,6 +1,5 @@
 package com.igor2i.client.Thread;
 
-import com.igor2i.client.Thread.ListenerMes;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -81,7 +80,7 @@ public class SendMes implements Runnable {
                                 channelHead.write(ByteBuffer.wrap(stringBuffer.toString().getBytes()));
 
                                 //Отправляем входящий порт и свой ник
-                                System.out.println(stringBuffer.toString());
+                                //System.out.println(stringBuffer.toString());
 
                                 clientSC.register(selector, SelectionKey.OP_WRITE);
 

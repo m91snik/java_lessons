@@ -49,8 +49,8 @@ public class ListenerMes implements Runnable {
 
             ServerSocketChannel clientSSC = ServerSocketChannel.open();
             clientSSC.configureBlocking(false);
-            clientSSC.socket().bind(new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), 0));
-            //clientSSC.socket().bind(new InetSocketAddress("127.0.0.1", 0));
+            //clientSSC.socket().bind(new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), 0));
+            clientSSC.socket().bind(new InetSocketAddress("127.0.0.1", 0));
 
             clientSSC.register(selector, clientSSC.validOps());
 

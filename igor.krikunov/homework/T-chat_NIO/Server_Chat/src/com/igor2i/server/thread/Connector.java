@@ -88,7 +88,7 @@ public class Connector implements Runnable {
                                         //TODO : закончить с добавлением в буффер
                                         clientChan.read(buffer);
                                     } catch (Exception e) {
-                                        //e.printStackTrace();
+                                        e.printStackTrace();
 
                                         key.cancel();
                                         key.channel().close();
@@ -104,13 +104,25 @@ public class Connector implements Runnable {
 
                                     if ("Bye".equals(str)) {
                                         String nick = nickUserSocketOut.get(clientChan.getRemoteAddress().toString());
-                                        nickUserSocketIn.remove(nick);
+                                        nickUserSocketOut.remove(clientChan.getRemoteAddress().toString());
+
                                         System.out.println("Пользователь " + nick + " покинул чат");
                                         //TODO доработать!
                                         bufferMessage = "Пользователь " + nick + " покинул чат";
 
-                                        key.cancel();
+                                        //завершаем соединение приёма сообщений, иначе вылетит IOException (который линукс не обрабатывае =/ )
+                                        Iterator<SelectionKey> itrK = selector.keys().iterator();
+                                        while (itrK.hasNext()){
+                                            SelectionKey selectionKey = itrK.next();
+                                            if(selectionKey.channel().equals(nickUserSocketIn.get(nick))){
+                                                selectionKey.channel().close();
+                                                selectionKey.cancel();
+                                                break;
+                                            }
+                                        }
+                                        nickUserSocketIn.remove(nick);
                                         key.channel().close();
+                                        key.cancel();
 
                                     } else if (Reg.regServSocket(str)) {
 
@@ -228,8 +240,8 @@ public class Connector implements Runnable {
                             } catch (Exception e) {
                                 e.printStackTrace();
 
-                                key.cancel();
                                 key.channel().close();
+                                key.cancel();
                                 System.out.println("Error");
                             }
                         }
