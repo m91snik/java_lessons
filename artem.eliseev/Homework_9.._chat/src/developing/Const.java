@@ -1,4 +1,4 @@
-package com;
+package developing;
 
 /**
  * Created by Anry on 16.08.2015.

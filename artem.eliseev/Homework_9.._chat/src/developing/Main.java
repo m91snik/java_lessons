@@ -1,7 +1,6 @@
-package com;
+package developing;
 
 import java.io.IOException;
-import java.net.UnknownHostException;
 
 /**
  * Created by Anry on 12.08.2015.
@@ -15,22 +14,24 @@ public class Main {
 //        Runnable runnable = new Runnable() {
 //            @Override
 //            public void run() {
-//                com.Client client = new com.Client("169.254.144.144", "1025");
+//                developing.Client client = new developing.Client("169.254.144.144", "1025");
 //        toDo Host name scanner;
         String hostName = "Host name";
         new Server();
-        try {
-            Client.main("169.254.144.144", Integer.toString(Const.SERVER_IN_PORT_NUMBER));
-        } catch (UnknownHostException e) {
-            System.err.println("Don't know about host " + hostName);
-            System.exit(1);
-        } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to " +
-                    hostName);
-            System.exit(1);
-        }
+//        try {
+//            Client.main("169.254.144.144", Integer.toString(Const.SERVER_IN_PORT_NUMBER));
+//        } catch (UnknownHostException e) {
+//            System.err.println("Don't know about host " + hostName);
+//            System.exit(1);
+//        } catch (IOException e) {
+//            System.err.println("Couldn't get I/O for the connection to " +
+//                    hostName);
+//            System.exit(1);
+//        }
+
+
 //                try {
-//                    com.Client.main("169.254.144.144", com.Const.SERVER_IN_PORT_NUMBER.toString());
+//                    developing.Client.main("169.254.144.144", developing.Const.SERVER_IN_PORT_NUMBER.toString());
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }
