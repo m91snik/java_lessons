@@ -11,9 +11,9 @@ import java.io.ObjectInputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -22,7 +22,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 public class Server {
     private static final int PORT = 1234;
     private static BlockingQueue<Message> blockingQueue = new LinkedBlockingQueue<>();
-    private static Map<String, Pair<String, Integer>> users = new HashMap<>();
+    private static Map<String, Pair<String, Integer>> users = new ConcurrentHashMap<>();
 
     public static void main(String[] args) {
         System.out.println("The server is loaded");
