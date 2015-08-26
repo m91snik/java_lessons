@@ -11,13 +11,15 @@ public class Main {
 
         };
         System.out.println(summator.calc(10.0, 20.0));
+
+
 //        Printer printer = (String[] strings) -> {
 //            for (String string : strings) {
 //                System.out.println(string);
 //            }
 //        };
 
-        printer.print(new String[]{"a", "b", "c"})
+//        printer.print(new String[]{"a", "b", "c"})
 
         System.out.println((strings) -> " Hi");
 

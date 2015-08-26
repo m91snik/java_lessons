@@ -1,0 +1,5 @@
+Manifest-Version: 1.0
+Implementation-Title: Gradle Main
+Implementation-Version: 1.0
+Main-Class: com.m91snik.lesson12.gradle.GradleMain
+
