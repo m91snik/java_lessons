@@ -61,7 +61,7 @@ public class EchoClient1 {
                                 new InputStreamReader(System.in))
         ) {
             String userInput;
-            System.out.println("com.Client works!");
+            System.out.println("Client works!");
             while ((userInput = stdIn.readLine()) != null) {
                 out.println(userInput);
                 System.out.println(EchoServer.counterWithSync() + " echo: " + in.readLine());
