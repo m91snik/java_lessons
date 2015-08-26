@@ -1,5 +1,7 @@
 package Client;
 
+import ChatUtils.Sender;
+
 import java.io.*;
 import java.net.InetAddress;
 import java.net.ServerSocket;

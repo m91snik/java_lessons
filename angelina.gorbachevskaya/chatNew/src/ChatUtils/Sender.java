@@ -1,4 +1,7 @@
-package Client;
+package ChatUtils;
+
+import Client.ClientID;
+import Client.Message;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;

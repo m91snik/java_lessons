@@ -2,7 +2,7 @@ package Server;
 
 import Client.ClientID;
 import Client.Message;
-import Client.Sender;
+import ChatUtils.Sender;
 
 import java.io.*;
 import java.net.ConnectException;
