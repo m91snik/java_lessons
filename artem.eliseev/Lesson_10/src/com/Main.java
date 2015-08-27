@@ -22,6 +22,9 @@ public class Main {
             fileOutputStream.close();
         }
         FileInputStream fileInputStream = new FileInputStream(file);
+
+
+
         try {
             byte[] buffer = new byte[10];
             StringBuilder fileContent = new StringBuilder();

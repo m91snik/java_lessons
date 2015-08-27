@@ -24,27 +24,31 @@ public class Main {
 
     public static void main(String[] args) {
 
-        System.out.println("Waiting connection...");
         try {
             server = new ServerSocket(port);
+            System.out.println("Server start, and we waiting connection...");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        /*
+         * Create thread for sending message for clients
+         */
+
+        outputMessage = new Thread(new NewConnectionOutput());
+        outputMessage.start();
+
         while(true) {
             try {
-                client = server.accept();
-                System.out.println("New client");
-                outputUsers.add(client);
 
+                /*
+                 * Open ServerSocket and wait input message client
+                 */
+
+                client = server.accept();
 
                 Thread inputMessage = new Thread(new NewConnectionInput(client));
                 inputMessage.start();
-
-                if (outputMessage == null) {
-                    outputMessage = new Thread(new NewConnectionOutput());
-                    outputMessage.start();
-                }
 
             } catch (IOException e) {
                 throw new RuntimeException(e);
