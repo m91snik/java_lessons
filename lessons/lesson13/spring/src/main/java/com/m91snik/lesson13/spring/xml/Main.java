@@ -11,7 +11,8 @@ public class Main {
 
     public static void main(String[] args) {
         ApplicationContext applicationContext=new ClassPathXmlApplicationContext("context.xml");
-        StringMessageSystem stringMessageSystem = applicationContext.getBean("messageSystem", StringMessageSystem.class);
+        StringMessageSystem stringMessageSystem =
+                applicationContext.getBean("messageSystem", StringMessageSystem.class);
         stringMessageSystem.runMessagesSystem();
     }
 }
