@@ -11,6 +11,7 @@ import java.util.ListIterator;
 public class NewConnectionOutput implements Runnable {
 
     private static PrintWriter out;
+    private static Socket client;
 
     public NewConnectionOutput() {
     }
@@ -20,12 +21,27 @@ public class NewConnectionOutput implements Runnable {
         try {
 
             while (true){
+
+                /*
+                 * Wait new message then send it all users
+                 * for sending open new socket and close it
+                 */
+
                 String outText = (String)Main.blockingQueue.take();
+
                 System.out.println("We send: " + outText);
-                ListIterator<Socket> itr = Main.outputUsers.listIterator();
+
+                ListIterator<String[]> itr = Main.outputUsers.listIterator();
+                String[] users;
+                
                 while (itr.hasNext()) {
-                    out = new PrintWriter(itr.next().getOutputStream(),true);
-                    out.println("user" + Main.whoSend + ": " + outText);
+                    users = itr.next();
+                    String address = users[0];
+                    Integer port = new Integer(users[1]);
+                    client = new Socket(address,port);
+                    out = new PrintWriter(client.getOutputStream(),true);
+                    out.println(outText);
+                    client.close();
                 }
             }
         } catch (IOException e) {
