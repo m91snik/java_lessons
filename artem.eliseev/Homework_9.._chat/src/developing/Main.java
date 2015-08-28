@@ -15,7 +15,6 @@ public class Main {
 //            @Override
 //            public void run() {
 //                developing.Client client = new developing.Client("169.254.144.144", "1025");
-//        toDo Host name scanner;
         String hostName = "Host name";
         new Server();
 //        try {

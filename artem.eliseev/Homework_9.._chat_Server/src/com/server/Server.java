@@ -1,6 +1,8 @@
 package com.server;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -22,7 +24,7 @@ public class Server {
     Server() {
     }
 
-    public static void main(String... args) throws IOException {
+    public static void main(String... args) throws IOException, ClassNotFoundException {
         if (args.length != 1) {
             System.err.println("Usage: java EchoServer <port number>");
             System.exit(1);
@@ -48,21 +50,23 @@ public class Server {
                             ObjectInputStream in =
                                     new ObjectInputStream(clientSocket.getInputStream())
                     ) {
-                        String inputLine;
-                        String clientIp = clientSocket.getInetAddress().toString();
-                        int clientInputPort;
-                        inputLine = in.readLine();
-
                         MessageFromClientToServer messageFromClientToServer =
-                                new MessageFromClientToServer();
-                        messageFromClientToServer =in.readObject();
+                                (MessageFromClientToServer) in.readObject();
 
-                        Connection con = new Connection(clientSocket, clientIp, clientInputPort);
+//                        String inputLine;
+                        String clientIp = clientSocket.getInetAddress().toString();
+//                        inputLine = in.readLine();
+//                        MessageFromClientToServer messageFromClientToServer =
+//                                new MessageFromClientToServer();
+//                        messageFromClientToServer =in.readObject();
+
+                        Connection con = new Connection(
+                                clientSocket, clientIp, messageFromClientToServer.inputClientPort);
                         if (con.newUserCheck(con)) {
                             connections.add(con);
                         }
                         try {
-                            blockingQueue.put(inputLine);
+                            blockingQueue.put(messageFromClientToServer.userInput);
                         } catch (InterruptedException ex) {
                             System.out.println("BlockingQueue Server input Exception");
                         }
@@ -71,6 +75,9 @@ public class Server {
                         System.out.println("Exception caught when trying to listen on port "
                                 + portNumber + " or listening for a connection");
                         System.out.println(e.getMessage());
+                    } catch (ClassNotFoundException e) {
+                        System.out.println("ClassNotFoundException MessageFromClientToServer " +
+                                "income message on server");
                     }
                 }
             }

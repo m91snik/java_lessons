@@ -1,9 +1,6 @@
 package com.client;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.Scanner;
@@ -31,16 +28,20 @@ public class ClientIn {
             BufferedReader stdIn =
                     new BufferedReader(
                             new InputStreamReader(System.in));
-            if (!(userInput = stdIn.readLine()).equalsIgnoreCase("exit")) {
+
+            if ((userInput = stdIn.readLine()).equalsIgnoreCase("exit")) {
 //toDo good system exit
                 break;
             }
             try (
                     Socket echoSocket = new Socket(hostName, portNumber);
-                    PrintWriter out =
-                            new PrintWriter(echoSocket.getOutputStream(), true);
+                    ObjectOutputStream out =
+                            new ObjectOutputStream(echoSocket.getOutputStream());
             ) {
-                out.println(userInput);
+                MessageFromClientToServer messageFromClientToServer =
+                        new MessageFromClientToServer(inputClientPort, userInput);
+                out.writeObject(messageFromClientToServer);
+//                out.println(messageFromClientToServer);
                 echoSocket.close();
             } catch (UnknownHostException e) {
                 System.err.println("Don't know about host " + hostName);
