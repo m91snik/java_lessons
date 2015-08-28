@@ -10,9 +10,11 @@ import com.m91snik.lesson13.processor.StringMessageProcessor;
 import com.m91snik.lesson13.producer.BaseProducer;
 import com.m91snik.lesson13.producer.Producer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 
 /**
  * Created by nikolay.garbuzov on 27.08.15.
@@ -21,22 +23,23 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan("com.m91snik.lesson13")
 public class Config {
     //
-    @Autowired
-    SharedQueue<String> sharedQueue;
+//    @Autowired
+//    SharedQueue<String> queue;
 
-//    @Bean
-//    public SharedQueue<String> sharedQueue(){
-//        return new SharedQueue<>();
-//    }
+    @Bean
+    @Scope(scopeName = ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+    public SharedQueue<String> queue(){
+        return new SharedQueue<>();
+    }
 
     @Bean
     public Consumer<String> consumer() {
-        return new BaseConsumer<>(sharedQueue, processor());
+        return new BaseConsumer<>(queue(), processor());
     }
 
     @Bean
     public Producer<String> producer() {
-        return new BaseProducer<>(sharedQueue, generator());
+        return new BaseProducer<>(queue(), generator());
     }
 
     @Bean

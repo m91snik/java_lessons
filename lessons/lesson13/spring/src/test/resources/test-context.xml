@@ -9,7 +9,8 @@
     <context:component-scan base-package="com.m91snik.lesson13.spring.test"/>
 
 
-    <bean id="sharedQueue" class="com.m91snik.lesson13.SharedQueue">
+    <bean id="sharedQueue" class="com.m91snik.lesson13.SharedQueue"
+          scope="prototype">
     </bean>
 
     <bean id="processor" class="com.m91snik.lesson13.spring.stub.AssertionProcessor">

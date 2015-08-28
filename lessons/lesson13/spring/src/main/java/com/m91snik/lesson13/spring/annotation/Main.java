@@ -10,7 +10,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
 
     public static void main(String[] args) {
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("context_annotation.xml");
+        ApplicationContext applicationContext=
+                new ClassPathXmlApplicationContext("context_annotation.xml");
         StringMessageSystem stringMessageSystem = applicationContext.getBean("stringMessageSystem", StringMessageSystem.class);
         stringMessageSystem.runMessagesSystem();
     }
