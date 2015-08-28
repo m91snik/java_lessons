@@ -1,9 +1,6 @@
 package com.server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -12,7 +9,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.SynchronousQueue;
 
 /**
  * Created by Anry on 22.08.2015.
@@ -47,18 +43,24 @@ public class Server {
                             ServerSocket serverSocket =
                                     new ServerSocket(Integer.parseInt(args[0]));
                             Socket clientSocket = serverSocket.accept();
-
-                            BufferedReader in = new BufferedReader(
-                                    new InputStreamReader(clientSocket.getInputStream()));
+//                            BufferedReader in = new BufferedReader(
+//                                    new InputStreamReader(clientSocket.getInputStream()));
+                            ObjectInputStream in =
+                                    new ObjectInputStream(clientSocket.getInputStream())
                     ) {
                         String inputLine;
-                        String clientIp;
-                        clientIp = clientSocket.getInetAddress().toString();
-                        Connection con = new Connection(clientSocket, clientIp);
+                        String clientIp = clientSocket.getInetAddress().toString();
+                        int clientInputPort;
+                        inputLine = in.readLine();
+
+                        MessageFromClientToServer messageFromClientToServer =
+                                new MessageFromClientToServer();
+                        messageFromClientToServer =in.readObject();
+
+                        Connection con = new Connection(clientSocket, clientIp, clientInputPort);
                         if (con.newUserCheck(con)) {
                             connections.add(con);
                         }
-                        inputLine = in.readLine();
                         try {
                             blockingQueue.put(inputLine);
                         } catch (InterruptedException ex) {
@@ -113,7 +115,7 @@ public class Server {
     }
 
     public static int counterWithSync() {
-        synchronized (Server.class) {
+        synchronized (com.server.Server.class) {
 //            try {
 //                Thread.sleep(1);
 //            } catch (InterruptedException e) {

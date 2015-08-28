@@ -17,10 +17,10 @@ import java.util.Iterator;
         this.clientInputPort = clientInputPort;
 
     }
-    public boolean newUserCheck(Connection connection) {
-        Iterator<Connection> iter = Server.connections.iterator();
+    public boolean newUserCheck(com.server.Connection connection) {
+        Iterator<com.server.Connection> iter = Server.connections.iterator();
         while (iter.hasNext()) {
-            if (((Connection) iter.next()).equals(connection)) {
+            if (((com.server.Connection) iter.next()).equals(connection)) {
                 return false;
             }
         }
