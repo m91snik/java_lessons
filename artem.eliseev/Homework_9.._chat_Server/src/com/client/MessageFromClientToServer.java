@@ -1,4 +1,4 @@
-package com.server;
+package com.client;
 
 import java.io.Serializable;
 
@@ -7,15 +7,17 @@ import java.io.Serializable;
  */
 public class MessageFromClientToServer implements Serializable {
     public static final long serialVersionUID = 1L;
-    int inputClientPort;
-    String userInput;
+    public int inputClientPort;
+    public String userInput;
 
     public MessageFromClientToServer(int inputClientPort, String userInput) {
         this.inputClientPort = inputClientPort;
         this.userInput = userInput;
     }
+
     @Override
     public String toString() {
         String outPrintString = "inputClientPort:" + inputClientPort + ", userInput:" + userInput;
+        return outPrintString;
     }
 }

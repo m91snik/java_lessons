@@ -17,8 +17,8 @@ import java.util.Iterator;
         this.clientInputPort = clientInputPort;
 
     }
-    public boolean newUserCheck(com.server.Connection connection) {
-        Iterator<com.server.Connection> iter = Server.connections.iterator();
+    public boolean newUserCheck(Connection connection) {
+        Iterator<Connection> iter = Server.connections.iterator();
         while (iter.hasNext()) {
             if (((com.server.Connection) iter.next()).equals(connection)) {
                 return false;
@@ -27,4 +27,12 @@ import java.util.Iterator;
         return true;
     }
 
+    @Override
+    public String toString() {
+        return "Connection{" +
+                "clientSocket=" + clientSocket +
+                ", clientIp='" + clientIp + '\'' +
+                ", clientInputPort=" + clientInputPort +
+                '}';
+    }
 }

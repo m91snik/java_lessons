@@ -1,15 +1,18 @@
 package com.server;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.PrintWriter;
+import com.client.MessageFromClientToServer;
+
+import java.io.*;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
 /**
@@ -32,10 +35,10 @@ public class Server {
         int portNumber = Integer.parseInt(args[0]);
 
         class ServerIn implements Runnable {
-            private final BlockingQueue blockingQueue;
+            private final BlockingQueue<String> queue;
 
-            ServerIn(BlockingQueue mainBlockingQueue) {
-                blockingQueue = mainBlockingQueue;
+            ServerIn(BlockingQueue<String> mainQueue) {
+                queue = mainQueue;
             }
 
             @Override
@@ -47,43 +50,52 @@ public class Server {
                             Socket clientSocket = serverSocket.accept();
 //                            BufferedReader in = new BufferedReader(
 //                                    new InputStreamReader(clientSocket.getInputStream()));
+
+//                            InputStream inputStream=clientSocket.getInputStream();
+//                            ObjectInputStream in = new ObjectInputStream(inputStream)
                             ObjectInputStream in =
-                                    new ObjectInputStream(clientSocket.getInputStream())
+                                    new ObjectInputStream(clientSocket.getInputStream());
                     ) {
+                        System.out.println("Server works, connection done.");
+                        System.out.println(clientSocket.toString());
                         MessageFromClientToServer messageFromClientToServer =
                                 (MessageFromClientToServer) in.readObject();
 
-//                        String inputLine;
-                        String clientIp = clientSocket.getInetAddress().toString();
-//                        inputLine = in.readLine();
-//                        MessageFromClientToServer messageFromClientToServer =
-//                                new MessageFromClientToServer();
-//                        messageFromClientToServer =in.readObject();
+                        String clientIpWithSlash = clientSocket.getInetAddress().toString();
+                        String clientIp = clientIpWithSlash.substring(1, clientIpWithSlash.length());
 
                         Connection con = new Connection(
                                 clientSocket, clientIp, messageFromClientToServer.inputClientPort);
+                        System.out.println(con.toString());
                         if (con.newUserCheck(con)) {
                             connections.add(con);
+                            System.out.println("Connection added");
                         }
+
                         try {
-                            blockingQueue.put(messageFromClientToServer.userInput);
-                        } catch (InterruptedException ex) {
-                            System.out.println("BlockingQueue Server input Exception");
+                            queue.put(messageFromClientToServer.userInput);
+                        } catch (InterruptedException e) {
+                            System.out.println("BlockingQueue Server input InterruptedException");
+                            e.printStackTrace();
                         }
+                        System.out.println("queue in receiver " + queue.toString());
+
                         clientSocket.close();
                     } catch (IOException e) {
                         System.out.println("Exception caught when trying to listen on port "
                                 + portNumber + " or listening for a connection");
                         System.out.println(e.getMessage());
+                        e.printStackTrace();
                     } catch (ClassNotFoundException e) {
                         System.out.println("ClassNotFoundException MessageFromClientToServer " +
-                                "income message on server");
+                                "incoming message on server");
+                        e.printStackTrace();
                     }
                 }
             }
         }
-        BlockingQueue mainBlockingQueue = new LinkedBlockingQueue();
-        ServerIn serverIn = new ServerIn(mainBlockingQueue);
+        BlockingQueue<String> mainQueue = new LinkedBlockingQueue<String>();
+        ServerIn serverIn = new ServerIn(mainQueue);
         new Thread(serverIn).start();
 //        Thread threadIn = new Thread(runnableIn);
 //        threadIn.start();
@@ -93,32 +105,69 @@ public class Server {
 
 
         class ServerOut implements Runnable {
-            private final BlockingQueue blockingQueue;
+            private final BlockingQueue<String> queue;
 
-            ServerOut(BlockingQueue mainBlockingQueue) {
-                blockingQueue = mainBlockingQueue;
+            ServerOut(BlockingQueue<String> mainQueue) {
+                queue = mainQueue;
             }
 
             //toDO client socket timeout defence;
             @Override
             public synchronized void run() {
-                Socket clientSocket;
+                while (true) {
+                    StringBuffer messageOut = new StringBuffer();
 
+                    try {
+                        messageOut = messageOut.append(queue.take());
+                        System.out.println("Message in sender " + messageOut);
+                    } catch (NullPointerException e) {
+                        System.err.print("NullPointerException in server sender");
+                        e.printStackTrace();
+                    } catch (InterruptedException e) {
+                        System.out.println("BlockingQueue Server sender InterruptedException");
+                        e.printStackTrace();
+                    }
+                    Iterator<Connection> iter = connections.iterator();
+                    while (iter.hasNext()) {
+                        Connection connection = ((Connection) iter.next());
+                        if (!(Server.messageSender(connection, messageOut.toString()))) {
+                            System.err.print("The message has just been lost! ");
+                            System.err.println(connection.toString() + messageOut);
+                        }
+                    }
 
-                Iterator<Connection> iter = connections.iterator();
-                while (iter.hasNext()) {
-                    Connection connection = new Connection(null);
-                    connection = (Connection) iter.next();
+//                    Socket clientSocket;
+//                        try (PrintWriter out =
+//                                     new PrintWriter(connection.clientSocket.getOutputStream(), true);
+//                        ){}
+//                    }
 
-                    try (PrintWriter out =
-                                 new PrintWriter(connection.clientSocket.getOutputStream(), true);
-                    )
                 }
-
             }
         }
+        ServerOut serverOut = new ServerOut(mainQueue);
+        new Thread(serverOut).start();
 
+    }
 
+    public static boolean messageSender(Connection connection, String messageOut) {
+        try (
+                Socket echoSocket = new Socket(connection.clientIp, connection.clientInputPort);
+                PrintWriter out =
+                        new PrintWriter(echoSocket.getOutputStream(), true);
+        ) {
+            out.println(messageOut);
+        } catch (UnknownHostException e) {
+            System.err.println("Don't know about client " + connection.toString() +
+                    " Message:" + messageOut.toString());
+            e.printStackTrace();
+        } catch (IOException e) {
+            System.err.println("Couldn't get I/O for the connection to " +
+                    connection.toString() + "Message:" + messageOut.toString());
+            e.printStackTrace();
+        }
+        System.out.println("The message has been sent");
+        return true;
     }
 
     public static int counterWithSync() {
@@ -131,5 +180,4 @@ public class Server {
             return ++counter;
         }
     }
-
 }
