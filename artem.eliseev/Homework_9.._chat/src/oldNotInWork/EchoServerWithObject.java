@@ -20,25 +20,25 @@ public class EchoServerWithObject {
         }
 
         int portNumber = Integer.parseInt(args[0]);
-//while(true){
-        try (
-                ServerSocket serverSocket =
-                        new ServerSocket(Integer.parseInt(args[0]));
-                Socket clientSocket = serverSocket.accept();
-                PrintWriter out =
-                        new PrintWriter(clientSocket.getOutputStream(), true);
+        while (true) {
+            try (
+                    ServerSocket serverSocket =
+                            new ServerSocket(Integer.parseInt(args[0]));
+                    Socket clientSocket = serverSocket.accept();
+                    PrintWriter out =
+                            new PrintWriter(clientSocket.getOutputStream(), true);
 //                BufferedReader in = new BufferedReader(
 //                        new InputStreamReader(clientSocket.getInputStream()));
-                ObjectInputStream in =
-                        new ObjectInputStream(clientSocket.getInputStream());
-        ) {
-            System.out.println("Server works!");
-            MessageFromClientToServer messageFromClientToServer =
-                    (MessageFromClientToServer) in.readObject();
-            System.out.println(messageFromClientToServer.toString());
+                    ObjectInputStream in =
+                            new ObjectInputStream(clientSocket.getInputStream());
+            ) {
+                System.out.println("Server works, connection done.");
+                System.out.println("Client IP: " + clientSocket.getInetAddress());
+                MessageFromClientToServer messageFromClientToServer =
+                        (MessageFromClientToServer) in.readObject();
+                System.out.println(messageFromClientToServer.toString());
 
-
-            String inputLine;
+                String inputLine;
 
 //            while ((inputLine = in.readLine()) != null) {
 //                out.println(inputLine);
@@ -46,17 +46,18 @@ public class EchoServerWithObject {
 //
 //
 //            }
+                System.out.println();
 
-        } catch (IOException e) {
-            System.out.println("Exception caught when trying to listen on port "
-                    + portNumber + " or listening for a connection");
-            System.out.println(e.getMessage());
-        }catch (ClassNotFoundException e) {
-            System.out.println("ClassNotFoundException MessageFromClientToServer " +
-                    "income message on server");
+            } catch (IOException e) {
+                System.out.println("Exception caught when trying to listen on port "
+                        + portNumber + " or listening for a connection");
+                System.out.println(e.getMessage());
+            } catch (ClassNotFoundException e) {
+                System.out.println("ClassNotFoundException MessageFromClientToServer " +
+                        "income message on server");
+            }
         }
     }
-//}
 
     static int counterWithSync() {
         synchronized (EchoServer.class) {

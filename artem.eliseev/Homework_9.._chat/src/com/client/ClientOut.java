@@ -11,30 +11,31 @@ import java.net.Socket;
 /**
  * From server to client.
  */
-public class ClientOut {
-    public static void main(String... args) throws IOException {
-        if (args.length != 1) {
-            System.err.println("Usage: java EchoServer <port number>");
-            System.exit(1);
-        }
-        int portNumber = Integer.parseInt(args[0]);
-        try (
-                ServerSocket clientServerSocket =
-                        new ServerSocket(Integer.parseInt(args[0]));
-                Socket clientSocket = clientServerSocket.accept();
-                BufferedReader in = new BufferedReader(
-                        new InputStreamReader(clientSocket.getInputStream()));
-        ) {
-            String inputLine;
-            while (true) {
-                System.out.println(" echo: " + in.readLine());
-            }
-        }
-        catch (IOException e) {
-            System.out.println("Exception caught when trying to listen on port "
-                    + portNumber + " or listening for a connection");
-            System.out.println(e.getMessage());
-        }
+public class ClientOut implements Runnable {
+    int inputClientPort;
 
+    public ClientOut(int inputClientPort) {
+        this.inputClientPort = inputClientPort;
+    }
+
+    @Override
+    public synchronized void run() {
+        while (true) {
+            try (
+                    ServerSocket clientServerSocket =
+                            new ServerSocket(inputClientPort);
+                    Socket clientSocket = clientServerSocket.accept();
+                    BufferedReader in = new BufferedReader(
+                            new InputStreamReader(clientSocket.getInputStream()));
+            ) {
+                System.out.println(" echo: " + in.readLine());
+            } catch (IOException e) {
+                System.out.println("Exception caught when trying to listen on port "
+                        + inputClientPort + " or listening for a connection");
+                System.out.println(e.getMessage());
+                e.printStackTrace();
+            }
+
+        }
     }
 }

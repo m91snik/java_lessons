@@ -14,7 +14,6 @@ public class MessageFromClientToServer implements Serializable {
         this.inputClientPort = inputClientPort;
         this.userInput = userInput;
     }
-
     @Override
     public String toString() {
         String outPrintString = "inputClientPort:" + inputClientPort + ", userInput:" + userInput;

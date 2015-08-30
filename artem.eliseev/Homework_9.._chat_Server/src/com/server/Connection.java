@@ -21,10 +21,10 @@ import java.util.Iterator;
         Iterator<Connection> iter = Server.connections.iterator();
         while (iter.hasNext()) {
             if (((com.server.Connection) iter.next()).equals(connection)) {
-                return false;
+                return true;
             }
         }
-        return true;
+        return false;
     }
 
     @Override
