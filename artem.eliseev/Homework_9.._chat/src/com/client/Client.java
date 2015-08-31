@@ -21,6 +21,7 @@ public class Client {
             System.out.println("Enter your input port (Integer):");
             inputClientPort = Integer.parseInt(Client.varGetter());
 
+        System.out.println("Enter messages:");
             ClientIn clientIn = new ClientIn(hostName, portNumber, inputClientPort);
             new Thread(clientIn).start();
 

@@ -60,12 +60,12 @@ public class Server {
                         System.out.println(clientSocket.toString());
                         MessageFromClientToServer messageFromClientToServer =
                                 (MessageFromClientToServer) in.readObject();
+                        System.out.println(messageFromClientToServer.toString());
 
                         String clientIpWithSlash = clientSocket.getInetAddress().toString();
                         String clientIp = clientIpWithSlash.substring(1, clientIpWithSlash.length());
 
-                        Connection con = new Connection(
-                                clientSocket, clientIp, messageFromClientToServer.inputClientPort);
+                        Connection con = new Connection(clientSocket, clientIp, messageFromClientToServer.inputClientPort);
                         System.out.println(con.toString());
                         if (con.newUserCheck(con)) {
                             connections.add(con);
@@ -130,17 +130,12 @@ public class Server {
                     Iterator<Connection> iter = connections.iterator();
                     while (iter.hasNext()) {
                         Connection connection = ((Connection) iter.next());
+
                         if (!(Server.messageSender(connection, messageOut.toString()))) {
                             System.err.print("The message has just been lost! ");
                             System.err.println(connection.toString() + messageOut);
                         }
                     }
-
-//                    Socket clientSocket;
-//                        try (PrintWriter out =
-//                                     new PrintWriter(connection.clientSocket.getOutputStream(), true);
-//                        ){}
-//                    }
 
                 }
             }
@@ -157,6 +152,7 @@ public class Server {
                         new PrintWriter(echoSocket.getOutputStream(), true);
         ) {
             out.println(messageOut);
+            echoSocket.close();
         } catch (UnknownHostException e) {
             System.err.println("Don't know about client " + connection.toString() +
                     " Message:" + messageOut.toString());
