@@ -8,12 +8,13 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by nikolay.garbuzov on 27.08.15.
  */
-@Component
+//@Component
 public class SharedQueue<E> {
 
     private final BlockingQueue<E> queue;
 
     public SharedQueue() {
+
         this.queue = new LinkedBlockingQueue<>();
     }
 

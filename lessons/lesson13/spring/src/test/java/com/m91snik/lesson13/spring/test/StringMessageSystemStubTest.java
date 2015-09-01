@@ -37,6 +37,7 @@ public class StringMessageSystemStubTest {
         stringMessageSystem.setStopped(true);
 
         Assert.assertNull(assertionProcessor.getAssertionError());
+        Assert.assertTrue(assertionProcessor.isProcessed());
 
     }
 }

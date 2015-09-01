@@ -9,11 +9,13 @@ import org.junit.Assert;
 public class AssertionProcessor implements MessageProcessor<String> {
 
     AssertionError assertionError;
+    boolean processed = false;
 
     @Override
     public void process(String element) {
         try {
             Assert.assertEquals("stub", element);
+            processed = true;
         } catch (AssertionError e) {
             assertionError = e;
             throw e;
@@ -22,5 +24,9 @@ public class AssertionProcessor implements MessageProcessor<String> {
 
     public AssertionError getAssertionError() {
         return assertionError;
+    }
+
+    public boolean isProcessed() {
+        return processed;
     }
 }
