@@ -97,7 +97,6 @@ public class Server {
             synchronized (connections) {
                 Iterator<MyConnection> iter = connections.iterator();
                 while (iter.hasNext()) {
-//                    toDO Realize this!!!
 //                    ((MyConnection) iter.next()).close();
                 }
             }

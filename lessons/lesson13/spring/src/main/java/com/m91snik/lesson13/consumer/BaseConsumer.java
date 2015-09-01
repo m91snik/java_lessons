@@ -3,10 +3,12 @@ package com.m91snik.lesson13.consumer;
 import com.m91snik.lesson13.SharedQueue;
 import com.m91snik.lesson13.processor.MessageProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by nikolay.garbuzov on 27.08.15.
  */
+//@Component
 public class BaseConsumer<E> implements Consumer<E>{
 
     @Autowired
