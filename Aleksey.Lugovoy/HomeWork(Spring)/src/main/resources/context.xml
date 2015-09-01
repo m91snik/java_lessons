@@ -1,0 +1,31 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="sharedQueue" class="com.lexsus.chat.SharedQueue">
+    </bean>
+
+    <bean id="consumer" class="com.lexsus.chat.consumer.BaseConsumer">
+        <constructor-arg index="0" ref="sharedQueue"/>
+        <constructor-arg index="1" ref="processor"/>
+    </bean>
+
+    <bean id="producer" class="com.lexsus.chat.producer.BaseProducer">
+        <constructor-arg index="0" ref="sharedQueue"/>
+        <constructor-arg index="1" ref="generator"/>
+    </bean>
+
+    <bean id="generator" class="com.lexsus.chat.generator.StringMessageGenerator">
+    </bean>
+
+    <bean id="processor" class="com.lexsus.chat.processor.StringMessageProcessor">
+    </bean>
+
+    <bean id="messageSystem" class="com.m91snik.lesson13.spring.xml.StringMessageSystem">
+        <constructor-arg index="0" ref="consumer"/>
+        <constructor-arg index="1" ref="producer"/>
+    </bean>
+
+
+</beans>
