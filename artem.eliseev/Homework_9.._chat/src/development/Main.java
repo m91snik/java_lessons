@@ -1,4 +1,4 @@
-package developing;
+package development;
 
 import java.io.IOException;
 
@@ -14,7 +14,7 @@ public class Main {
 //        Runnable runnable = new Runnable() {
 //            @Override
 //            public void run() {
-//                developing.Client client = new developing.Client("169.254.144.144", "1025");
+//                development.Client client = new development.Client("169.254.144.144", "1025");
         String hostName = "Host name";
         new Server();
 //        try {
@@ -30,7 +30,7 @@ public class Main {
 
 
 //                try {
-//                    developing.Client.main("169.254.144.144", developing.Const.SERVER_IN_PORT_NUMBER.toString());
+//                    development.Client.main("169.254.144.144", development.Const.SERVER_IN_PORT_NUMBER.toString());
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                }

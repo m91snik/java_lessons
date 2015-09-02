@@ -1,4 +1,4 @@
-package developing;
+package development;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,8 +10,8 @@ import java.net.UnknownHostException;
 /**
  * Created by Anry on 15.08.2015.
  */
-public class Client {
-    Client(String hostName, String portNumber) {
+public class Client1 {
+    Client1(String hostName, String portNumber) {
     }
 
     public static void main(String... args) throws IOException {

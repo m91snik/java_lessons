@@ -22,25 +22,30 @@ public class ClientIn implements Runnable {
     @Override
     public synchronized void run() {
         while (true) {
+
             BufferedReader stdIn =
                     new BufferedReader(
                             new InputStreamReader(System.in));
-
+            String userInput;
+            try {
+                if ((userInput = stdIn.readLine()).equalsIgnoreCase("exit")) {
+//                  toDo good system exit
+//                  System.exit(1);
+                    break;
+                }
+            } catch (IOException e) {
+                System.err.println("IOException in stdIn.readLine System.in");
+                e.printStackTrace();
+                userInput = "IO error in client";
+            }
+            MessageFromClientToServer messageFromClientToServer =
+                    new MessageFromClientToServer(inputClientPort, userInput);
             try (
                     Socket echoSocket = new Socket(hostName, portNumber);
                     ObjectOutputStream out =
-                            new ObjectOutputStream(echoSocket.getOutputStream());
+                            new ObjectOutputStream(echoSocket.getOutputStream())
             ) {
-                String userInput;
-                if ((userInput = stdIn.readLine()).equalsIgnoreCase("exit")) {
-//toDo good system exit
-//                System.exit(1);
-                    break;
-                }
-                MessageFromClientToServer messageFromClientToServer =
-                        new MessageFromClientToServer(inputClientPort, userInput);
                 out.writeObject(messageFromClientToServer);
-                echoSocket.close();
             } catch (UnknownHostException e) {
                 System.err.println("Don't know about host " + hostName);
                 e.printStackTrace();
@@ -49,7 +54,6 @@ public class ClientIn implements Runnable {
                         hostName);
                 e.printStackTrace();
             }
-
         }
     }
 
