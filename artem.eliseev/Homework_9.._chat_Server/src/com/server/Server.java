@@ -18,8 +18,11 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by Anry on 22.08.2015.
  */
+//TODO: do refactoring. extract ServerIn, ServerOut from main method to separate files
+//TODO: do not duplicate e.printStackTrace by System.out. just remove System.out usage
 public class Server {
     static int counter = 0;
+    //TODO: use concurrentHashMap and save userName as a key and it's (port,host) as a value
     static List<Connection> connections =
             Collections.synchronizedList(new ArrayList<Connection>());
 

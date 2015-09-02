@@ -1,11 +1,7 @@
 package com.makedonsky94.socket;
 
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
-import java.net.Socket;
 import java.net.SocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
@@ -14,7 +10,7 @@ import java.nio.channels.SocketChannel;
  * Created by Sasha on 18.08.2015.
  */
 public class Client {
-
+    //TODO: remove unused field
     public static final String ANSI_RESET = "\u001B[0m";
 
     public Client(SocketAddress address) {

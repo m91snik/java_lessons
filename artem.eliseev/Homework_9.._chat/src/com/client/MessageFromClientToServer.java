@@ -5,6 +5,8 @@ import java.io.Serializable;
 /**
  * Created by Anry on 28.08.2015.
  */
+//TODO: make fields final
+//TODO:
 public class MessageFromClientToServer implements Serializable {
     public static final long serialVersionUID = 1L;
     int inputClientPort;

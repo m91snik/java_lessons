@@ -5,6 +5,8 @@ import com.kamyshovcorp.message.ClientInfo;
 import com.kamyshovcorp.message.Message;
 import com.kamyshovcorp.message.MessageType;
 import javafx.util.Pair;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Component;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -19,54 +21,56 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by kamyshov.sergey on 17.08.15.
  */
+@Component
 public class Server {
-    private static final int PORT = 1234;
-    private static BlockingQueue<Message> blockingQueue = new LinkedBlockingQueue<>();
-    private static Map<String, Pair<String, Integer>> users = new ConcurrentHashMap<>();
 
-    public static void main(String[] args) {
-        System.out.println("The server is loaded");
+	private static final Logger logger = Logger.getLogger(Server.class);
+	private static final int PORT = 1234;
+	private static BlockingQueue<Message> messages = new LinkedBlockingQueue<>();
+	private static Map<String, Pair<String, Integer>> users = new ConcurrentHashMap<>();
 
-        // Reader
+    public void runServer() {
+        // Thread Reader
         new Thread(() -> {
             try (ServerSocket serverSocket = new ServerSocket(PORT)) {
+	            logger.info("Создан ServerSocket с портом: " + serverSocket.getLocalPort());
                 Message message;
                 ClientInfo clientInfo;
                 ObjectInputStream inputStream;
                 while (true) {
                     try (Socket socket = serverSocket.accept()) {
-                        inputStream = new ObjectInputStream(socket.getInputStream());
+	                    logger.info("Создано входящее подключение для адресса: " + socket.getInetAddress());
+	                    inputStream = new ObjectInputStream(socket.getInputStream());
                         message = (Message) inputStream.readObject();
                         clientInfo = message.getClientInfo();
                         Date date = new Date();
                         if (MessageType.ENTRANCE == message.getMessageType()) {
                             // Добавляем клиента в список пользователей
                             users.put(clientInfo.getUserName(), new Pair<>(clientInfo.getHostName(), clientInfo.getClientPort()));
-                            System.out.println(String.format("[%td/%tm/%ty %tT %tZ] Пользователь [%s, %s, %d] подключился к чату.",
-                                    date, date, date, date, date, clientInfo.getUserName(), clientInfo.getHostName(), clientInfo.getClientPort()));
-                        } else if (MessageType.MESSAGE == message.getMessageType()) {
-                            System.out.println(String.format("[%td/%tm/%ty %tT %tZ] Принятно сообщение от [%s, %s, %d]: ",
-                                    date, date, date, date, date, clientInfo.getUserName(), clientInfo.getHostName(), clientInfo.getClientPort()) + message.getText());
+	                        logger.info(String.format("Пользователь [%s, %s, %d] подключился к чату.", clientInfo.getUserName(), clientInfo.getHostName(), clientInfo.getClientPort()));
                         }
-                        blockingQueue.add(message);
+	                    messages.add(message);
                     } catch (ClassNotFoundException e) {
-                        e.printStackTrace();
+	                    logger.error("Ошибка преобразования при приеме сообщения на сервере", e);
+	                    e.printStackTrace();
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+	            logger.error(e);
+	            e.printStackTrace();
             }
         }).start();
 
-        // Writer
+        // Thread Writer
         new Thread(() -> {
             Message message = null;
             ClientInfo clientInfo = null;
             while (true) {
                 try {
-                    message = blockingQueue.take();
+                    message = messages.take();
                     clientInfo = message.getClientInfo();
                 } catch (InterruptedException e) {
+	                logger.error(e);
                     e.printStackTrace();
                 }
                 // Если пользователь только вошел, то отправляем ему историю последних сообщений
@@ -74,6 +78,7 @@ public class Server {
                     String history = HistoryHandler.readHistory();
                     Message historyMessage = new Message(MessageType.MESSAGE, history, clientInfo);
                     ServerHandler.sendMessage(historyMessage, clientInfo.getHostName(), clientInfo.getClientPort());
+	                logger.info(String.format("Пользователю [%s, %d] отправлена история последних сообщений", clientInfo.getHostName(), clientInfo.getClientPort()));
                     continue;
                 } else if (MessageType.MESSAGE == message.getMessageType()) {
                     Date date = new Date();
@@ -92,6 +97,9 @@ public class Server {
                 }
             }
         }).start();
+
+	    System.out.println("Сервер запущен");
+	    logger.info("Сервер запущен");
     }
 }
 

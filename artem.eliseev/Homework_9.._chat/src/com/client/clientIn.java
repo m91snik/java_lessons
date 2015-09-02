@@ -8,6 +8,7 @@ import java.util.Scanner;
 /**
  * From client to server
  */
+//TODO: rename file to ClientIn. it's clientIn right now
 public class ClientIn implements Runnable {
     String hostName;
     int portNumber;
@@ -19,6 +20,7 @@ public class ClientIn implements Runnable {
         this.inputClientPort = inputClientPort;
     }
 
+    //TODO: do not use synchronized here. it makes no sense
     @Override
     public synchronized void run() {
         while (true) {
@@ -32,6 +34,7 @@ public class ClientIn implements Runnable {
                             new ObjectOutputStream(echoSocket.getOutputStream());
             ) {
                 String userInput;
+                //TODO: use constant.equals(variable) to prevent NPE
                 if ((userInput = stdIn.readLine()).equalsIgnoreCase("exit")) {
 //toDo good system exit
 //                System.exit(1);
