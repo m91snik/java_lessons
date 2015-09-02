@@ -3,6 +3,7 @@ package com.kamyshovcorp.client;
 import com.kamyshovcorp.message.ClientInfo;
 import com.kamyshovcorp.message.Message;
 import com.kamyshovcorp.message.MessageType;
+import org.apache.log4j.Logger;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -16,15 +17,17 @@ import java.util.Scanner;
  * Created by kamyshov.sergey on 17.08.15.
  */
 public class Client {
+    private static final Logger logger = Logger.getLogger(Client.class);
     private static String clientHostName;
     private static int clientPort;
     private static String userName;
 
-    public static void main(String[] args) {
+    public void runClient() {
         try {
             clientHostName = InetAddress.getLocalHost().getHostAddress();
+            logger.info("Получен адрес клиента: " + clientHostName);
         } catch (UnknownHostException e) {
-            System.out.println("Не удалось определить адресс клиента");
+            logger.error("Не удалось определить адресс клиента.");
             e.printStackTrace();
         }
 
@@ -32,17 +35,18 @@ public class Client {
         System.out.print("Введите порт клиента: ");
         // TODO: Почему при использовании scanner.nextInt() проблема?
         clientPort = Integer.valueOf(scanner.nextLine());
-
         System.out.print("Введите имя пользователя: ");
         userName = scanner.nextLine();
+        logger.info(String.format("Пользователь ввел порт %d и ник %s", clientPort, userName));
 
-        // Writer
+        // Thread Writer
         new Thread(() -> {
             String textMessage;
             // Формируем информацию о текущем пользователе
             ClientInfo clientInfo = new ClientInfo(userName, clientHostName, clientPort);
             // Отправляем оповещение серверу, чтобы добавиться в список пользователей
             ClientHandler.sendMessage(new Message(MessageType.ENTRANCE, null, clientInfo));
+            logger.info("Пользователь " + userName + " отправил сообщение о входе в чат");
             // TODO: Добавить выход из чата
             while (true) {
                 textMessage = scanner.nextLine();
@@ -50,9 +54,10 @@ public class Client {
             }
         }).start();
 
-        // Reader
+        // Thread Reader
         new Thread(() -> {
             try (ServerSocket serverSocket = new ServerSocket(clientPort)) {
+                logger.info("Пользователь " + userName + " создал подключение на прослушивание порта " + clientPort);
                 ObjectInputStream inputStream;
                 Message message;
                 while (true) {
@@ -61,10 +66,12 @@ public class Client {
                         message = (Message) inputStream.readObject();
                         System.out.println(message.getText());
                     } catch (ClassNotFoundException e) {
+                        logger.error("Ошибка преобразования сообщения на клиенте пользователя " + userName, e);
                         e.printStackTrace();
                     }
                 }
             } catch (IOException e) {
+                logger.error("Ошибка при приеме сообщения на клиенте пользователя " + userName, e);
                 e.printStackTrace();
             }
         }).start();
