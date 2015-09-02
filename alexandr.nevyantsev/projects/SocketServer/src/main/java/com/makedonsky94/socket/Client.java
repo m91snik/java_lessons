@@ -10,8 +10,6 @@ import java.nio.channels.SocketChannel;
  * Created by Sasha on 18.08.2015.
  */
 public class Client {
-    //TODO: remove unused field
-    public static final String ANSI_RESET = "\u001B[0m";
 
     public Client(SocketAddress address) {
         this.address = (InetSocketAddress)address;
