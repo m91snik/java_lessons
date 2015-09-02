@@ -6,7 +6,7 @@ import java.util.Iterator;
 /**
  * Created by Anry on 26.08.2015.
  */
-  class Connection {
+class Connection {
     Socket clientSocket;
     String clientIp;
     int clientInputPort;
@@ -17,6 +17,7 @@ import java.util.Iterator;
         this.clientInputPort = clientInputPort;
 
     }
+
     public boolean newUserCheck(Connection connection) {
         Iterator<Connection> iter = Server.connections.iterator();
         while (iter.hasNext()) {

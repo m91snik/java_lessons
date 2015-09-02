@@ -18,6 +18,7 @@ public class ClientOut implements Runnable {
         this.inputClientPort = inputClientPort;
     }
 
+    //TODO: do not use synchronized here. it makes no sense
     @Override
     public synchronized void run() {
         while (true) {
