@@ -1,8 +1,5 @@
 package com.makedonsky94.socket;
 
-import java.net.Socket;
-import java.nio.channels.SocketChannel;
-
 /**
  * Created by user on 13.08.2015.
  */
@@ -11,6 +8,7 @@ public class Message {
         this.messageString = messageString;
     }
 
+    //TODO: make it final
     private String messageString;
 
     public String getMessageString() {

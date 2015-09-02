@@ -30,10 +30,12 @@ public class WorkerWriter implements Runnable {
     @Override
     public void run() {
         Scanner scanner = new Scanner(System.in);
+        //TODO: use try-with-resources
         SocketChannel socketChannel = null;
         try {
             socketChannel = SocketChannel.open(new InetSocketAddress("localhost", Main.DEFAULT_PORT));
             socketChannel.configureBlocking(false);
+            //TODO: it's better to create dao layer and create FileDao implementation and just call it here!
             //TODO get relative path to resources folder
             String resourcesFolder = "./src/main/resources/";
             Path nickFilePath = Paths.get(resourcesFolder + "nick");

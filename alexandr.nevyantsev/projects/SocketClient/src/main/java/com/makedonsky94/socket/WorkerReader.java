@@ -24,6 +24,7 @@ public class WorkerReader implements Runnable {
 
     @Override
     public void run() {
+        //TODO: use try-with-resources
         SocketChannel inputSocketChannel = null;
         while(true) {
             try {

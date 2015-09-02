@@ -1,9 +1,7 @@
 package com.makedonsky94.socket;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.ConnectException;
-import java.net.Socket;
-import java.nio.channels.SocketChannel;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -39,6 +37,7 @@ public class WorkerWriter implements Runnable {
                         e.printStackTrace();
                     }
                 });
+                //TODO: use logger
                 ProjectLogger.log(msg.getMessageString());
             } catch (InterruptedException e) {
                 e.printStackTrace();
