@@ -10,14 +10,6 @@ import java.nio.file.StandardOpenOption;
  */
 //TODO: use log4j instead of this logger
 public class ProjectLogger {
-    static int counter = 0;
-    public static void logMessage(Message msg) {
-        System.out.format("Message #%s: %s \n", ++counter, msg.getMessageString());
-    }
-    public static void logMessage(String msg) {
-        System.out.format("Message #%s: %s \n", ++counter, msg);
-
-    }
     public static void log(String string) {
         try {
             Files.write(Paths.get("./src/main/resources/history"), string.getBytes(), StandardOpenOption.APPEND, StandardOpenOption.CREATE);

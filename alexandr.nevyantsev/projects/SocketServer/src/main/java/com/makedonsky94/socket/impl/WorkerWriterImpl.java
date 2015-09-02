@@ -34,27 +34,4 @@ public class WorkerWriterImpl implements WorkerWriter {
         return clients;
     }
 
-
-//    @Override
-//    public void run() {
-//        while (true) {
-//            try {
-//                Message msg = this.getMessage();
-//
-//                clients.forEach((nick, client) -> {
-//                    try {
-//                        client.write(msg);
-//                    } catch (ConnectException ex) {
-//                        clients.remove(nick);
-//                    }
-//                    catch (IOException e) {
-//                        e.printStackTrace();
-//                    }
-//                });
-//                ProjectLogger.log(msg.getMessageString());
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//    }
 }

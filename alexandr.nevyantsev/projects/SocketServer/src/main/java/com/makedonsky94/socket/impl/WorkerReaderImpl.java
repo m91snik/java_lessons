@@ -87,52 +87,6 @@ public class WorkerReaderImpl implements WorkerReader {
     }
 
 
-//    @Override
-//    public void run() {
-//        try {
-//            Selector selector = Selector.open();
-//            ServerSocketChannel serverSocketChannel = ServerSocketChannel.open();
-//            serverSocketChannel.socket().bind(new InetSocketAddress("localhost", port));
-//            WorkerReaderImpl.logger.info("serverSocketChannel is opened");
-//            serverSocketChannel.configureBlocking(false);
-//            serverSocketChannel.register(selector, SelectionKey.OP_ACCEPT);
-//            WorkerReaderImpl.logger.info("serverSocketChannel is registered");
-//            while (true) {
-//                int count = selector.select();
-//                if (count == 0) {
-//                    continue;
-//                }
-//                Set selectedKeys = selector.selectedKeys();
-//                Iterator iterator = selectedKeys.iterator();
-//                while (iterator.hasNext()) {
-//                    SelectionKey selectionKey = (SelectionKey) iterator.next();
-//                    if (selectionKey.isAcceptable()) {
-//                        SocketChannel sock = serverSocketChannel.accept();
-//                        if(sock != null) {
-//                            sock.configureBlocking(false);
-//                            sock.register(selector, SelectionKey.OP_READ);
-//                            WorkerReaderImpl.logger.info(selectionKey.toString() + " has been accepted");
-//                        }
-//                    }
-//                    if (selectionKey.isReadable()) {
-//                        WorkerReaderImpl.logger.info("Read from " + selectionKey.channel().toString());
-//                        SocketChannel socketChannel =
-//                                (SocketChannel) selectionKey.channel();
-//                        try {
-//                            this.readMessage(socketChannel);
-//                        } catch(IOException e) {
-//                            WorkerReaderImpl.logger.info("Disconnected from server " + selectionKey.channel().toString());
-//                        }
-//                        socketChannel.close();
-//                    }
-//                    iterator.remove();
-//                }
-//            }
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//    }
-
     private interface WorkerReaderCallback {
         void call(String string, Client client) throws IOException;
     }

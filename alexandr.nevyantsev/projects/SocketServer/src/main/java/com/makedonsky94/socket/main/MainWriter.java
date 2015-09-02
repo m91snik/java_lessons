@@ -34,6 +34,7 @@ public class MainWriter implements ServerComponent {
                         e.printStackTrace();
                     }
                 });
+                //TODO: use logger
                 ProjectLogger.log(msg.getMessageString());
             } catch (InterruptedException e) {
                 e.printStackTrace();

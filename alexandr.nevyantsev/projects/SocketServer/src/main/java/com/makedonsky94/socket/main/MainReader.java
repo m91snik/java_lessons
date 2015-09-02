@@ -38,6 +38,7 @@ public class MainReader implements ServerComponent {
             MainReader.logger.info("serverSocketChannel is registered");
             while (true) {
                 int count = selector.select();
+                //TODO: it will never return 0 because it's in blocking state till somebody connects to socket
                 if (count == 0) {
                     continue;
                 }

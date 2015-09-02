@@ -21,9 +21,7 @@ public class Main {
     private static ConcurrentHashMap<String, Client> clients;
 
     public static void main(String[] args) {
-//        int port = args.length > 0 ? Integer.parseInt(args[0]) : DEFAULT_PORT;
-//        messageBlockingQueue = new ArrayBlockingQueue<>(500);
-//        clients = new ConcurrentHashMap<>();
+        //TODO config file with host and port
         ApplicationContext applicationContext =
                 new AnnotationConfigApplicationContext(Config.class);
         ServerWorker serverWorker = applicationContext.getBean(ServerWorker.class);
