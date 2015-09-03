@@ -24,21 +24,14 @@ public class WorkerReader implements Runnable {
 
     @Override
     public void run() {
-        SocketChannel inputSocketChannel = null;
         while(true) {
-            try {
-                inputSocketChannel = this.socketChannel.accept();
+            try(SocketChannel inputSocketChannel =  this.socketChannel.accept())
+            {
                 ByteBuffer reader = ByteBuffer.allocate(256);
                 inputSocketChannel.read(reader);
                 System.out.println(new String(reader.array()));
             } catch (IOException e) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    inputSocketChannel.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }

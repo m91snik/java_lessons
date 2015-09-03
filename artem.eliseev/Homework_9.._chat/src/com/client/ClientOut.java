@@ -18,8 +18,9 @@ public class ClientOut implements Runnable {
         this.inputClientPort = inputClientPort;
     }
 
+    //TO DO: do not use synchronized here. it makes no sense: Done
     @Override
-    public synchronized void run() {
+    public void run() {
         while (true) {
             try (
                     ServerSocket clientServerSocket =
@@ -35,7 +36,6 @@ public class ClientOut implements Runnable {
                 System.out.println(e.getMessage());
                 e.printStackTrace();
             }
-
         }
     }
 }

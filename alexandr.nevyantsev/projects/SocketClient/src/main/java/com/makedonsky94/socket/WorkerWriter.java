@@ -30,10 +30,10 @@ public class WorkerWriter implements Runnable {
     @Override
     public void run() {
         Scanner scanner = new Scanner(System.in);
-        SocketChannel socketChannel = null;
-        try {
-            socketChannel = SocketChannel.open(new InetSocketAddress("localhost", Main.DEFAULT_PORT));
+        try (SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("localhost", Main.DEFAULT_PORT)))
+        {
             socketChannel.configureBlocking(false);
+            //TODO: it's better to create dao layer and create FileDao implementation and just call it here!
             //TODO get relative path to resources folder
             String resourcesFolder = "./src/main/resources/";
             Path nickFilePath = Paths.get(resourcesFolder + "nick");
@@ -53,14 +53,13 @@ public class WorkerWriter implements Runnable {
             while(byteBuffer.hasRemaining()) {
                 socketChannel.write(byteBuffer);
             }
-            socketChannel.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
         while ( true ) {
-            try {
+            try(SocketChannel socketChannel = SocketChannel.open(new InetSocketAddress("localhost", Main.DEFAULT_PORT)))
+            {
                 String msg = scanner.nextLine();
-                socketChannel = SocketChannel.open(new InetSocketAddress("localhost", Main.DEFAULT_PORT));
                 StringBuilder stringBuilder = new StringBuilder();
                 //TODO set nick in server
                 stringBuilder.append(this.color);
@@ -74,12 +73,6 @@ public class WorkerWriter implements Runnable {
                 }
             } catch ( IOException e ) {
                 e.printStackTrace();
-            } finally {
-                try {
-                    socketChannel.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
             }
         }
     }

@@ -54,7 +54,7 @@ public class SendMes implements Runnable {
             while (!stoped) {
 
                 while (selector.select(500) > 0 & !stoped) {
-
+                    //TODO: no need to use additional select here
                     selector.select();
                     Iterator<SelectionKey> it = selector.selectedKeys().iterator();
 

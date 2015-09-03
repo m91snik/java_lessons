@@ -1,0 +1,8 @@
+create database lesson14_jdbc;
+
+create table USER(
+    ID VARCHAR(32) PRIMARY KEY,
+    NAME VARCHAR(20) NOT NULL,
+    PASSWORD VARCHAR(128)  NOT NULL,
+    CREATION_TIME TIMESTAMP
+);

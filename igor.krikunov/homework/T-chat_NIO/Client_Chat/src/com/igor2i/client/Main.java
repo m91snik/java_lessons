@@ -29,7 +29,7 @@ public class Main {
 
             new Thread(new ListenerMes(nick, ipAdrrServ, port)).start();
 
-
+        //TODO: it makes no sense to catch exception here. just remove try-catch
         }catch (Exception e){
             e.printStackTrace();
         }

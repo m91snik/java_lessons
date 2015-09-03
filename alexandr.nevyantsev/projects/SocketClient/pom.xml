@@ -9,6 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
 
-
+    <properties>
+        <build.version>1.8</build.version>
+    </properties>
     
 </project>
