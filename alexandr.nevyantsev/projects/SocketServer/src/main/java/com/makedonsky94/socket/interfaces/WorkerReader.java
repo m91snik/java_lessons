@@ -11,6 +11,5 @@ import java.nio.channels.SocketChannel;
  */
 public interface WorkerReader {
     void addMessage(Message msg);
-    void readMessage(SocketChannel socketChannel) throws IOException;
-    int getPort();
+    void runReader();
 }

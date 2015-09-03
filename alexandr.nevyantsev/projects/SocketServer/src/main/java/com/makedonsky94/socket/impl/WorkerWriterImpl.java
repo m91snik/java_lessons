@@ -29,9 +29,27 @@ public class WorkerWriterImpl implements WorkerWriter {
     public Message getMessage() throws InterruptedException {
         return messageBlockingQueue.take();
     }
-    @Override
-    public ConcurrentHashMap<String, Client> getClients() {
-        return clients;
-    }
 
+    @Override
+    public void runWriter() {
+        while (true) {
+            try {
+                Message msg = this.getMessage();
+
+                clients.forEach((nick, client) -> {
+                    try {
+                        client.write(msg);
+                    } catch (ConnectException ex) {
+                        clients.remove(nick);
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
+                //TODO: use logger
+                ProjectLogger.log(msg.getMessageString());
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
 }

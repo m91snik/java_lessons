@@ -21,24 +21,6 @@ public class MainWriter implements ServerComponent {
 
     @Override
     public void start() {
-        while (true) {
-            try {
-                Message msg = workerWriter.getMessage();
-
-                workerWriter.getClients().forEach((nick, client) -> {
-                    try {
-                        client.write(msg);
-                    } catch (ConnectException ex) {
-                        workerWriter.getClients().remove(nick);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-                //TODO: use logger
-                ProjectLogger.log(msg.getMessageString());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        workerWriter.runWriter();
     }
 }

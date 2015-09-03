@@ -11,5 +11,5 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public interface WorkerWriter {
     Message getMessage() throws InterruptedException;
-    ConcurrentHashMap<String, Client> getClients();
+    void runWriter();
 }
