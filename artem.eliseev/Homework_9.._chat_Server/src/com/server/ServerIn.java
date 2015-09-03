@@ -1,6 +1,6 @@
 package com.server;
 
-import com.client.MessageFromClientToServer;
+import com.MessageFromClientToServer;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;

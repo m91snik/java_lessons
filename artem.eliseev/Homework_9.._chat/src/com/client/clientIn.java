@@ -1,16 +1,15 @@
 package com.client;
 
-import com.client.MessageFromClientToServer;
+import com.MessageFromClientToServer;
 
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
-import java.util.Scanner;
 
 /**
  * From client to server
  */
-//TODO: rename file to com.client.ClientIn. it's clientIn right now
+//TO DO: rename file to com.client.ClientIn. it's clientIn right now: Done
 public class ClientIn implements Runnable {
     String hostName;
     int portNumber;
@@ -22,17 +21,19 @@ public class ClientIn implements Runnable {
         this.inputClientPort = inputClientPort;
     }
 
-    //TODO: do not use synchronized here. it makes no sense
+    //TO DO: do not use synchronized here. it makes no sense: Done
     @Override
-    public synchronized void run() {
+    public void run() {
         while (true) {
 
             BufferedReader stdIn =
                     new BufferedReader(
                             new InputStreamReader(System.in));
             String userInput;
+            Constants constants=new Constants();
             try {
-                if ((userInput = stdIn.readLine()).equalsIgnoreCase("exit")) {
+                //TO DO: use constant.equals(variable) to prevent NPE: done
+                if (constants.EXIT.equalsIgnoreCase(userInput = stdIn.readLine())){
 //                  toDo good system exit
 //                  System.exit(1);
                     break;
@@ -49,18 +50,6 @@ public class ClientIn implements Runnable {
                     ObjectOutputStream out =
                             new ObjectOutputStream(echoSocket.getOutputStream())
             ) {
-<<<<<<< HEAD
-=======
-                String userInput;
-                //TODO: use constant.equals(variable) to prevent NPE
-                if ((userInput = stdIn.readLine()).equalsIgnoreCase("exit")) {
-//toDo good system exit
-//                System.exit(1);
-                    break;
-                }
-                MessageFromClientToServer messageFromClientToServer =
-                        new MessageFromClientToServer(inputClientPort, userInput);
->>>>>>> 6791f46ce5d25f4a80f718136f8a7dc61d44c89e
                 out.writeObject(messageFromClientToServer);
             } catch (UnknownHostException e) {
                 System.err.println("Don't know about host " + hostName);

@@ -1,6 +1,6 @@
 package oldNotInWork;
 
-import com.client.MessageFromClientToServer;
+import com.MessageFromClientToServer;
 
 import java.io.*;
 import java.net.ServerSocket;

@@ -17,7 +17,7 @@ class ServerOut implements Runnable {
         queue = mainQueue;
     }
 
-    //toDO client socket timeout defence;
+    //toDO client socket timeout protection;
     @Override
     public synchronized void run() {
         while (true) {
@@ -54,13 +54,12 @@ class ServerOut implements Runnable {
         ) {
             out.println(messageOut);
         } catch (UnknownHostException e) {
-            System.err.println("Don't know about client " + connection.toString() +
-                    " Message:" + messageOut.toString());
+            System.err.println("Don't know about client " + connection.toString());
             e.printStackTrace();
             return false;
         } catch (IOException e) {
             System.err.println("Couldn't get I/O for the connection to " +
-                    connection.toString() + "Message:" + messageOut.toString());
+                    connection.toString());
             e.printStackTrace();
             return false;
         }
