@@ -8,6 +8,4 @@ public class InputChecker {
     public boolean sorter() {
         return true;
     }
-
-    ;
 }
