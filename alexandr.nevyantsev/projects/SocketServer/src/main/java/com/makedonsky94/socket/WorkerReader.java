@@ -1,21 +1,15 @@
 package com.makedonsky94.socket;
 
-import jdk.nashorn.internal.runtime.regexp.joni.Regex;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.*;
+import java.io.IOException;
 import java.net.InetSocketAddress;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
-import java.nio.CharBuffer;
-import java.nio.channels.*;
-import java.nio.channels.spi.SelectorProvider;
-import java.nio.charset.Charset;
-import java.nio.charset.CharsetDecoder;
-import java.util.Arrays;
+import java.nio.channels.SelectionKey;
+import java.nio.channels.Selector;
+import java.nio.channels.ServerSocketChannel;
+import java.nio.channels.SocketChannel;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Set;
@@ -100,6 +94,7 @@ public class WorkerReader implements Runnable {
             WorkerReader.logger.info("serverSocketChannel is registered");
             while (true) {
                 int count = selector.select();
+                //TODO: it will never return 0 because it's in blocking state till somebody connects to socket
                 if (count == 0) {
                     continue;
                 }

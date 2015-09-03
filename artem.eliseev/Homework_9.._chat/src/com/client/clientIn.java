@@ -1,5 +1,7 @@
 package com.client;
 
+import com.client.MessageFromClientToServer;
+
 import java.io.*;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -8,6 +10,7 @@ import java.util.Scanner;
 /**
  * From client to server
  */
+//TODO: rename file to com.client.ClientIn. it's clientIn right now
 public class ClientIn implements Runnable {
     String hostName;
     int portNumber;
@@ -19,6 +22,7 @@ public class ClientIn implements Runnable {
         this.inputClientPort = inputClientPort;
     }
 
+    //TODO: do not use synchronized here. it makes no sense
     @Override
     public synchronized void run() {
         while (true) {
@@ -45,6 +49,18 @@ public class ClientIn implements Runnable {
                     ObjectOutputStream out =
                             new ObjectOutputStream(echoSocket.getOutputStream())
             ) {
+<<<<<<< HEAD
+=======
+                String userInput;
+                //TODO: use constant.equals(variable) to prevent NPE
+                if ((userInput = stdIn.readLine()).equalsIgnoreCase("exit")) {
+//toDo good system exit
+//                System.exit(1);
+                    break;
+                }
+                MessageFromClientToServer messageFromClientToServer =
+                        new MessageFromClientToServer(inputClientPort, userInput);
+>>>>>>> 6791f46ce5d25f4a80f718136f8a7dc61d44c89e
                 out.writeObject(messageFromClientToServer);
             } catch (UnknownHostException e) {
                 System.err.println("Don't know about host " + hostName);

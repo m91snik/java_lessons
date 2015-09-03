@@ -1,14 +1,16 @@
-package com.client;
+package com;
 
 import java.io.Serializable;
 
 /**
  * Created by Anry on 28.08.2015.
  */
+//TO DO: make fields final Done
+//TO DO:
 public class MessageFromClientToServer implements Serializable {
     public static final long serialVersionUID = 1L;
-    int inputClientPort;
-    String userInput;
+    final int inputClientPort;
+    final String userInput;
 
     public MessageFromClientToServer(int inputClientPort, String userInput) {
         this.inputClientPort = inputClientPort;

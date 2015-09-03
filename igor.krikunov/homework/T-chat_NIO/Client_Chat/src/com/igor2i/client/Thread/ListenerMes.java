@@ -21,6 +21,7 @@ public class ListenerMes implements Runnable {
     private String IP_SERVER;
     private int PORT_SERVER;
 
+    //TODO: use camel-case for input arguments
     public ListenerMes(String nick, String IP_SERVER, int PORT_SERVER) {
         this.nick = nick;
         this.IP_SERVER = IP_SERVER;
@@ -33,6 +34,7 @@ public class ListenerMes implements Runnable {
         stoped = true;
     }
 
+    //TODO: it seems that static is not required here.
     private static boolean closeServer = false;
     public static void setCloseServer(){
         closeServer = true;
@@ -45,11 +47,14 @@ public class ListenerMes implements Runnable {
 
         try {
 
+            //TODO: it makes sense to configure it outside of ListenerMes and set here as parameter
+            // and also set it to SendMes. Eventually ListenerMes and SendMes should not know nothing about each other
             Selector selector = SelectorProvider.provider().openSelector();
 
             ServerSocketChannel clientSSC = ServerSocketChannel.open();
             clientSSC.configureBlocking(false);
             //clientSSC.socket().bind(new InetSocketAddress(InetAddress.getLocalHost().getHostAddress(), 0));
+            //TODO: it seems to be a bad idea to use port 0
             clientSSC.socket().bind(new InetSocketAddress("127.0.0.1", 0));
 
             clientSSC.register(selector, clientSSC.validOps());
@@ -59,8 +64,9 @@ public class ListenerMes implements Runnable {
 
             while (!stoped) {
 
+                //TODO: use &&
                 while (selector.select(500) > 0 & !stoped) {
-
+                    //TODO: no need to use additional select here
                     selector.select();
                     Iterator<SelectionKey> it = selector.selectedKeys().iterator();
 
