@@ -27,7 +27,7 @@ public class ServerMessageProcessor implements MessageProcessor<Message> {
             {
                 String login = entry.getKey();
                 ClientInfo clientInfo = entry.getValue();
-                MessageType.MESSAGE.sendMessage(clientInfo.getIp_address(), clientInfo.getPort(), message.getText(),null);
+                MessageType.MESSAGE.sendMessage(clientInfo.getIp_address(), clientInfo.getPort(), message.getText());
             }
         }
     }
