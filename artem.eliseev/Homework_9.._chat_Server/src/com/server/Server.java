@@ -25,15 +25,14 @@ public class Server {
 
 
     Server() {
-        //TODO: create method runServer and move this logic to that method
+        runServer();
+    }
 
+    private void runServer() {
         ServerIn serverIn = new ServerIn(mainQueue);
         new Thread(serverIn).start();
 
         ServerOut serverOut = new ServerOut(mainQueue);
         new Thread(serverOut).start();
-
     }
-
-
 }

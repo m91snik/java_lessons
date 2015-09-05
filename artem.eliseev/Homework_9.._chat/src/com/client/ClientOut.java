@@ -18,7 +18,6 @@ public class ClientOut implements Runnable {
         this.inputClientPort = inputClientPort;
     }
 
-    //TO DO: do not use synchronized here. it makes no sense: Done
     @Override
     public void run() {
         while (true) {
@@ -31,10 +30,6 @@ public class ClientOut implements Runnable {
             ) {
                 System.out.println(" echo: " + in.readLine());
             } catch (IOException e) {
-                //TODO: do not dublicate errors in console. e.printStackTrace() is enought
-                System.out.println("Exception caught when trying to listen on port "
-                        + inputClientPort + " or listening for a connection");
-                System.out.println(e.getMessage());
                 e.printStackTrace();
             }
         }

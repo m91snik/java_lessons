@@ -21,10 +21,9 @@ class ServerIn implements Runnable {
     @Override
     public synchronized void run() {
         while (true) {
-            Constants constants=new Constants();
             try (
                     ServerSocket serverSocket =
-                            new ServerSocket(constants.getSERVER_INPUT_PORT());
+                            new ServerSocket(Constants.SERVER_INPUT_PORT);
                     Socket clientSocket = serverSocket.accept();
                     ObjectInputStream in =
                             new ObjectInputStream(clientSocket.getInputStream())
@@ -48,26 +47,18 @@ class ServerIn implements Runnable {
                 try {
                     queue.put(messageFromClientToServer.userInput);
                 } catch (InterruptedException e) {
-                    //TODO: do not dublicate errors in console. e.printStackTrace() is enought
-                    System.out.println("BlockingQueue Server input InterruptedException");
                     e.printStackTrace();
                 }
                 System.out.println("queue in receiver " + queue.toString());
             } catch (IOException e) {
-                //TODO: do not dublicate errors in console. e.printStackTrace() is enought
-                System.out.println("Exception caught wheàn trying to listen on port "
-                        + constants.getSERVER_INPUT_PORT() + " or listening for a connection");
-                System.out.println(e.getMessage());
                 e.printStackTrace();
                 break;
             } catch (ClassNotFoundException e) {
-                //TODO: do not dublicate errors in console. e.printStackTrace() is enought
-                System.out.println("ClassNotFoundException MessageFromClientToServer " +
-                        "incoming message on server");
                 e.printStackTrace();
             }
         }
     }
+
     private static String getClientIp(Socket clientSocket) {
         return clientSocket.getInetAddress().toString()
                 .substring(1, clientSocket.getInetAddress().toString().length());
