@@ -39,6 +39,7 @@ public class ClientIn implements Runnable {
                     break;
                 }
             } catch (IOException e) {
+                //TODO: do not dublicate errors in console. e.printStackTrace() is enought
                 System.err.println("IOException in stdIn.readLine System.in");
                 e.printStackTrace();
                 userInput = "IO error in client";
@@ -52,9 +53,11 @@ public class ClientIn implements Runnable {
             ) {
                 out.writeObject(messageFromClientToServer);
             } catch (UnknownHostException e) {
+                //TODO: do not dublicate errors in console. e.printStackTrace() is enought
                 System.err.println("Don't know about host " + hostName);
                 e.printStackTrace();
             } catch (IOException e) {
+                //TODO: do not dublicate errors in console. e.printStackTrace() is enought
                 System.err.println("Couldn't get I/O for the connection to " +
                         hostName);
                 e.printStackTrace();

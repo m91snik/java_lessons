@@ -29,6 +29,7 @@ class ServerIn implements Runnable {
                     ObjectInputStream in =
                             new ObjectInputStream(clientSocket.getInputStream())
             ) {
+                //TODO: use logger log4j
                 System.out.println();
                 System.out.println("Server works, connection done.");
                 System.out.println("clientSocket:" + clientSocket.toString());
@@ -47,17 +48,20 @@ class ServerIn implements Runnable {
                 try {
                     queue.put(messageFromClientToServer.userInput);
                 } catch (InterruptedException e) {
+                    //TODO: do not dublicate errors in console. e.printStackTrace() is enought
                     System.out.println("BlockingQueue Server input InterruptedException");
                     e.printStackTrace();
                 }
                 System.out.println("queue in receiver " + queue.toString());
             } catch (IOException e) {
+                //TODO: do not dublicate errors in console. e.printStackTrace() is enought
                 System.out.println("Exception caught when trying to listen on port "
                         + constants.getSERVER_INPUT_PORT() + " or listening for a connection");
                 System.out.println(e.getMessage());
                 e.printStackTrace();
                 break;
             } catch (ClassNotFoundException e) {
+                //TODO: do not dublicate errors in console. e.printStackTrace() is enought
                 System.out.println("ClassNotFoundException MessageFromClientToServer " +
                         "incoming message on server");
                 e.printStackTrace();

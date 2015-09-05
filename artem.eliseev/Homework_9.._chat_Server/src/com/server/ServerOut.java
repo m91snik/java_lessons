@@ -21,16 +21,19 @@ class ServerOut implements Runnable {
     @Override
     public synchronized void run() {
         while (true) {
+            //TODO: use StringBuilder. the main difference is that StringBuffer is synchronized - and it's not required here!
             StringBuffer messageOut = new StringBuffer();
 
             try {
                 messageOut = messageOut.append(queue.take());
                 System.out.println("Message in sender " + messageOut);
             } catch (NullPointerException e) {
+                //TODO: do not use println.  e.printStackTrace() will already printerror
                 System.err.print("NullPointerException in server sender");
                 e.printStackTrace();
             } catch (InterruptedException e) {
                 System.out.println("BlockingQueue Server sender InterruptedException");
+                //TODO: do not use println.  e.printStackTrace() will already printerror
                 e.printStackTrace();
             }
 
@@ -55,9 +58,11 @@ class ServerOut implements Runnable {
             out.println(messageOut);
         } catch (UnknownHostException e) {
             System.err.println("Don't know about client " + connection.toString());
+            //TODO: do not use println.  e.printStackTrace() will already printerror
             e.printStackTrace();
             return false;
         } catch (IOException e) {
+            //TODO: do not use println.  e.printStackTrace() will already printerror
             System.err.println("Couldn't get I/O for the connection to " +
                     connection.toString());
             e.printStackTrace();

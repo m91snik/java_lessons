@@ -16,6 +16,8 @@ class Connection {
 
     }
 
+    //TODO: move this method outside of Connection. it's utility method and it should be in Utils.
+    //TODO: use Connections as input argument to remove dependency on Server class
     public boolean newUserCheck(Connection connection) {
         Iterator<Connection> iter = Server.connections.iterator();
         while (iter.hasNext()) {
