@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Users page</title>
+	<link rel="stylesheet" type="text/css" href="css/jquery.dynatable.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.9.2.custom.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/poc.css" />
+</head>
+<body>
+	<div>
+		Hello, <span id="admin_name"></span>! <a href="logout">Logout</a>
+	</div>
+	<br/>
+
+	<div>
+		<table id="my-ajax-table" class="table table-bordered">
+			<thead>
+				<th>ID</th>
+				<th>Creation Date</th>
+				<th>Name</th>
+				<th>User Type</th>
+				<th>Edit</th>
+				<th>Change Expenses</th>
+			</thead>
+		</table>
+	</div>
+
+	<button type="submit" id="user-add" class="btn btn-default">Add</button>
+	<button type="submit" id="user-remove" class="btn btn-default">Remove</button>
+
+	<div id="dialog-form" title="Add/Update User">
+		<form  id="save-user-form">
+			<fieldset>
+				<input type="hidden" name="id" id="id" class="text ui-widget-content ui-corner-all">
+
+				<label for="name">Name</label>
+				<input type="text" name="name" id="name" class="text ui-widget-content ui-corner-all">
+
+				<label for="password">Password</label>
+				<input type="password" name="password" id="password" class="text ui-widget-content ui-corner-all">
+
+				<label for="userType">Type</label>
+				<input type="text" name="userType" id="userType" class="text ui-widget-content ui-corner-all">
+
+				<!-- Allow form submission with keyboard without duplicating the dialog button -->
+				<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+			</fieldset>
+		</form>
+	</div>
+
+</body>
+<script src="js/jquery-2.1.3.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.dynatable.js"></script>
+<script src="js/users.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.js"></script>
+</html>

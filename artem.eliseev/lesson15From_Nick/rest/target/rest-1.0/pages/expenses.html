@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>Expenses</title>
+	<link rel="stylesheet" type="text/css" href="css/jquery.dynatable.css" />
+	<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.9.2.custom.css" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="css/poc.css" />
+</head>
+<body>
+	<div id="user_greeting">
+
+	</div>
+	<br/>
+
+	Dates: <input type="text" id="dateFrom"> - <input type="text" id="dateTo">
+	<button type="submit" id="exp-filter" class="btn btn-default">Apply</button>
+
+	<div>
+		<table id="my-ajax-table" class="table table-bordered">
+			<thead>
+				<th>Select</th>
+				<th>Creation Date</th>
+				<th>Amount</th>
+				<th>Description</th>
+				<th>Comment</th>
+				<th>Edit</th>
+			</thead>
+		</table>
+	</div>
+
+	<button type="submit" id="exp-add" class="btn btn-default">Add</button>
+	<button type="submit" id="exp-remove" class="btn btn-default">Remove</button>
+	<br/>
+	<button type="submit" id="exp-print" class="btn btn-default">Print</button>
+
+	<div id="dialog-form" title="Add/Update Expenses">
+		<form>
+			<fieldset>
+				<input type="hidden" name="id" id="id" class="text ui-widget-content ui-corner-all">
+
+				<label for="amount">Amount</label>
+				<input type="text" name="amount" id="amount" class="text ui-widget-content ui-corner-all">
+
+				<label for="currency">Currency</label>
+				<input type="text" name="currency" id="currency" class="text ui-widget-content ui-corner-all">
+
+				<label for="description">Description</label>
+				<input type="text" name="description" id="description" class="text ui-widget-content ui-corner-all">
+
+				<label for="amount">CreationTime (dd.mm.yyyy hh:mm)</label>
+				<input type="text" name="creationTime" id="creationTime" class="text ui-widget-content ui-corner-all">
+
+				<label for="comment">Comment</label>
+				<input type="text" name="comment" id="comment" class="text ui-widget-content ui-corner-all">
+				<!-- Allow form submission with keyboard without duplicating the dialog button -->
+				<input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+			</fieldset>
+		</form>
+	</div>
+
+</body>
+<script src="js/jquery-2.1.3.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery.dynatable.js"></script>
+<script src="js/expenses.js"></script>
+<script src="js/jquery-ui-1.9.2.custom.js"></script>
+</html>

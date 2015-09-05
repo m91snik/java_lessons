@@ -55,7 +55,7 @@ class ServerIn implements Runnable {
                 System.out.println("queue in receiver " + queue.toString());
             } catch (IOException e) {
                 //TODO: do not dublicate errors in console. e.printStackTrace() is enought
-                System.out.println("Exception caught when trying to listen on port "
+                System.out.println("Exception caught wheàn trying to listen on port "
                         + constants.getSERVER_INPUT_PORT() + " or listening for a connection");
                 System.out.println(e.getMessage());
                 e.printStackTrace();

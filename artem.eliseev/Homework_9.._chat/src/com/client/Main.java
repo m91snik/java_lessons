@@ -10,10 +10,10 @@ public class Main {
         Scanner settingsScanner = new Scanner(System.in);
 
 //        toDo Illegal Argument Exception
-        System.out.println("Enter host name (ip or www)  169.254.144.144 :");
+        System.out.println("Enter host name (ip or www) (169.254.144.144 in default):");
         String hostName = settingsScanner.nextLine();
 
-        System.out.println("portNumber:");
+        System.out.println("portNumber (1025 in default):");
         int portNumber = settingsScanner.nextInt();
 
         System.out.println("Enter your input port (Integer):");

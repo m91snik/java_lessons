@@ -32,8 +32,8 @@ class ServerOut implements Runnable {
                 System.err.print("NullPointerException in server sender");
                 e.printStackTrace();
             } catch (InterruptedException e) {
-                System.out.println("BlockingQueue Server sender InterruptedException");
                 //TODO: do not use println.  e.printStackTrace() will already printerror
+                System.out.println("BlockingQueue Server sender InterruptedException");
                 e.printStackTrace();
             }
 

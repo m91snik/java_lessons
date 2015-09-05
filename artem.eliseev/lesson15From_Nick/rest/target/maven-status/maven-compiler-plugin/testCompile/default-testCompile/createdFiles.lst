@@ -1,0 +1,4 @@
+com\m91snik\lesson15\rest\repository\impl\BaseTest.class
+com\m91snik\lesson15\rest\repository\impl\UserRepositoryTest.class
+com\m91snik\lesson15\rest\repository\impl\ExpensesRepositoryTest.class
+com\m91snik\lesson15\rest\repository\impl\ReportShowTest.class

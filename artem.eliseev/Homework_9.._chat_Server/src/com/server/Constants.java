@@ -10,7 +10,6 @@ public class Constants {
     //TODO: make constructor private.
     public Constants() {
     }
-
     //TODO: it will be not required after first TODO implementation
     public int getSERVER_INPUT_PORT() {
         return SERVER_INPUT_PORT;
