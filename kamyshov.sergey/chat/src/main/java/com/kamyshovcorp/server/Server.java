@@ -24,40 +24,40 @@ import java.util.concurrent.LinkedBlockingQueue;
 @Component
 public class Server {
 
-	private static final Logger logger = Logger.getLogger(Server.class);
-	private static final int PORT = 1234;
-	private static BlockingQueue<Message> messages = new LinkedBlockingQueue<>();
-	private static Map<String, Pair<String, Integer>> users = new ConcurrentHashMap<>();
+    private static final Logger logger = Logger.getLogger(Server.class);
+    private static final int PORT = 1234;
+    private static BlockingQueue<Message> messages = new LinkedBlockingQueue<>();
+    private static Map<String, Pair<String, Integer>> users = new ConcurrentHashMap<>();
 
     public void runServer() {
         // Thread Reader
         new Thread(() -> {
             try (ServerSocket serverSocket = new ServerSocket(PORT)) {
-	            logger.info("Создан ServerSocket с портом: " + serverSocket.getLocalPort());
-                Message message;
-                ClientInfo clientInfo;
-                ObjectInputStream inputStream;
+                logger.info("Создан ServerSocket с портом: " + serverSocket.getLocalPort());
+                ;
                 while (true) {
-                    try (Socket socket = serverSocket.accept()) {
-	                    logger.info("Создано входящее подключение для адресса: " + socket.getInetAddress());
-	                    inputStream = new ObjectInputStream(socket.getInputStream());
-                        message = (Message) inputStream.readObject();
-                        clientInfo = message.getClientInfo();
-                        Date date = new Date();
+                    try (Socket socket = serverSocket.accept();
+                         ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())) {
+                        logger.info("Создано входящее подключение для адресса: " + socket.getInetAddress());
+                        Message message = (Message) inputStream.readObject();
+                        ClientInfo clientInfo = message.getClientInfo();
                         if (MessageType.ENTRANCE == message.getMessageType()) {
                             // Добавляем клиента в список пользователей
+                            //TODO: if user is already there?
                             users.put(clientInfo.getUserName(), new Pair<>(clientInfo.getHostName(), clientInfo.getClientPort()));
-	                        logger.info(String.format("Пользователь [%s, %s, %d] подключился к чату.", clientInfo.getUserName(), clientInfo.getHostName(), clientInfo.getClientPort()));
+                            logger.info(String.format("Пользователь [%s, %s, %d] подключился к чату.", clientInfo.getUserName(), clientInfo.getHostName(), clientInfo.getClientPort()));
                         }
-	                    messages.add(message);
+                        messages.add(message);
                     } catch (ClassNotFoundException e) {
-	                    logger.error("Ошибка преобразования при приеме сообщения на сервере", e);
-	                    e.printStackTrace();
+                        logger.error("Ошибка преобразования при приеме сообщения на сервере", e);
+                        //TODO: throw an exception because in this case it will not be possible to continue chat processing.
+                        // class will not appear after that ;)
+                        e.printStackTrace();
                     }
                 }
             } catch (IOException e) {
-	            logger.error(e);
-	            e.printStackTrace();
+                logger.error(e);
+                e.printStackTrace();
             }
         }).start();
 
@@ -66,19 +66,22 @@ public class Server {
             Message message = null;
             ClientInfo clientInfo = null;
             while (true) {
+                //TODO: move to separate method
                 try {
                     message = messages.take();
                     clientInfo = message.getClientInfo();
                 } catch (InterruptedException e) {
-	                logger.error(e);
+                    logger.error(e);
                     e.printStackTrace();
+                    //TODO: add continue here
                 }
                 // Если пользователь только вошел, то отправляем ему историю последних сообщений
+                //TODO: use switch-case for messageType
                 if (MessageType.ENTRANCE == message.getMessageType()) {
                     String history = HistoryHandler.readHistory();
                     Message historyMessage = new Message(MessageType.MESSAGE, history, clientInfo);
                     ServerHandler.sendMessage(historyMessage, clientInfo.getHostName(), clientInfo.getClientPort());
-	                logger.info(String.format("Пользователю [%s, %d] отправлена история последних сообщений", clientInfo.getHostName(), clientInfo.getClientPort()));
+                    logger.info(String.format("Пользователю [%s, %d] отправлена история последних сообщений", clientInfo.getHostName(), clientInfo.getClientPort()));
                     continue;
                 } else if (MessageType.MESSAGE == message.getMessageType()) {
                     Date date = new Date();
@@ -98,8 +101,8 @@ public class Server {
             }
         }).start();
 
-	    System.out.println("Сервер запущен");
-	    logger.info("Сервер запущен");
+        System.out.println("Сервер запущен");
+        logger.info("Сервер запущен");
     }
 }
 
