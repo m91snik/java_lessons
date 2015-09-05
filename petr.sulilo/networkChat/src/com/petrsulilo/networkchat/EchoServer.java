@@ -16,6 +16,7 @@ public class EchoServer {
         if (args.length !=1)
         {
             System.err.println("Usage: java EchoServer <port number>");
+            //TODO: do not use this! throw IllegalArgumeException
             System.exit(1);
         }
 

@@ -17,7 +17,9 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Created by Petr on 18.08.2015.
  */
 public class Server2Tr {
+    //TODO: volatile is not required here, just make it static final
     volatile static BlockingQueue<Message> q = new LinkedBlockingQueue<Message>();
+    //TODO: make thsi class immutable, i.e. each field should be final. volatile is not required here
     public static class Person
     {
         volatile int    id;
@@ -47,6 +49,7 @@ public class Server2Tr {
             return 100;
         }
     }
+
     public static void main(String... args) throws IOException
     {
         int portNumber = 1232;
@@ -142,7 +145,7 @@ class Sender implements Runnable
                         System.out.println("In text for-each");
                         System.out.println("entry.getValue().hostName = " + entry.getValue().hostName);
                         System.out.println("entry.getValue().port = " + entry.getValue().port);
-                        SendMessage(entry.getValue(), this.msg);
+                        sendMessage(entry.getValue(), this.msg);
                     }
                 } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -150,9 +153,10 @@ class Sender implements Runnable
         }
 
     }
-    public void SendMessage(Server2Tr.Person person,Message msg)
+    public void sendMessage(Server2Tr.Person person,Message msg)
     {
         try {
+            //TODO: use try-with-resources
             Socket outSocket = new Socket(person.hostName, Integer.parseInt(person.port));
 
             PrintWriter out =
@@ -172,6 +176,7 @@ class Sender implements Runnable
     }
 }
 
+//TODO: make thsi class immutable, i.e. each field should be final. volatile is not required here
 class Message
 {
     volatile public int      id;

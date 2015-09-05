@@ -1,14 +1,9 @@
 package com.petrsulilo.networkchat;
 
-import javax.swing.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.lang.reflect.Array;
 import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 
@@ -16,32 +11,33 @@ import java.util.concurrent.LinkedBlockingQueue;
  * Created by Petr on 23.08.2015.
  */
 public class Client2Tr {
+    //TODO: make it final and remove volatile
     volatile static BlockingQueue<Message> q = new LinkedBlockingQueue<Message>();
 
-    public static void main(String... args) throws IOException
-    {
+    public static void main(String... args) throws IOException {
         int portNumber = 1232;
 
         HashMap<Integer, Server2Tr.Person> hashMap = new HashMap();
-        Server2Tr.Person person = new Server2Tr.Person("Kate","127.0.0.1","1232");
-        hashMap.put(person.getId(),person);
+        Server2Tr.Person person = new Server2Tr.Person("Kate", "127.0.0.1", "1232");
+        hashMap.put(person.getId(), person);
         person = hashMap.get(person.getId());
 
         try {
+            //TODO: use try with resources
             ServerSocket serverSocket = new ServerSocket(portNumber);
             Reciever reciever = new Reciever(q, serverSocket);
-            Sender sender = new Sender(q, serverSocket,hashMap);
+            Sender sender = new Sender(q, serverSocket, hashMap);
             new Thread(reciever).start();
             new Thread(sender).start();
-        }
-        catch (IOException e)
-        {
+        } catch (IOException e) {
             System.out.println("Exception caught when trying to listen on port "
                     + portNumber + " or listening for a connection");
             e.printStackTrace();
         }
     }
 }
+//TODO: uncomment it...
+
 //class Reciever implements Runnable{
 //    private final BlockingQueue queue;
 //    ServerSocket serverSocket;
@@ -106,7 +102,7 @@ public class Client2Tr {
 //                    Integer id = entry.getKey();
 //                    Server2Tr.Person person = entry.getValue();
 //
-//                    // отлавливать исключение
+//                    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 //                    Socket outSocket = new Socket(person.hostName, Integer.parseInt(person.port));
 //
 //                    PrintWriter out =
@@ -154,8 +150,7 @@ public class Client2Tr {
 //                '}';
 //    }
 //}
-class Listener
-{
+class Listener {
     BlockingQueue<Message> queue = new LinkedBlockingQueue<Message>();
 
 
