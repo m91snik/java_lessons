@@ -12,6 +12,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by Lexsus on 18.08.2015.
  */
+//TODO: use logger, use maven
 public class ServerWriter implements Runnable {
 
     private ConcurrentHashMap clientsMap = null;

@@ -3,7 +3,6 @@ package com.lexsus.chat.spring.java;
 import com.lexsus.chat.ServerMessageSystem;
 import com.lexsus.chat.SharedMap;
 import com.lexsus.chat.SharedQueue;
-import com.lexsus.chat.base.LaggedUserService;
 import com.lexsus.chat.consumer.Consumer;
 import com.lexsus.chat.consumer.ServerConsumer;
 import com.lexsus.chat.generator.MessageGenerator;
@@ -33,6 +32,7 @@ import java.util.Properties;
  * Created by Lexsus on 30.08.2015.
  */
 @Configuration
+//TODO: set correct package to scan, i.e. com.lexsus.chat
 @ComponentScan("com.m91snik.lesson13")
 public class ConfigServer {
     //
@@ -63,7 +63,8 @@ public class ConfigServer {
 
     @Bean
     public MessageGenerator<Message> generator() {
-        return new ServerMessageGenerator(saver());
+        //NOTE: spring will scan dependencies because of ComponentScan and inject them
+        return new ServerMessageGenerator();
     }
 
     @Bean

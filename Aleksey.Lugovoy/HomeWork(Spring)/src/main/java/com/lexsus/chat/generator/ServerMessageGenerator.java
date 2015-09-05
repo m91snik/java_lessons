@@ -6,7 +6,10 @@ import com.lexsus.chat.entity.UserEntity;
 import com.lexsus.chat.saver.MessageSaver;
 import com.lexsus.chat.spring.java.ClientInfo;
 import com.lexsus.chat.spring.java.Message;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -14,9 +17,6 @@ import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by Lexsus on 30.08.2015.
@@ -25,18 +25,14 @@ import org.springframework.transaction.annotation.Transactional;
 public class ServerMessageGenerator implements MessageGenerator<Message> {
 
     private static final Logger logger = LogManager.getLogger(ServerMessageGenerator.class);
+    @Autowired
     MessageSaver<Message> saver;
-
-    public ServerMessageGenerator(MessageSaver<Message> saver,LaggedUserService service) {
-
-        this.saver = saver;
-        this.laggedUserService = service;
-    }
 
     @Autowired
     private SharedMap<String, ClientInfo> sharedMap;
-    //@Autowired
+    @Autowired
     LaggedUserService laggedUserService ;
+
     @Override
     public Message generate() {
         try (ServerSocket serverSocket = new ServerSocket(11005/*server_port*/)) {
@@ -68,6 +64,7 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
                         break;
                 }
             }
+            //TOD: move it to finally
             client.close();
             return retMessage;
         } catch (ClassNotFoundException | SocketTimeoutException e) {
