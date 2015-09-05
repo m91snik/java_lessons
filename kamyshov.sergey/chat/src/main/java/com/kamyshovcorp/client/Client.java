@@ -28,6 +28,7 @@ public class Client {
             logger.info("Получен адрес клиента: " + clientHostName);
         } catch (UnknownHostException e) {
             logger.error("Не удалось определить адресс клиента.");
+            //TODO: throw exception because in this case it will be not possible to continue program
             e.printStackTrace();
         }
 
