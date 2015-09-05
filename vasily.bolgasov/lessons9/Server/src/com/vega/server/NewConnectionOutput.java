@@ -6,13 +6,15 @@ import java.net.Socket;
 import java.util.ListIterator;
 
 /**
- * Created by Вася-Вега on 17.08.2015.
+ * Created by пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅ on 17.08.2015.
  */
+//TODO: add logger, add spring and persistence
 public class NewConnectionOutput implements Runnable {
 
     private static PrintWriter out;
     private static Socket client;
 
+    //TODO: default constructor will be created by default
     public NewConnectionOutput() {
     }
 
@@ -33,11 +35,13 @@ public class NewConnectionOutput implements Runnable {
 
                 ListIterator<String[]> itr = Main.outputUsers.listIterator();
                 String[] users;
-                
+
+                //TODO: use for-each, it's more simple
                 while (itr.hasNext()) {
                     users = itr.next();
                     String address = users[0];
                     Integer port = new Integer(users[1]);
+                    //TODO: use try-with-resources
                     client = new Socket(address,port);
                     out = new PrintWriter(client.getOutputStream(),true);
                     out.println(outText);

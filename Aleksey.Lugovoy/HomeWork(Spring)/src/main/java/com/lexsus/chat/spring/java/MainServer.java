@@ -2,6 +2,7 @@ package com.lexsus.chat.spring.java;
 
 
 import com.lexsus.chat.ServerMessageSystem;
+import com.lexsus.chat.base.LaggedUserService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -21,5 +22,7 @@ public class MainServer {
                 new AnnotationConfigApplicationContext(ConfigServer.class);
         ServerMessageSystem server = applicationContext.getBean(ServerMessageSystem.class);
         server.runMessagesSystem();
+
+        LaggedUserService laggedUserService = applicationContext.getBean(LaggedUserService.class);
     }
 }

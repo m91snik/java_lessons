@@ -28,6 +28,7 @@ public class Client {
             logger.info("Получен адрес клиента: " + clientHostName);
         } catch (UnknownHostException e) {
             logger.error("Не удалось определить адресс клиента.");
+            //TODO: throw exception because in this case it will be not possible to continue program
             e.printStackTrace();
         }
 
@@ -41,7 +42,6 @@ public class Client {
 
         // Thread Writer
         new Thread(() -> {
-            String textMessage;
             // Формируем информацию о текущем пользователе
             ClientInfo clientInfo = new ClientInfo(userName, clientHostName, clientPort);
             // Отправляем оповещение серверу, чтобы добавиться в список пользователей
@@ -49,7 +49,7 @@ public class Client {
             logger.info("Пользователь " + userName + " отправил сообщение о входе в чат");
             // TODO: Добавить выход из чата
             while (true) {
-                textMessage = scanner.nextLine();
+                String textMessage = scanner.nextLine();
                 ClientHandler.sendMessage(new Message(MessageType.MESSAGE, textMessage, clientInfo));
             }
         }).start();
@@ -58,12 +58,10 @@ public class Client {
         new Thread(() -> {
             try (ServerSocket serverSocket = new ServerSocket(clientPort)) {
                 logger.info("Пользователь " + userName + " создал подключение на прослушивание порта " + clientPort);
-                ObjectInputStream inputStream;
-                Message message;
                 while (true) {
-                    try (Socket socket = serverSocket.accept()) {
-                        inputStream = new ObjectInputStream(socket.getInputStream());
-                        message = (Message) inputStream.readObject();
+                    try (Socket socket = serverSocket.accept();
+                         ObjectInputStream inputStream = new ObjectInputStream(socket.getInputStream())) {
+                        Message message = (Message) inputStream.readObject();
                         System.out.println(message.getText());
                     } catch (ClassNotFoundException e) {
                         logger.error("Ошибка преобразования сообщения на клиенте пользователя " + userName, e);

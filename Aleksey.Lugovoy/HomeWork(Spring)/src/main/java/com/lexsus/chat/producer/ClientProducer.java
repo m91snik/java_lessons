@@ -29,30 +29,40 @@ public class ClientProducer <E>  implements Producer<E>{
         else return null;
     }
 
+
     @Override
     public void produce() throws ProducerException {
         //logger.info("Client write start thread!");
+        System.out.println("Enter login or register....");
         Scanner scanner = new Scanner(System.in);
-        String text = "";
-        for (; scanner.hasNext(); text = scanner.next()) {
-            if ("exit".equals(text)) {
-                return;
-            }
+        String text = scanner.next();
+        //for (; scanner.hasNext(); text = scanner.next()) {
+        while(!"exit".equals(text)){
+
             if ("login".equals(text)) {
                 String login = getlogin(scanner);
-                MessageType.LOGIN.sendMessage(ip_address, client_port, login, new Integer(server_port).toString());
+                String password = getlogin(scanner);
+                MessageType.LOGIN.sendMessage(ip_address, client_port, login, server_port, password);
+                continue;
+            }
+            if ("register".equals(text)) {
+                System.out.println("Enter login:");
+                String login = getlogin(scanner);
+                System.out.println("Enter password:");
+                String password = getlogin(scanner);
+                MessageType.REGISTER.sendMessage(ip_address, client_port, login, server_port, password);
                 continue;
             }
             if ("log_chat_on".equals(text)) {
-                MessageType.LOG_FILE_ON.sendMessage(ip_address, client_port, null, null);
+                MessageType.LOG_FILE_ON.sendMessage(ip_address, client_port, null);
                 continue;
             }
             if ("log_chat_off".equals(text)) {
-                MessageType.LOG_FILE_OFF.sendMessage(ip_address, client_port, null, null);
+                MessageType.LOG_FILE_OFF.sendMessage(ip_address, client_port, null);
                 continue;
             }
             if (!text.isEmpty())
-                MessageType.MESSAGE.sendMessage(ip_address, client_port, text, null);
+                MessageType.MESSAGE.sendMessage(ip_address, client_port, text);
         }
     }
 }

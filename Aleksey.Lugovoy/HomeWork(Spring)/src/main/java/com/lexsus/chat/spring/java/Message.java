@@ -27,13 +27,19 @@ public class Message implements Serializable{
         return additional;
     }
 
-    public Message(MessageType type, String text,String additional) {
+    public int getSenderPort() {
+        return senderPort;
+    }
+
+    public Message(MessageType type, String text,int senderPort,String additional) {
         this.type = type;
         this.text = text;
         this.additional = additional;
+        this.senderPort = senderPort;
     }
 
     final String text;
+    final int senderPort;
     final String additional;
     Date date;
     final MessageType type;

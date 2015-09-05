@@ -14,6 +14,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by LugovoyAV on 13.08.2015.
  */
+//TODO: use logger, use maven
 public class ServerReader implements Runnable {
     //TODO: make field final
     private ServerSocket socket = null;
@@ -39,6 +40,7 @@ public class ServerReader implements Runnable {
                 if (message.type == MessageType.LOGIN) {
                     InetAddress address = client.getInetAddress();
                     clientsMap.put(message.Text, address.toString().substring(1));
+                    //TODO: move to final block or use try-with-resources
                     client.close();
                     continue;
                 }

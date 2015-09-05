@@ -10,8 +10,9 @@ import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 
 /**
- * Created by Вася-Вега on 17.08.2015.
+ * Created by пїЅпїЅпїЅпїЅ-пїЅпїЅпїЅпїЅ on 17.08.2015.
  */
+//TODO: it's not used. may be remove it?
 public class InputMessage implements Runnable{
 
     private ServerSocket socket;

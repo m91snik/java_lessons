@@ -21,16 +21,14 @@ class ServerOut implements Runnable {
     @Override
     public synchronized void run() {
         while (true) {
-            StringBuffer messageOut = new StringBuffer();
+            StringBuilder messageOut = new StringBuilder();
 
             try {
                 messageOut = messageOut.append(queue.take());
                 System.out.println("Message in sender " + messageOut);
             } catch (NullPointerException e) {
-                System.err.print("NullPointerException in server sender");
                 e.printStackTrace();
             } catch (InterruptedException e) {
-                System.out.println("BlockingQueue Server sender InterruptedException");
                 e.printStackTrace();
             }
 
@@ -54,12 +52,9 @@ class ServerOut implements Runnable {
         ) {
             out.println(messageOut);
         } catch (UnknownHostException e) {
-            System.err.println("Don't know about client " + connection.toString());
             e.printStackTrace();
             return false;
         } catch (IOException e) {
-            System.err.println("Couldn't get I/O for the connection to " +
-                    connection.toString());
             e.printStackTrace();
             return false;
         }
