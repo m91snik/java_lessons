@@ -18,11 +18,13 @@ public class MainServer {
 //        StringMessageSystem stringMessageSystem = applicationContext.getBean(StringMessageSystem.class);
 //        stringMessageSystem.runMessagesSystem();
 
+
         ApplicationContext applicationContext =
                 new AnnotationConfigApplicationContext(ConfigServer.class);
-        ServerMessageSystem server = applicationContext.getBean(ServerMessageSystem.class);
-        server.runMessagesSystem();
-
         LaggedUserService laggedUserService = applicationContext.getBean(LaggedUserService.class);
+        ServerMessageSystem server = applicationContext.getBean(ServerMessageSystem.class);
+        server.runMessagesSystem(laggedUserService);
+
+
     }
 }

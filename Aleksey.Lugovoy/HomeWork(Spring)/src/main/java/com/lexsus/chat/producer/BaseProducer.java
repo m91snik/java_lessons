@@ -1,6 +1,7 @@
 package com.lexsus.chat.producer;
 
 import com.lexsus.chat.SharedQueue;
+import com.lexsus.chat.base.LaggedUserService;
 import com.lexsus.chat.generator.MessageGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -25,9 +26,9 @@ public class BaseProducer<E> implements Producer<E> {
     }
 
     @Override
-    public void produce() throws ProducerException {
+    public void produce(LaggedUserService service) throws ProducerException {
         try {
-            sharedQueue.put(generator.generate());
+            sharedQueue.put(generator.generate(null));
         } catch (InterruptedException e) {
             throw new ProducerException(e);
         }

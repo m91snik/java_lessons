@@ -1,5 +1,6 @@
 package com.lexsus.chat;
 
+import com.lexsus.chat.base.LaggedUserService;
 import com.lexsus.chat.consumer.Consumer;
 import com.lexsus.chat.consumer.ConsumerException;
 import com.lexsus.chat.producer.ProducerException;
@@ -20,7 +21,7 @@ public class ServerMessageSystem{
         this.producer = producer;
     }
 
-    public void runMessagesSystem() {
+    public void runMessagesSystem(LaggedUserService service) {
         isStopped = false;
         new Thread(() -> {
             while (!isStopped) {
@@ -35,7 +36,7 @@ public class ServerMessageSystem{
         new Thread(() -> {
             while (!isStopped) {
                 try {
-                    producer.produce();
+                    producer.produce(service);
                     Thread.sleep(1000);
                 } catch (ProducerException e) {
                     e.printStackTrace();

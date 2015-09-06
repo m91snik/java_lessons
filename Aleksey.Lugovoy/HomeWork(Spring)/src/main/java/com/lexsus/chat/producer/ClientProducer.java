@@ -1,5 +1,6 @@
 package com.lexsus.chat.producer;
 
+import com.lexsus.chat.base.LaggedUserService;
 import com.lexsus.chat.spring.java.MessageType;
 
 import java.util.Scanner;
@@ -31,7 +32,7 @@ public class ClientProducer <E>  implements Producer<E>{
 
 
     @Override
-    public void produce() throws ProducerException {
+    public void produce(LaggedUserService service) throws ProducerException {
         //logger.info("Client write start thread!");
         System.out.println("Enter login or register....");
         Scanner scanner = new Scanner(System.in);

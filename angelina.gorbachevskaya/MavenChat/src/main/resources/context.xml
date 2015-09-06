@@ -1,0 +1,43 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <bean id="sharedQueue" class="Server.SharedQueue">
+    </bean>
+
+    <bean id="sharedConnectionDB" class="Server.SharedConnectionsDatabase">
+    </bean>
+
+    <bean id="userID" class="Utils.UserIDImpl">
+        <constructor-arg index="0" value="localhost"></constructor-arg>
+        <constructor-arg index="1" value="1992"></constructor-arg>
+        <constructor-arg index="2" value="server"></constructor-arg>
+    </bean>
+
+    <bean id="consumer" class="Server.Consumer.ServerConsumer">
+        <constructor-arg index="0" ref="sharedQueue"/>
+        <constructor-arg index="1" ref="sender"/>
+    </bean>
+
+    <bean id="producer" class="Server.Producer.ServerProducer">
+        <constructor-arg index="0" ref="sharedQueue"/>
+        <constructor-arg index="1" ref="receiver"/>
+    </bean>
+
+    <bean id="sender" class="Server.MessageSender.ServerSender">
+        <constructor-arg index="0" ref="sharedConnectionDB"/>
+        <constructor-arg index="1" ref="userID"/>
+    </bean>
+
+    <bean id="receiver" class="Server.MessageReceiver.ServerReceiver">
+        <constructor-arg index="0" ref="sharedConnectionDB"/>
+        <constructor-arg index="1" ref="userID"/>
+    </bean>
+
+    <bean id="server" class="Server.Server">
+        <constructor-arg index="0" ref="producer"/>
+        <constructor-arg index="1" ref="consumer"/>
+    </bean>
+
+</beans>

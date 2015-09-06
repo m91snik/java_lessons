@@ -33,7 +33,7 @@ import java.util.Properties;
  */
 @Configuration
 //TODO: set correct package to scan, i.e. com.lexsus.chat
-@ComponentScan("com.m91snik.lesson13")
+@ComponentScan("com.lexsus.chat")
 public class ConfigServer {
     //
 //    @Autowired
