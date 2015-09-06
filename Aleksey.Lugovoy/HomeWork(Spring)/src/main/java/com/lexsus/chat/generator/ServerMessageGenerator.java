@@ -30,11 +30,11 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
 
     @Autowired
     private SharedMap<String, ClientInfo> sharedMap;
-    @Autowired
-    LaggedUserService laggedUserService ;
+  //  @Autowired
+    //LaggedUserService laggedUserService ;
 
     @Override
-    public Message generate() {
+    public Message generate(LaggedUserService service) {
         try (ServerSocket serverSocket = new ServerSocket(11005/*server_port*/)) {
             serverSocket.setSoTimeout(20000);
             Socket client = serverSocket.accept();
@@ -54,7 +54,7 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
                         address = client.getInetAddress();
                         port = message.getSenderPort();
                         //sharedMap.put(message.getText(), new ClientInfo(address.toString().substring(1), port));
-                        saveUser(laggedUserService,message.getText(),message.getAdditional());
+                        saveUser(service,message.getText(),message.getAdditional());
                         logger.info(String.format("Client register: login:%s password:%d", address.toString().substring(1), port));
 
                         break;
