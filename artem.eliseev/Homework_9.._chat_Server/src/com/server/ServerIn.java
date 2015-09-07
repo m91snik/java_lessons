@@ -1,6 +1,7 @@
 package com.server;
 
 import com.MessageFromClientToServer;
+import com.server.util.NewUserCheckUtil;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -40,7 +41,7 @@ class ServerIn implements Runnable {
 
                 Connection con = new Connection(clientIp, messageFromClientToServer.inputClientPort);
                 System.out.println(con.toString());
-                if (con.newUserCheck(con)) {
+                if (NewUserCheckUtil.newUserCheck(con)) {
                     Server.connections.add(con);
                     System.out.println("Connection added");
                 }

@@ -19,7 +19,7 @@ public class Server {
     //    static int counter = 0;
     //TODO: it's better to use ConcurrentHashMap and use clientIp as key and Connection with details as value
     //TODO: it's better to send it as input argument to both ServerIn and ServerOut
-    static List<Connection> connections =
+    public static List<Connection> connections =
             Collections.synchronizedList(new ArrayList<Connection>());
     static BlockingQueue<String> mainQueue = new LinkedBlockingQueue<String>();
 

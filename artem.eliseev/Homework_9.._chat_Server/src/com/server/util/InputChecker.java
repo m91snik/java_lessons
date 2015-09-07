@@ -1,4 +1,4 @@
-package com.server;
+package com.server.util;
 
 /**
  * Created by Anry on 02.09.2015.

@@ -8,5 +8,6 @@ import com.lexsus.chat.entity.UserEntity;
  */
 public interface LaggedUserService {
     UserEntity findUser();
+    UserEntity findUser(String userLogin);
     UserEntity save(UserEntity userEntity);
 }

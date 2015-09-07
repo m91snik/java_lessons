@@ -5,6 +5,8 @@ import com.lexsus.chat.consumer.Consumer;
 import com.lexsus.chat.producer.Producer;
 import com.lexsus.chat.producer.ProducerException;
 
+import java.io.IOException;
+
 /**
  * Created by nikolay.garbuzov on 27.08.15.
  */
@@ -34,12 +36,14 @@ public class StringMessageSystem {
         new Thread(() -> {
             while (!isStopped) {
                 try {
-                    producer.produce();
+                    producer.produce(null);
                     Thread.sleep(1000);
                 } catch (ProducerException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     //just ignore it
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }).start();

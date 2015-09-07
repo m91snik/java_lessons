@@ -6,26 +6,13 @@ import java.util.Iterator;
 /**
  * Created by Anry on 26.08.2015.
  */
-class Connection {
-    String clientIp;
-    int clientInputPort;
+public class Connection {
+    public String clientIp;
+    public int clientInputPort;
 
     public Connection(String clientIp, int clientInputPort) {
         this.clientIp = clientIp;
         this.clientInputPort = clientInputPort;
-    }
-    //TODO: move this method outside of Connection. it's utility method and it should be in Utils.
-    //TODO: use Connections as input argument to remove dependency on Server class
-    public boolean newUserCheck(Connection connection) {
-        Iterator<Connection> iter = Server.connections.iterator();
-        while (iter.hasNext()) {
-            Connection next = iter.next();
-            if ((next.clientIp.equals(connection.clientIp)) &
-                    ((next.clientInputPort) == (connection.clientInputPort))) {
-                return false;
-            }
-        }
-        return true;
     }
 
     @Override
