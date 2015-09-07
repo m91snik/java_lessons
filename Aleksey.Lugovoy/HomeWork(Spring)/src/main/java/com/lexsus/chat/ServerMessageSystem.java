@@ -8,6 +8,8 @@ import com.lexsus.chat.saver.MessageSaver;
 import com.lexsus.chat.spring.java.Message;
 import com.lexsus.chat.producer.Producer;
 
+import java.io.IOException;
+
 /**
  * Created by Lexsus on 30.08.2015.
  */
@@ -42,6 +44,8 @@ public class ServerMessageSystem{
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     //just ignore it
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }).start();

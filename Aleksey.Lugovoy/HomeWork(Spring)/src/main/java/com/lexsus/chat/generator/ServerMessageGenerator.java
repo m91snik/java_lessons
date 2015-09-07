@@ -31,7 +31,7 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
     @Autowired
     private SharedMap<String, ClientInfo> sharedMap;
   //  @Autowired
-    //LaggedUserService laggedUserService ;
+    LaggedUserService laggedUserService ;
 
     @Override
     public Message generate(LaggedUserService service) {
@@ -47,7 +47,7 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
                     case LOGIN:
                         address = client.getInetAddress();
                         port = message.getSenderPort();
-                        if (autorisisedUser(service, message.getText(), message.getAdditional()))
+                        if (authorizationUser(service, message.getText(), message.getAdditional()))
                         {
                             sharedMap.put(message.getText(), new ClientInfo(address.toString().substring(1), port));
                             logger.info(String.format("Client login address:%s port:%d", address.toString().substring(1), port));
@@ -57,7 +57,8 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
                         address = client.getInetAddress();
                         port = message.getSenderPort();
                         //sharedMap.put(message.getText(), new ClientInfo(address.toString().substring(1), port));
-                        saveUser(service,message.getText(),message.getAdditional());
+                        String addText = message.getAdditional();
+                        saveUser(service,message.getText(),getPassword(addText), getSurname(addText), getAge(addText));
                         logger.info(String.format("Client register: login:%s password:%d", address.toString().substring(1), port));
 
                         break;
@@ -82,16 +83,17 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
     }
 
     @Transactional
-    public static void saveUser(LaggedUserService laggedUserService,String name,String password) {
+    public static void saveUser(LaggedUserService laggedUserService,String name,String password,String surname,int age) {
         UserEntity userEntity = new UserEntity();
         userEntity.setName(name);
         userEntity.setPassword(password);
-
+        userEntity.setSurname(surname);
+        userEntity.setAge(age);
         UserEntity saveUser = laggedUserService.save(userEntity);
     }
 
     @Transactional
-    public static boolean autorisisedUser(LaggedUserService laggedUserService, String name, String password) {
+    public static boolean authorizationUser(LaggedUserService laggedUserService, String name, String password) {
 
         UserEntity user = laggedUserService.findUser(name);
         if (user!=null) {
@@ -99,6 +101,24 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
                 return true;
         }
         return false;
+    }
+
+    protected String getPassword(String additionalText){
+        int index = additionalText.indexOf(";");
+        return additionalText.substring(0,index);
+    }
+
+    protected String getSurname(String additionalText){
+        int index = additionalText.indexOf(";");
+        int indexLast = additionalText.indexOf(";",index+1);
+        return additionalText.substring(index,indexLast);
+    }
+
+    protected int getAge(String additionalText){
+
+        int indexLast = additionalText.lastIndexOf(";");
+
+        return Integer.parseInt(additionalText.substring(indexLast,additionalText.length()));
     }
 }
 

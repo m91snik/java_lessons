@@ -25,6 +25,28 @@ public class UserEntity  implements Serializable {
     private String password;
     @Column(name = "CREATION_TIME")
     private Timestamp creationTime;
+    @Column
+    private String surname;
+    @Column
+    private int age;
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+
 
     public UserEntity() {
         id = UUID.randomUUID().toString().replace("-", "");
