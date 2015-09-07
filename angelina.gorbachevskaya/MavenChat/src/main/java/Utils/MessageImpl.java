@@ -10,8 +10,10 @@ public class MessageImpl implements Message, Serializable{
     private String text;
     private Date date;
     private UserID senderID;
+    private MessageType messageType;// = MessageType.LOGIN;
 
     public MessageImpl() {
+//        messageType = MessageType.REGISTER;
     }
 
     public MessageImpl(String text) {
@@ -49,5 +51,15 @@ public class MessageImpl implements Message, Serializable{
     @Override
     public void setSender(UserID userID) {
         this.senderID = userID;
+    }
+
+    @Override
+    public MessageType getType() {
+        return messageType;
+    }
+
+    @Override
+    public void setType(MessageType type) {
+        this.messageType = type;
     }
 }

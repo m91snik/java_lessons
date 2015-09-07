@@ -27,7 +27,6 @@ public class ServerProducer<E extends Message, U extends UserID> implements Prod
     public void produce() throws ProducerException {
         try {
             sharedQueue.put(receiver.receiveMessage());
-//            connections.put(receiver.getSender());
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

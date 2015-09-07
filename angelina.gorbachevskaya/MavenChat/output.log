@@ -1,0 +1,14 @@
+23:37:38.000 [Thread-1] INFO  Server.SharedConnectionsDatabase - User localhost 34585 nana add to database.
+23:38:31.485 [Thread-2] INFO  Server.SharedConnectionsDatabase - User localhost 34585 nana removed.
+23:55:51.623 [Thread-1] INFO  Server.SharedConnectionsDatabase - User localhost 35630 null add to database.
+00:09:58.018 [Thread-1] INFO  Server.SharedConnectionsDatabase - User localhost 58750 ann add to database.
+00:11:30.111 [Thread-1] INFO  Server.SharedConnectionsDatabase - User localhost 20589 ann add to database.
+00:11:53.519 [Thread-2] INFO  Server.SharedConnectionsDatabase - User localhost 20589 ann removed.
+00:13:32.665 [Thread-1] INFO  Server.SharedConnectionsDatabase - User localhost 1135 ann add to database.
+00:14:47.722 [Thread-2] INFO  Server.SharedConnectionsDatabase - User localhost 1135 ann removed.
+00:21:10.369 [Thread-1] INFO  Server.SharedConnectionsDatabase - User localhost 43665 ann34 add to database.
+00:23:06.601 [Thread-1] INFO  Server.SharedConnectionsDatabase - User localhost 43665 ann34 removed.
+00:24:23.996 [Thread-1] INFO  Server.SharedConnectionsDatabase - User localhost 39457 rob add to database.
+00:24:44.797 [Thread-2] INFO  Server.SharedConnectionsDatabase - User localhost 39457 rob removed.
+00:30:16.258 [Thread-1] INFO  Server.SharedConnectionsDatabase - User localhost 33224 ann add to database.
+00:30:26.555 [Thread-1] INFO  Server.SharedConnectionsDatabase - User localhost 33224 ann removed.
