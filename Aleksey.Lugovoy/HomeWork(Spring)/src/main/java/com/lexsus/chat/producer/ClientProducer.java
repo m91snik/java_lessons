@@ -38,10 +38,12 @@ public class ClientProducer <E>  implements Producer<E>{
         Scanner scanner = new Scanner(System.in);
         String text = scanner.next();
         //for (; scanner.hasNext(); text = scanner.next()) {
-        while(!"exit".equals(text)){
+        for(;!"exit".equals(text);text = scanner.next()){
 
             if ("login".equals(text)) {
+                System.out.println("Enter login:");
                 String login = getlogin(scanner);
+                System.out.println("Enter password:");
                 String password = getlogin(scanner);
                 MessageType.LOGIN.sendMessage(ip_address, client_port, login, server_port, password);
                 continue;

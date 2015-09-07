@@ -47,8 +47,11 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
                     case LOGIN:
                         address = client.getInetAddress();
                         port = message.getSenderPort();
-                        sharedMap.put(message.getText(), new ClientInfo(address.toString().substring(1), port));
-                        logger.info(String.format("Client login address:%s port:%d", address.toString().substring(1), port));
+                        if (autorisisedUser(service, message.getText(), message.getAdditional()))
+                        {
+                            sharedMap.put(message.getText(), new ClientInfo(address.toString().substring(1), port));
+                            logger.info(String.format("Client login address:%s port:%d", address.toString().substring(1), port));
+                        }
                         break;
                     case REGISTER:
                         address = client.getInetAddress();
@@ -64,8 +67,10 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
                         break;
                 }
             }
-            //TOD: move it to finally
-            client.close();
+            finally{
+                client.close();
+            }
+
             return retMessage;
         } catch (ClassNotFoundException | SocketTimeoutException e) {
             if (e instanceof SocketTimeoutException)
@@ -83,6 +88,17 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
         userEntity.setPassword(password);
 
         UserEntity saveUser = laggedUserService.save(userEntity);
+    }
+
+    @Transactional
+    public static boolean autorisisedUser(LaggedUserService laggedUserService, String name, String password) {
+
+        UserEntity user = laggedUserService.findUser(name);
+        if (user!=null) {
+            if (user.getPassword().equals(password))
+                return true;
+        }
+        return false;
     }
 }
 
