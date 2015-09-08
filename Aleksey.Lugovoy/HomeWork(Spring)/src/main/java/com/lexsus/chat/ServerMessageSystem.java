@@ -38,7 +38,7 @@ public class ServerMessageSystem{
         new Thread(() -> {
             while (!isStopped) {
                 try {
-                    producer.produce(service);
+                    producer.produce();
                     Thread.sleep(1000);
                 } catch (ProducerException e) {
                     e.printStackTrace();

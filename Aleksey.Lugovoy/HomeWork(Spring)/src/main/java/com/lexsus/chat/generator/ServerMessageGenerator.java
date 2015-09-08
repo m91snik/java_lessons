@@ -30,11 +30,11 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
 
     @Autowired
     private SharedMap<String, ClientInfo> sharedMap;
-  //  @Autowired
+    @Autowired
     LaggedUserService laggedUserService ;
 
     @Override
-    public Message generate(LaggedUserService service) {
+    public Message generate() {
         try (ServerSocket serverSocket = new ServerSocket(11005/*server_port*/)) {
             serverSocket.setSoTimeout(20000);
             Socket client = serverSocket.accept();
@@ -47,7 +47,7 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
                     case LOGIN:
                         address = client.getInetAddress();
                         port = message.getSenderPort();
-                        if (authorizationUser(service, message.getText(), message.getAdditional()))
+                        if (authorizationUser(laggedUserService, message.getText(), message.getAdditional()))
                         {
                             sharedMap.put(message.getText(), new ClientInfo(address.toString().substring(1), port));
                             logger.info(String.format("Client login address:%s port:%d", address.toString().substring(1), port));
@@ -56,15 +56,16 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
                     case REGISTER:
                         address = client.getInetAddress();
                         port = message.getSenderPort();
-                        //sharedMap.put(message.getText(), new ClientInfo(address.toString().substring(1), port));
                         String addText = message.getAdditional();
-                        saveUser(service,message.getText(),getPassword(addText), getSurname(addText), getAge(addText));
+                        saveUser(laggedUserService,message.getText(),getPassword(addText), getSurname(addText), getAge(addText));
                         logger.info(String.format("Client register: login:%s password:%d", address.toString().substring(1), port));
-
                         break;
                     case MESSAGE:
                         retMessage = message;
                         saver.writeMessage(message);
+                        break;
+                    case DELETE_USER:
+                        deleteUser(laggedUserService, message.getText(), message.getAdditional());
                         break;
                 }
             }
@@ -103,6 +104,11 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
         return false;
     }
 
+    @Transactional
+    public static void deleteUser(LaggedUserService laggedUserService,String name,String password) {
+        laggedUserService.remove(name,password);
+    }
+
     protected String getPassword(String additionalText){
         int index = additionalText.indexOf(";");
         return additionalText.substring(0,index);
@@ -111,14 +117,14 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
     protected String getSurname(String additionalText){
         int index = additionalText.indexOf(";");
         int indexLast = additionalText.indexOf(";",index+1);
-        return additionalText.substring(index,indexLast);
+        return additionalText.substring(index+1,indexLast);
     }
 
     protected int getAge(String additionalText){
 
         int indexLast = additionalText.lastIndexOf(";");
 
-        return Integer.parseInt(additionalText.substring(indexLast,additionalText.length()));
+        return Integer.parseInt(additionalText.substring(indexLast+1,additionalText.length()));
     }
 }
 

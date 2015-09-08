@@ -34,7 +34,6 @@ public class LaggedUserServiceImpl implements LaggedUserService {
     public UserEntity findUser(String userLogin){
         List<UserEntity> usersList = userDao.getUsers();
         for (UserEntity user:usersList) {
-            //UserEntity user = userDao.findUser(userLogin);
             if (user.getName().equals(userLogin)) {
                 return user;
             }
@@ -52,5 +51,13 @@ public class LaggedUserServiceImpl implements LaggedUserService {
             throw new IllegalStateException(e);
         }
         return savedUser;
+    }
+
+    @Override
+    public void remove(String name, String password){
+        UserEntity user = findUser(name);
+        if (user!=null && password.equals(user.getPassword()))
+            userDao.remove(user);
+
     }
 }

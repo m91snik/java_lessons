@@ -9,5 +9,5 @@ import java.io.IOException;
  */
 public interface Producer<E> {
 
-    public void produce(LaggedUserService service) throws ProducerException, IOException;
+    public void produce() throws ProducerException, IOException;
 }

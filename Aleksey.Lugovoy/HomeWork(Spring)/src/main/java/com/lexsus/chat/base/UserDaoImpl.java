@@ -21,6 +21,11 @@ public class UserDaoImpl implements UserDao {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Override
+    public void remove(UserEntity userEntity) {
+         entityManager.remove(userEntity);
+    }
+
     public UserEntity save(UserEntity userEntity) {
         if(userEntity.getCreationTime()==null){
             userEntity.setCreationTime(new Timestamp(System.currentTimeMillis()));
@@ -39,4 +44,5 @@ public class UserDaoImpl implements UserDao {
     public UserEntity findUser(String id) {
         return entityManager.find(UserEntity.class, id);
     }
+
 }

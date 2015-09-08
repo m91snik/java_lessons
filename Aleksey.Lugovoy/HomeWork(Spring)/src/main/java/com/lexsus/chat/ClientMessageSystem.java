@@ -37,7 +37,7 @@ public class ClientMessageSystem {
         new Thread(() -> {
             while (!isStopped) {
                 try {
-                    producer.produce(null);
+                    producer.produce();
                     Thread.sleep(1000);
                 } catch (ProducerException e) {
                     e.printStackTrace();

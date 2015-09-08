@@ -10,4 +10,5 @@ public interface LaggedUserService {
     UserEntity findUser();
     UserEntity findUser(String userLogin);
     UserEntity save(UserEntity userEntity);
+    void remove(String name, String password);
 }
