@@ -1,9 +1,0 @@
-com\MessageFromClientToServer.class
-com\server\util\NewUserCheckUtil.class
-com\server\util\InputChecker.class
-com\server\ServerIn.class
-com\server\Main.class
-com\server\Server.class
-com\server\Connection.class
-com\server\ServerOut.class
-com\server\Constants.class
