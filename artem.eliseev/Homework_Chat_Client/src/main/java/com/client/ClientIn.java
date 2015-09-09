@@ -32,8 +32,7 @@ public class ClientIn implements Runnable {
             try {
                 if (Constants.EXIT.equalsIgnoreCase(userInput = stdIn.readLine())) {
 //                  toDo good system exit
-//                  System.exit(1);
-                    break;
+                  System.exit(1);
                 }
             } catch (IOException e) {
                 e.printStackTrace();
