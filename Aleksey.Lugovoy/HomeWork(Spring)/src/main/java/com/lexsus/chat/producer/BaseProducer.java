@@ -26,9 +26,9 @@ public class BaseProducer<E> implements Producer<E> {
     }
 
     @Override
-    public void produce(LaggedUserService service) throws ProducerException {
+    public void produce() throws ProducerException {
         try {
-            sharedQueue.put(generator.generate(null));
+            sharedQueue.put(generator.generate());
         } catch (InterruptedException e) {
             throw new ProducerException(e);
         }

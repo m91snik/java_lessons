@@ -11,14 +11,11 @@ import Client.Sender.SenderException;
 import Utils.MessageImpl;
 import Utils.UserIDImpl;
 
-/**
- * Created by �������� on 01.09.2015.
- */
 public class Client {
 
     private static UserIDImpl clientID = new UserIDImpl();
 
-    Sender<MessageImpl, UserIDImpl> sender = new ClientSender<>(new ClientProducer(), clientID);
+    Sender<MessageImpl, UserIDImpl> sender = new ClientSender<>(new ClientProducer(clientID));
     Receiver<MessageImpl, UserIDImpl> receiver = new ClientReceiver<>(new ClientConsumer(), clientID);
 
     private boolean stop = false;

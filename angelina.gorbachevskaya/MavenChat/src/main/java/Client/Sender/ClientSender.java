@@ -18,9 +18,8 @@ public class ClientSender<E, U extends UserID> implements Sender<E, U> {
     private Producer<E, U> producer;
 //    private U userID;
 
-    public ClientSender(Producer producer, U u) {
+    public ClientSender(Producer producer) {
         this.producer = producer;
-        this.producer.setSender(u);
     }
 
     @Override

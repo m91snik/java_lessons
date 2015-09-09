@@ -8,7 +8,7 @@ import com.lexsus.chat.base.LaggedUserService;
 //@Component
 public class StringMessageGenerator implements MessageGenerator<String> {
     @Override
-    public String generate(LaggedUserService service) {
+    public String generate() {
         return Math.random() + "";
     }
 }

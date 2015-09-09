@@ -6,6 +6,8 @@ import com.lexsus.chat.producer.Producer;
 import com.lexsus.chat.producer.ProducerException;
 import com.lexsus.chat.spring.java.Message;
 
+import java.io.IOException;
+
 /**
  * Created by Lexsus on 30.08.2015.
  */
@@ -35,12 +37,14 @@ public class ClientMessageSystem {
         new Thread(() -> {
             while (!isStopped) {
                 try {
-                    producer.produce(null);
+                    producer.produce();
                     Thread.sleep(1000);
                 } catch (ProducerException e) {
                     e.printStackTrace();
                 } catch (InterruptedException e) {
                     //just ignore it
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
             }
         }).start();

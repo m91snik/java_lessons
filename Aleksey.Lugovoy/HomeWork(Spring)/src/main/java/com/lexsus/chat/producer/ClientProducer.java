@@ -3,6 +3,7 @@ package com.lexsus.chat.producer;
 import com.lexsus.chat.base.LaggedUserService;
 import com.lexsus.chat.spring.java.MessageType;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -20,38 +21,39 @@ public class ClientProducer <E>  implements Producer<E>{
     public ClientProducer() {
     }
 
-//    public ClientProducer(MessageGenerator<E> generator) {
-//        this.generator = generator;
-//    }
-
-    protected String getlogin(Scanner scanner){
+    protected String getText(Scanner scanner){
         if (scanner.hasNext())
             return scanner.next();
         else return null;
     }
 
-
     @Override
-    public void produce(LaggedUserService service) throws ProducerException {
+    public void produce() throws ProducerException, IOException {
         //logger.info("Client write start thread!");
         System.out.println("Enter login or register....");
         Scanner scanner = new Scanner(System.in);
         String text = scanner.next();
         //for (; scanner.hasNext(); text = scanner.next()) {
-        while(!"exit".equals(text)){
+        for(;!"exit".equals(text);text = scanner.next()){
 
             if ("login".equals(text)) {
-                String login = getlogin(scanner);
-                String password = getlogin(scanner);
+                System.out.println("Enter login:");
+                String login = getText(scanner);
+                System.out.println("Enter password:");
+                String password = getText(scanner);
                 MessageType.LOGIN.sendMessage(ip_address, client_port, login, server_port, password);
                 continue;
             }
             if ("register".equals(text)) {
                 System.out.println("Enter login:");
-                String login = getlogin(scanner);
+                String login = getText(scanner);
                 System.out.println("Enter password:");
-                String password = getlogin(scanner);
-                MessageType.REGISTER.sendMessage(ip_address, client_port, login, server_port, password);
+                String password = getText(scanner);
+                System.out.println("Enter surname:");
+                String surname = getText(scanner);
+                System.out.println("Enter age:");
+                int age = System.in.read();
+                MessageType.REGISTER.sendMessage(ip_address, client_port, login, server_port, password+";"+surname+";"+age);
                 continue;
             }
             if ("log_chat_on".equals(text)) {
@@ -62,8 +64,17 @@ public class ClientProducer <E>  implements Producer<E>{
                 MessageType.LOG_FILE_OFF.sendMessage(ip_address, client_port, null);
                 continue;
             }
+            if ("delete_user".equals(text)) {
+                System.out.println("Enter deleted user:");
+                String delete_user = getText(scanner);
+                System.out.println("Enter password");
+                String password = getText(scanner);
+                MessageType.DELETE_USER.sendMessage(ip_address, client_port, delete_user,0,password);
+                continue;
+            }
             if (!text.isEmpty())
                 MessageType.MESSAGE.sendMessage(ip_address, client_port, text);
         }
     }
 }
+

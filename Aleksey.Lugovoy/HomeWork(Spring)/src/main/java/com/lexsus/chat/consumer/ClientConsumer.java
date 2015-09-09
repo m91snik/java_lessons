@@ -17,24 +17,29 @@ import java.net.SocketTimeoutException;
  * Created by Lexsus on 30.08.2015.
  */
 
-public class ClientConsumer  implements Consumer<Message>{
+public class ClientConsumer implements Consumer<Message> {
     private static final Logger logger = LogManager.getLogger(ClientConsumer.class);
     final int server_port = 11007;
     @Autowired
     protected MessageProcessor messageProcessor;
+
     @Override
     public void consume() throws ConsumerException {
         try (ServerSocket serverSocket = new ServerSocket(server_port)) {
             serverSocket.setSoTimeout(20000);
-            Socket client = serverSocket.accept();
-            try (ObjectInputStream objectInputStream = new ObjectInputStream(client.getInputStream())) {
-                Message message = (Message) objectInputStream.readObject();
+            while (true) {
+                Socket client = serverSocket.accept();
+                try (ObjectInputStream objectInputStream = new ObjectInputStream(client.getInputStream())) {
+                    Message message = (Message) objectInputStream.readObject();
 
-                if (message.getType() == MessageType.MESSAGE) {
-                    messageProcessor.process(message);
+                    if (message.getType() == MessageType.MESSAGE) {
+                        messageProcessor.process(message);
+                    }
+                } catch (ClassNotFoundException e) {
+                    throw new IllegalStateException(e);
                 }
             }
-        } catch (ClassNotFoundException | SocketTimeoutException e ) {
+        } catch (SocketTimeoutException e) {
             if (e instanceof SocketTimeoutException)
                 logger.info("Client close by timeout!");
         } catch (IOException e) {

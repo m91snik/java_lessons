@@ -7,4 +7,5 @@ public interface UserID {
     public int getPort();
     public String getName();
     public String getIp();
+    public void setName(String name);
 }

@@ -1,0 +1,4 @@
+Message{text='Registration success', date=Tue Sep 08 00:21:10 MSK 2015, senderID=192.168.1.6 43665 ann34}
+Message{text='hello', date=Tue Sep 08 00:21:13 MSK 2015, senderID=192.168.1.6 1992 server}
+Message{text='how are you?', date=Tue Sep 08 00:21:19 MSK 2015, senderID=192.168.1.6 1992 server}
+Message{text='Online users : "ann34" ', date=Tue Sep 08 00:21:20 MSK 2015, senderID=192.168.1.6 1992 server}

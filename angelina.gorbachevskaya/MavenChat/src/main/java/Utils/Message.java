@@ -9,4 +9,6 @@ public interface Message {
     public void setText(String string);
     public String toString();
     public void setSender(UserID userID);
+    public MessageType getType();
+    public void setType(MessageType type);
 }

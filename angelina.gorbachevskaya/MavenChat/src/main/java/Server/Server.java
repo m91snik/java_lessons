@@ -12,7 +12,6 @@ import Utils.UserIDImpl;
  * Created by root on 8/28/15.
  */
 
-//TODO: handling all exception here. No throw!
 public class Server {
     private static String SERVER_HOSTNAME = "localhost";
     private static int SERVER_PORT = 1992;

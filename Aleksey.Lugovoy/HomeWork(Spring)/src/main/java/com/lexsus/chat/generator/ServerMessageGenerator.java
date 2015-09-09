@@ -30,11 +30,11 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
 
     @Autowired
     private SharedMap<String, ClientInfo> sharedMap;
-  //  @Autowired
-    //LaggedUserService laggedUserService ;
+    @Autowired
+    LaggedUserService laggedUserService ;
 
     @Override
-    public Message generate(LaggedUserService service) {
+    public Message generate() {
         try (ServerSocket serverSocket = new ServerSocket(11005/*server_port*/)) {
             serverSocket.setSoTimeout(20000);
             Socket client = serverSocket.accept();
@@ -47,25 +47,32 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
                     case LOGIN:
                         address = client.getInetAddress();
                         port = message.getSenderPort();
-                        sharedMap.put(message.getText(), new ClientInfo(address.toString().substring(1), port));
-                        logger.info(String.format("Client login address:%s port:%d", address.toString().substring(1), port));
+                        if (authorizationUser(laggedUserService, message.getText(), message.getAdditional()))
+                        {
+                            sharedMap.put(message.getText(), new ClientInfo(address.toString().substring(1), port));
+                            logger.info(String.format("Client login address:%s port:%d", address.toString().substring(1), port));
+                        }
                         break;
                     case REGISTER:
                         address = client.getInetAddress();
                         port = message.getSenderPort();
-                        //sharedMap.put(message.getText(), new ClientInfo(address.toString().substring(1), port));
-                        saveUser(service,message.getText(),message.getAdditional());
+                        String addText = message.getAdditional();
+                        saveUser(laggedUserService,message.getText(),getPassword(addText), getSurname(addText), getAge(addText));
                         logger.info(String.format("Client register: login:%s password:%d", address.toString().substring(1), port));
-
                         break;
                     case MESSAGE:
                         retMessage = message;
                         saver.writeMessage(message);
                         break;
+                    case DELETE_USER:
+                        deleteUser(laggedUserService, message.getText(), message.getAdditional());
+                        break;
                 }
             }
-            //TOD: move it to finally
-            client.close();
+            finally{
+                client.close();
+            }
+
             return retMessage;
         } catch (ClassNotFoundException | SocketTimeoutException e) {
             if (e instanceof SocketTimeoutException)
@@ -77,12 +84,47 @@ public class ServerMessageGenerator implements MessageGenerator<Message> {
     }
 
     @Transactional
-    public static void saveUser(LaggedUserService laggedUserService,String name,String password) {
+    public static void saveUser(LaggedUserService laggedUserService,String name,String password,String surname,int age) {
         UserEntity userEntity = new UserEntity();
         userEntity.setName(name);
         userEntity.setPassword(password);
-
+        userEntity.setSurname(surname);
+        userEntity.setAge(age);
         UserEntity saveUser = laggedUserService.save(userEntity);
+    }
+
+    @Transactional
+    public static boolean authorizationUser(LaggedUserService laggedUserService, String name, String password) {
+
+        UserEntity user = laggedUserService.findUser(name);
+        if (user!=null) {
+            if (user.getPassword().equals(password))
+                return true;
+        }
+        return false;
+    }
+
+    @Transactional
+    public static void deleteUser(LaggedUserService laggedUserService,String name,String password) {
+        laggedUserService.remove(name,password);
+    }
+
+    protected String getPassword(String additionalText){
+        int index = additionalText.indexOf(";");
+        return additionalText.substring(0,index);
+    }
+
+    protected String getSurname(String additionalText){
+        int index = additionalText.indexOf(";");
+        int indexLast = additionalText.indexOf(";",index+1);
+        return additionalText.substring(index+1,indexLast);
+    }
+
+    protected int getAge(String additionalText){
+
+        int indexLast = additionalText.lastIndexOf(";");
+
+        return Integer.parseInt(additionalText.substring(indexLast+1,additionalText.length()));
     }
 }
 

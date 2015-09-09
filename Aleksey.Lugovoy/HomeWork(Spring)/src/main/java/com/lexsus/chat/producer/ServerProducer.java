@@ -25,9 +25,9 @@ public class ServerProducer<E>  implements Producer<E>{
     }
 
     @Override
-    public void produce(LaggedUserService service) throws ProducerException {
+    public void produce() throws ProducerException {
         try {
-            E mes = generator.generate(service);
+            E mes = generator.generate();
             if (mes!=null)
                 sharedQueue.put(mes);
         } catch (InterruptedException e) {

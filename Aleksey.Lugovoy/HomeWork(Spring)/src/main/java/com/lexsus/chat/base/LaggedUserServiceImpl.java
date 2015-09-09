@@ -5,6 +5,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 /**
  * Created by m91snik on 30.08.15.
  */
@@ -29,6 +31,17 @@ public class LaggedUserServiceImpl implements LaggedUserService {
     }
 
     @Override
+    public UserEntity findUser(String userLogin){
+        List<UserEntity> usersList = userDao.getUsers();
+        for (UserEntity user:usersList) {
+            if (user.getName().equals(userLogin)) {
+                return user;
+            }
+        }
+        return null;
+    }
+
+    @Override
     public UserEntity save(UserEntity userEntity) {
         UserEntity savedUser = userDao.save(userEntity);
         savedUserId = savedUser.getId();
@@ -38,5 +51,13 @@ public class LaggedUserServiceImpl implements LaggedUserService {
             throw new IllegalStateException(e);
         }
         return savedUser;
+    }
+
+    @Override
+    public void remove(String name, String password){
+        UserEntity user = findUser(name);
+        if (user!=null && password.equals(user.getPassword()))
+            userDao.remove(user);
+
     }
 }

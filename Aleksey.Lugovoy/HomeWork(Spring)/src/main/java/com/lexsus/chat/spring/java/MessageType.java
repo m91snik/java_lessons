@@ -28,6 +28,12 @@ public enum MessageType {
             internalSendMessage(MessageType.LOG_FILE_ON, address, port, text, senderPort,additional);
         }
     },
+    DELETE_USER{
+        @Override
+        public void sendMessage(String address, int port,String text,int senderPort,String additional) {
+            internalSendMessage(MessageType.DELETE_USER, address, port, text, senderPort,additional);
+        }
+    },
     LOG_FILE_OFF{
         @Override
         public void sendMessage(String address, int port,String text,int senderPort,String additional) {

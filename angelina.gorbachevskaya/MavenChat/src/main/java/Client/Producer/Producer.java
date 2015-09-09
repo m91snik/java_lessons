@@ -7,6 +7,5 @@ import Utils.UserID;
  */
 public interface Producer<E, U extends UserID> {
     public E produce();
-    public void setSender(U u);
     public boolean isStop();
 }
