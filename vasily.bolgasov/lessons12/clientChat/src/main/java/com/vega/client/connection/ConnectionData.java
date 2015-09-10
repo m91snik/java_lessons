@@ -10,8 +10,10 @@ public class ConnectionData implements Connect {
     private Integer port;
     private String adressServer;
     private InetAddress ourAdress;
-    private String ourName;
+    private String ourLogin;
+    private String ourPassword;
     private Integer ourPort;
+    private String login;
 
     @Override
     public void setPort(Integer port) { this.port = port; }
@@ -32,14 +34,26 @@ public class ConnectionData implements Connect {
     public InetAddress getOurAdress() { return ourAdress; }
 
     @Override
-    public void setOurName(String name) { this.ourName = name; }
+    public void setOurLogin(String name) { this.ourLogin = name; }
 
     @Override
-    public String getOurName() { return ourName; }
+    public String getOurLogin() { return ourLogin; }
 
     @Override
     public void setOurPort(Integer port) { this.ourPort = port; }
 
     @Override
     public Integer getOurPort() { return ourPort; }
+
+    @Override
+    public String getOurPassword() { return ourPassword; }
+
+    @Override
+    public void setOurPassword(String ourPassword) { this.ourPassword = ourPassword; }
+
+    @Override
+    public void setLogin(String login) { this.login = login; }
+
+    @Override
+    public String getLogin() { return login; }
 }

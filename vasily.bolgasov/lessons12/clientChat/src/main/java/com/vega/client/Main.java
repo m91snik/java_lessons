@@ -37,8 +37,12 @@ public class Main {
         }catch (UnknownHostException e){
             throw new RuntimeException(e);
         }
-        System.out.println("Write your name ");
-        connectionData.setOurName(scanner.next());
+        System.out.println("you wanna LOGIN or REGISTER? ");
+        connectionData.setLogin(scanner.next());
+        System.out.println("Write your login ");
+        connectionData.setOurLogin(scanner.next());
+        System.out.println("Write your password ");
+        connectionData.setOurPassword(scanner.next());
 
     }
 
@@ -101,7 +105,8 @@ public class Main {
                     server = new Socket(connectionData.getAdressServer(), connectionData.getPort());
                     PrintWriter out = new PrintWriter(server.getOutputStream(), true);
                     out.println(connectionData.getOurAdress().getHostAddress() + " - " +
-                            connectionData.getOurPort() + " - " + connectionData.getOurName());
+                            connectionData.getOurPort() + " - " + connectionData.getOurLogin()
+                            + " - " + connectionData.getLogin() + " - " + connectionData.getOurPassword());
                     out.println(fuser);
                     if (fuser.equalsIgnoreCase(String.valueOf(Command.CLOSE)) ||
                             fuser.equalsIgnoreCase(String.valueOf(Command.EXIT))) {
