@@ -52,7 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public List<User> findUser(String userLogin, String userPassword){
+    public List<User> findUser(String userLogin){
         List<User> users = new ArrayList<>();
         Properties properties = new Properties();
         properties.put("user",String.valueOf(BDType.USER));
@@ -61,9 +61,8 @@ public class UserServiceImpl implements UserService {
 
         try {
             connection = DriverManager.getConnection(String.valueOf(BDType.CONNECTBASE), properties);
-            PreparedStatement preparedStatement = connection.prepareStatement(String.valueOf(BDType.FINDUSER));
+            PreparedStatement preparedStatement = connection.prepareStatement(String.valueOf(BDType.FINDQUERY));
             preparedStatement.setString(1, userLogin);
-            preparedStatement.setString(2, PasswordUntil.getPasswordHash(userPassword, userLogin));
             ResultSet resultSet = preparedStatement.executeQuery();
 
             while (resultSet.next()){

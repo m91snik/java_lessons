@@ -2,6 +2,8 @@ package com.vega.server.connectionInput;
 
 import com.vega.server.ChatType;
 import com.vega.server.Main;
+import com.vega.server.connectionOutput.ConnectionToOne;
+import com.vega.server.connectionOutput.ToOne;
 import com.vega.server.service.UserService;
 import com.vega.server.service.impl.UserServiceImpl;
 import org.apache.logging.log4j.LogManager;
@@ -39,6 +41,7 @@ public class NewConnectionInput implements ConnectionInput {
 
         try {
             input = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            ToOne toOne = new ConnectionToOne();
 
             /*
              * whoSend[0] - userAdress, whoSend[1] - userPort, whoSend[2] - userLogin,
@@ -59,8 +62,26 @@ public class NewConnectionInput implements ConnectionInput {
                     userExit();
                     Main.blockingQueue.put("User: " + whoSend[2] + " exit");
                 } else {
-                    Main.blockingQueue.put(whoSend[2] + ": " + inputMessage);
-                    System.out.println("We get: '" + inputMessage + "' from " + whoSend[2]);
+                    String[] checkCommand = inputMessage.split(" ");
+                    if (checkCommand.length < 2){ checkCommand = new String[]{" ", " "}; }
+                    switch (checkCommand[1]){
+                        case ".WHISP":
+                            toOne.whisper(whoSend,inputMessage);
+                            break;
+                        case ".UPDATE":
+                            toOne.updateUser(whoSend,inputMessage);
+                            break;
+                        case ".ONLINE":
+                            toOne.countUser(whoSend);
+                            break;
+                        case ".SEARCH":
+                            toOne.aboutUser(whoSend,inputMessage);
+                            break;
+                        default:
+                            Main.blockingQueue.put(whoSend[2] + ": " + inputMessage);
+                            System.out.println("We get: '" + inputMessage + "' from " + whoSend[2]);
+                            break;
+                    }
                 }
             }
             client.close();
@@ -133,7 +154,7 @@ public class NewConnectionInput implements ConnectionInput {
 
     private boolean checkLoginAndPassword(String login, String password){
         UserService userService = new UserServiceImpl();
-        return !userService.findUser(login,password).isEmpty();
+        return !userService.findUser(login).isEmpty();
     }
 
     private boolean addNewUser(String login, String password){

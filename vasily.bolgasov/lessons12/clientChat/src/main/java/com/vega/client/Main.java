@@ -96,6 +96,10 @@ public class Main {
                     System.out.println("Now all next message not save");
                     chatLog.stopSave();
 
+                }else if (String.valueOf(Command.HELP).equals(fuser)) {
+
+                    System.out.println(Command.HELPINFO);
+
                 }else {
 
                     /*

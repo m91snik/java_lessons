@@ -16,6 +16,6 @@ public interface UserService {
 
     boolean changeLastname(String userLogin, String userPassword, String newLastname);
 
-    List<User> findUser(String userLogin, String userPassword);
+    List<User> findUser(String userLogin);
 
 }
