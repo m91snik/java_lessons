@@ -10,6 +10,6 @@ public interface ConnectionInput extends Runnable {
     @Override
     void run();
     void userExit();
-    void checkUser(String[] dataUser);
+    boolean checkUser(String[] dataUser);
 
 }

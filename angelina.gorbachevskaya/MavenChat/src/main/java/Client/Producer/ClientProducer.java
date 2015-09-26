@@ -19,6 +19,8 @@ public class ClientProducer implements Producer<MessageImpl, UserID> {
         String answer = "r";
         //TODO: вопрос! если раскоментировать код ниже(для выбора режима работы: ввод логина или регистрация) далее при попытке ввода данных в FormFactory вылетает IOException
         //TODO: я так понимаю, что это потому что мы два раза пытаемся использовать один и тот же System.in, как это обойти? или я не права и какой тогда выход?
+
+        //TODO: do not use System.in in try-with-resources. it should not be closed!
 //        try (BufferedReader stdIn = new BufferedReader(
 //               new InputStreamReader(System.in));) {
 //            answer = stdIn.readLine();

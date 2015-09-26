@@ -13,9 +13,13 @@ public interface Connect {
     String getAdressServer();
     void setOurAdress(InetAddress adress);
     InetAddress getOurAdress();
-    void setOurName(String name);
-    String getOurName();
+    void setOurLogin(String name);
+    String getOurLogin();
     void setOurPort(Integer port);
     Integer getOurPort();
+    void setOurPassword(String password);
+    String getOurPassword();
+    void setLogin(String login);
+    String getLogin();
 
 }
