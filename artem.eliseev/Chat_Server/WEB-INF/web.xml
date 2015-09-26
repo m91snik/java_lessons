@@ -5,12 +5,12 @@
 http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
 
     <servlet>
-        <servlet-name>Servlet Name</servlet-name>
-        <servlet-class>com.m91snik.lesson15.servlet.SimpleServlet</servlet-class>
+        <servlet-name>Chat_server</servlet-name>
+        <servlet-class>com.server.Main</servlet-class>
     </servlet>
 
     <servlet-mapping>
-        <servlet-name>Servlet Name</servlet-name>
-        <url-pattern>/servlet</url-pattern>
+        <servlet-name>Chat_server</servlet-name>
+        <url-pattern>/*</url-pattern>
     </servlet-mapping>
 </web-app>
