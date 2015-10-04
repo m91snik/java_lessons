@@ -36,5 +36,7 @@ public class Server {
 
         ServerOut serverOut = new ServerOut(mainQueue);
         new Thread(serverOut).start();
+
+        System.out.println("Server works.");
     }
 }

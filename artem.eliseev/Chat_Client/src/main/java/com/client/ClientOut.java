@@ -37,4 +37,3 @@ public class ClientOut implements Runnable {
         }
     }
 }
-Chat - stable version. Working on TODOes; Client-jar, server-war; Tombcat, rest - not finished
