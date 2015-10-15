@@ -9,8 +9,7 @@ import java.io.PrintWriter;
 /**
  * Created by nikolay.garbuzov on 03.09.15.
  */
-public class
-        SimpleServlet extends HttpServlet {
+public class SimpleServlet extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)

@@ -14,3 +14,5 @@ http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
         <url-pattern>/servlet</url-pattern>
     </servlet-mapping>
 </web-app>
+
+<!--in browser paste http://localhost:8080/servlet/servlet-->

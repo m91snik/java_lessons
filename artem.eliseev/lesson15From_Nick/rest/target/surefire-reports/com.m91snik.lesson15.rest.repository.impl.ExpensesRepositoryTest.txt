@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.m91snik.lesson15.rest.repository.impl.ExpensesRepositoryTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 17.213 sec
+Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 11.877 sec

@@ -45,6 +45,7 @@
 
         </plugins>
     </build>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
