@@ -1,9 +1,0 @@
-0:0:0:0:0:0:0:1 - - [03/Sep/2015:20:03:47 +0300] "GET /servlet HTTP/1.1" 302 - http-bio-8080-exec-1 0
-0:0:0:0:0:0:0:1 - - [03/Sep/2015:20:03:48 +0300] "GET /servlet/ HTTP/1.1" 404 967 http-bio-8080-exec-2 166
-0:0:0:0:0:0:0:1 - - [03/Sep/2015:20:03:48 +0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-3 0
-0:0:0:0:0:0:0:1 - - [03/Sep/2015:20:03:48 +0300] "GET /favicon.ico HTTP/1.1" 404 - http-bio-8080-exec-4 0
-0:0:0:0:0:0:0:1 - - [03/Sep/2015:20:05:35 +0300] "GET /servlet/servlet/ HTTP/1.1" 404 983 http-bio-8080-exec-7 9
-0:0:0:0:0:0:0:1 - - [03/Sep/2015:20:05:39 +0300] "GET /servlet/servlet/ HTTP/1.1" 404 983 http-bio-8080-exec-8 4
-0:0:0:0:0:0:0:1 - - [03/Sep/2015:20:06:04 +0300] "GET /servlet/servlet/ HTTP/1.1" 404 983 http-bio-8080-exec-9 5
-0:0:0:0:0:0:0:1 - - [03/Sep/2015:20:06:12 +0300] "GET /servlet/servlet/ HTTP/1.1" 404 983 http-bio-8080-exec-10 6
-0:0:0:0:0:0:0:1 - - [03/Sep/2015:20:06:24 +0300] "GET /servlet/servlet HTTP/1.1" 200 71 http-bio-8080-exec-10 11
