@@ -1,6 +1,8 @@
 package com.frontEnd;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -12,7 +14,11 @@ import java.io.PrintWriter;
  * Created by Ната и Артем on 05.10.2015.
  */
 @Component
+@Controller
+@RequestMapping(value = "/")
 public class FrontEnd extends HttpServlet{
+    
+    @RequestMapping(method = RequestMethod.GET)
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
