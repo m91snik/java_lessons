@@ -11,15 +11,14 @@ import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Created by Ната и Артем on 05.10.2015.
+ * Created by пїЅпїЅпїЅпїЅ пїЅ пїЅпїЅпїЅпїЅпїЅ on 05.10.2015.
  */
-@Component
 @Controller
 @RequestMapping(value = "/")
-public class FrontEnd extends HttpServlet{
-    
-    @RequestMapping(method = RequestMethod.GET)
+public class FrontEndController extends HttpServlet {
+
     @Override
+    @RequestMapping(method = RequestMethod.GET, value = "/index")
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         PrintWriter out = response.getWriter();
@@ -28,5 +27,7 @@ public class FrontEnd extends HttpServlet{
         out.println("<h1>Hello! It's ChatServlet</h1>");
         out.println("</body>");
         out.println("</html>");
+        System.out.println("Hello! It's ChatServlet without HTML");
     }
+
 }
