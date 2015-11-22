@@ -1,0 +1,17 @@
+0:0:0:0:0:0:0:1 - - [22/Nov/2015:18:06:55 +0300] "GET /Chat_Server_servlet HTTP/1.1" 404 - http-bio-8080-exec-1 0
+0:0:0:0:0:0:0:1 - - [22/Nov/2015:18:06:56 +0300] "GET /Chat_Server_servlet/index HTTP/1.1" 404 - http-bio-8080-exec-2 0
+0:0:0:0:0:0:0:1 - - [22/Nov/2015:18:06:58 +0300] "GET /Chat_Server_servlet HTTP/1.1" 404 - http-bio-8080-exec-3 0
+0:0:0:0:0:0:0:1 - - [22/Nov/2015:18:06:59 +0300] "GET /Chat_Server_servlet/404 HTTP/1.1" 404 - http-bio-8080-exec-4 0
+0:0:0:0:0:0:0:1 - - [22/Nov/2015:18:06:59 +0300] "GET /Chat_Server_servlet/404.html HTTP/1.1" 404 - http-bio-8080-exec-5 0
+0:0:0:0:0:0:0:1 - - [22/Nov/2015:18:12:49 +0300] "GET /Chat_Server_servlet HTTP/1.1" 404 - http-bio-8080-exec-7 0
+0:0:0:0:0:0:0:1 - - [22/Nov/2015:18:12:50 +0300] "GET /Chat_Server_servlet/index HTTP/1.1" 404 - http-bio-8080-exec-8 0
+0:0:0:0:0:0:0:1 - - [22/Nov/2015:18:12:51 +0300] "GET /Chat_Server_servlet/404 HTTP/1.1" 404 - http-bio-8080-exec-9 0
+0:0:0:0:0:0:0:1 - - [22/Nov/2015:18:12:52 +0300] "GET /Chat_Server_servlet/404.html HTTP/1.1" 404 - http-bio-8080-exec-10 0
+169.254.207.142 - - [22/Nov/2015:19:01:23 +0300] "GET / HTTP/1.1" 404 - http-bio-8080-exec-2 0
+169.254.207.142 - - [22/Nov/2015:19:01:23 +0300] "GET /HNAP1/ HTTP/1.1" 404 - http-bio-8080-exec-2 0
+192.168.42.70 - - [22/Nov/2015:19:01:25 +0300] "GET / HTTP/1.1" 404 - http-bio-8080-exec-8 0
+192.168.42.70 - - [22/Nov/2015:19:01:25 +0300] "GET /HNAP1/ HTTP/1.1" 404 - http-bio-8080-exec-1 0
+fe80:0:0:0:39fe:7646:635c:cf8e%16 - - [22/Nov/2015:19:01:28 +0300] "GET / HTTP/1.1" 404 - http-bio-8080-exec-5 0
+fe80:0:0:0:39fe:7646:635c:cf8e%16 - - [22/Nov/2015:19:01:28 +0300] "GET /HNAP1/ HTTP/1.1" 404 - http-bio-8080-exec-5 0
+fe80:0:0:0:acc5:79ee:f836:90a0%14 - - [22/Nov/2015:19:01:30 +0300] "GET / HTTP/1.1" 404 - http-bio-8080-exec-8 0
+fe80:0:0:0:acc5:79ee:f836:90a0%14 - - [22/Nov/2015:19:01:30 +0300] "GET /HNAP1/ HTTP/1.1" 404 - http-bio-8080-exec-1 0

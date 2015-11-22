@@ -9,7 +9,7 @@ import java.io.IOException;
  */
 @Component
 public class Main {
-    public static void main(String[] args) throws IOException, ClassNotFoundException {
+    public static void Main(String[] args) throws IOException, ClassNotFoundException {
         Server server = new Server();
     }
 }

@@ -14,11 +14,12 @@ import java.io.PrintWriter;
  * Created by ���� � ����� on 05.10.2015.
  */
 @Controller
-@RequestMapping(value = "/")
+@RestController
+@RequestMapping(value = "/index")
 public class FrontEndController extends HttpServlet {
 
     @Override
-    @RequestMapping(method = RequestMethod.GET, value = "/index")
+    @RequestMapping(method = RequestMethod.GET, value = "/index/page")
     public void doGet(HttpServletRequest request, HttpServletResponse response)
             throws IOException {
         PrintWriter out = response.getWriter();
@@ -28,6 +29,16 @@ public class FrontEndController extends HttpServlet {
         out.println("</body>");
         out.println("</html>");
         System.out.println("Hello! It's ChatServlet without HTML");
+    }
+
+    @RequestMapping("/message")
+    public Message message() {
+        return new Message("Hello! It's ChatServlet from Message, entered from FrontEndController");
+    }
+
+    @RequestMapping("/404.html")
+    public String Error404() {
+        return "redirect:/404.html";
     }
 
 }

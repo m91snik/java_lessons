@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans
+        xmlns:sec="http://www.springframework.org/schema/security"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.springframework.org/schema/beans"
+        xmlns:aop="http://www.springframework.org/schema/aop"
+        xsi:schemaLocation="
+         http://www.springframework.org/schema/beans
+         http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/security
+        http://www.springframework.org/schema/security/spring-security.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <aop:aspectj-autoproxy/>
+
+    <sec:http use-expressions="true" auto-config="false">
+        <!-- it protects from session fixation attack -->
+        <sec:session-management
+                session-fixation-protection="migrateSession"/>
+    <sec:intercept-url pattern="/" access="hasAnyRole('ROLE_REGULAR','ROLE_MANAGER','ROLE_ADMIN')"/>
+    <!--<sec:intercept-url pattern="/logged_in" access="hasAnyRole('ROLE_REGULAR','ROLE_MANAGER','ROLE_ADMIN')"/>-->
+        <!--<sec:intercept-url pattern="/controller/expenses/**" access="hasAnyRole('ROLE_REGULAR','ROLE_ADMIN')"/>-->
+        <!--<sec:intercept-url pattern="/expenses.html" access="hasAnyRole('ROLE_REGULAR','ROLE_ADMIN')"/>-->
+
+        <!--<sec:intercept-url pattern="/controller/user/**" access="hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')"/>-->
+        <!--<sec:intercept-url pattern="/users.html" access="hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')"/>-->
+        <!--&lt;!&ndash;method="POST"/>&ndash;&gt;-->
+        <!--<sec:http-basic/>-->
+        <!--&lt;!&ndash;<sec:custom-filter position="FORM_LOGIN_FILTER" ref="authFilter"/>&ndash;&gt;-->
+        <!--<sec:logout logout-url="/logout" logout-success-url="/loggin"  invalidate-session="true" delete-cookies="JSESSIONID"/>-->
+        <!--<sec:csrf disabled="true"/>-->
+
+        <!--<sec:form-login login-page="/loggin"-->
+                    <!--default-target-url="/logged_in"-->
+                    <!--authentication-failure-url="/loggin"-->
+                    <!--username-parameter="j_username"-->
+                    <!--password-parameter="j_password"/>-->
+    </sec:http>
+
+    <!--<bean id="authFilter"-->
+          <!--class="org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter">-->
+        <!--<property name="authenticationManager" ref="authenticationManager"/>-->
+        <!--<property name="authenticationSuccessHandler" ref="successHandler"/>-->
+        <!--<property name="authenticationFailureHandler" ref="failureHandler"/>-->
+        <!--<property name="filterProcessesUrl" value="/login"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="successHandler"-->
+          <!--class="org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler">-->
+        <!--<property name="defaultTargetUrl" value="/logged_in"/>-->
+        <!--<property name="alwaysUseDefaultTargetUrl" value="true"/>-->
+    <!--</bean>-->
+
+    <!--<bean id="failureHandler"-->
+          <!--class="org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler">-->
+        <!--<property name="defaultFailureUrl" value="/login.html"/>-->
+    <!--</bean>-->
+
+    <sec:authentication-manager alias="authenticationManager">
+        <sec:authentication-provider ref="customAuthenticationProvider"/>
+    </sec:authentication-manager>
+
+    <bean id="customAuthenticationProvider"
+          class="com.m91snik.lesson15.rest.security.CustomAuthenticationProvider"/>
+
+
+</beans>
