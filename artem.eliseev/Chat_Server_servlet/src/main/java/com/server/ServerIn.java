@@ -13,7 +13,6 @@ import java.util.concurrent.BlockingQueue;
 /**
  * Created by Anry on 25.08.2015.
  */
-@Component
 class ServerIn implements Runnable {
     private final BlockingQueue<String> queue;
 

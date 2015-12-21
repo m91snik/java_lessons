@@ -29,16 +29,16 @@
         <property name="prefix" value="/pages/" />
         <property name="suffix" value=".html" />
     </bean>
-</beans>
 
-    <!--<bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>-->
-    <!--<bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">-->
-        <!--<property name="messageConverters">-->
-            <!--<list>-->
-                <!--<ref bean="jacksonMessageConverter"/>-->
-            <!--</list>-->
-        <!--</property>-->
-    <!--</bean>-->
+
+    <bean id="jacksonMessageConverter" class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter"></bean>
+    <bean class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
+        <property name="messageConverters">
+            <list>
+                <ref bean="jacksonMessageConverter"/>
+            </list>
+        </property>
+    </bean>
 
     <!--<bean name="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
         <!--<property name="driverClassName" value="com.mysql.jdbc.Driver" />-->
@@ -48,11 +48,11 @@
     <!--</bean>-->
 
 
-    <!--<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">-->
-        <!--<property name="entityManagerFactory" ref="emf" />-->
-    <!--</bean>-->
+    <bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="emf" />
+    </bean>
 
-    <!--<tx:annotation-driven transaction-manager="transactionManager" />-->
+    <tx:annotation-driven transaction-manager="transactionManager" />
 
     <!--<bean id="emf"-->
           <!--class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">-->

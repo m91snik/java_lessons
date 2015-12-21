@@ -16,7 +16,6 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Created by Anry on 22.08.2015.
  */
-@Component
 public class Server {
     //    static int counter = 0;
     //TODO: it's better to use ConcurrentHashMap and use clientIp as key and Connection with details as value

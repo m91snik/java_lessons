@@ -12,7 +12,6 @@ import java.util.concurrent.BlockingQueue;
 /**
  * Created by Anry on 25.08.2015.
  */
-@Component
 class ServerOut implements Runnable {
     private final BlockingQueue<String> queue;
 

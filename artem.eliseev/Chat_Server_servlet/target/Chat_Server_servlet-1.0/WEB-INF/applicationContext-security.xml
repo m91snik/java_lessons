@@ -18,23 +18,23 @@
         <sec:session-management
                 session-fixation-protection="migrateSession"/>
     <sec:intercept-url pattern="/" access="hasAnyRole('ROLE_REGULAR','ROLE_MANAGER','ROLE_ADMIN')"/>
-    <!--<sec:intercept-url pattern="/logged_in" access="hasAnyRole('ROLE_REGULAR','ROLE_MANAGER','ROLE_ADMIN')"/>-->
-        <!--<sec:intercept-url pattern="/controller/expenses/**" access="hasAnyRole('ROLE_REGULAR','ROLE_ADMIN')"/>-->
-        <!--<sec:intercept-url pattern="/expenses.html" access="hasAnyRole('ROLE_REGULAR','ROLE_ADMIN')"/>-->
+    <sec:intercept-url pattern="/logged_in" access="hasAnyRole('ROLE_REGULAR','ROLE_MANAGER','ROLE_ADMIN')"/>
+        <sec:intercept-url pattern="/controller/expenses/**" access="hasAnyRole('ROLE_REGULAR','ROLE_ADMIN')"/>
+        <sec:intercept-url pattern="/expenses.html" access="hasAnyRole('ROLE_REGULAR','ROLE_ADMIN')"/>
 
-        <!--<sec:intercept-url pattern="/controller/user/**" access="hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')"/>-->
-        <!--<sec:intercept-url pattern="/users.html" access="hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')"/>-->
-        <!--&lt;!&ndash;method="POST"/>&ndash;&gt;-->
-        <!--<sec:http-basic/>-->
-        <!--&lt;!&ndash;<sec:custom-filter position="FORM_LOGIN_FILTER" ref="authFilter"/>&ndash;&gt;-->
-        <!--<sec:logout logout-url="/logout" logout-success-url="/loggin"  invalidate-session="true" delete-cookies="JSESSIONID"/>-->
-        <!--<sec:csrf disabled="true"/>-->
+        <sec:intercept-url pattern="/controller/user/**" access="hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')"/>
+        <sec:intercept-url pattern="/users.html" access="hasAnyRole('ROLE_MANAGER','ROLE_ADMIN')"/>
+        <!--method="POST"/>-->
+        <sec:http-basic/>
+        <!--<sec:custom-filter position="FORM_LOGIN_FILTER" ref="authFilter"/>-->
+        <sec:logout logout-url="/logout" logout-success-url="/loggin"  invalidate-session="true" delete-cookies="JSESSIONID"/>
+        <sec:csrf disabled="true"/>
 
-        <!--<sec:form-login login-page="/loggin"-->
-                    <!--default-target-url="/logged_in"-->
-                    <!--authentication-failure-url="/loggin"-->
-                    <!--username-parameter="j_username"-->
-                    <!--password-parameter="j_password"/>-->
+        <sec:form-login login-page="/loggin"
+                    default-target-url="/logged_in"
+                    authentication-failure-url="/loggin"
+                    username-parameter="j_username"
+                    password-parameter="j_password"/>
     </sec:http>
 
     <!--<bean id="authFilter"-->

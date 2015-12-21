@@ -8,7 +8,6 @@ import java.util.Iterator;
 /**
  * Created by Anry on 26.08.2015.
  */
-@Component
 public class Connection {
     public String clientIp;
     public int clientInputPort;
